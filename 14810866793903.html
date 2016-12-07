@@ -183,11 +183,6 @@
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<a href="#toc_16">xrdp.ini file version number</a>
 
 
 <h3 id="toc_0">0.介绍</h3>
@@ -395,86 +390,6 @@ make pytest
 make matcaffe -j
 make mattest
 </code></pre>
-
-<p>7install x-windows <br/>
-yum groupinstall &#39;Server with GUI&#39;</p>
-
-<p>yum groupinstall &quot;X Window System&quot;</p>
-
-<p>yum install gnome-classic-session gnome-terminal nautilus-open-terminal control-center liberation-mono-fonts<br/>
-nk /etc/systemd/system/default.target<br/>
-ln -sf /lib/systemd/system/graphical.target /  /etc/systemd/system/default.target</p>
-
-<ol>
-<li>install xrdp xvnc  port:10087</li>
-<li></li>
-<li></li>
-<li></li>
-<li>yum -y install xrdp tigervnc-server</li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li>tensorflow    get source code from git and compile </li>
-<li>theano   conda install keras set env:  export CUDA_ROOT=$CUDA_HOME</li>
-<li>keras   conda install keras</li>
-<li></li>
-<li>matlab  download from pt</li>
-<li></li>
-<li></li>
-<li>yum install backintime /恢复</li>
-</ol>
-
-<p>mac 安装matlab 命令行如何启动</p>
-
-<p>xrdp<br/>
-sesame.ini</p>
-
-<p>param2=-nolisten<br/>
-param3=tcp<br/>
-param4=-localhost<br/>
-param5=-dpi<br/>
-param6=96<br/>
-param7=-depth<br/>
-param8=32   </p>
-
-<p>xrdp.ini<br/>
-[globals]</p>
-
-<h1 id="toc_16">xrdp.ini file version number</h1>
-
-<p>ini_version=1</p>
-
-<p>bitmap_cache=yes<br/>
-bitmap_compression=yes<br/>
-port=10087<br/>
-allow_channels=true<br/>
-max_bpp=24<br/>
-fork=yes</p>
-
-<p>systemctl start xrdp<br/>
-systemctl enable xrdp conda</p>
-
-<p>systemctl status xrdp.service<br/>
-ss -antup|grep xrdp</p>
-
-<p>mount /dev/mapper/vg_raid-lv_raid /data</p>
-
-<p>/etc/fstab </p>
-
-<p>ll 列出权限</p>
-
-<p>2./etc/bashrc    （一般在这个文件中添加系统级环境变量）<br/>
-全局（公有）配置，bash shell执行时，不管是何种方式，都会读取此文件。<br/>
-我在这里加入mysqlstart、mysql和mysqladmin命令的别名，保证每一个用户都可以使用这3个命令。<br/>
- <br/>
- 3.~/.bash_profile  （一般在这个文件中添加用户级环境变量）<br/>
-（注：Linux 里面是 .bashrc 而 Mac 是 .bash_profile）<br/>
- 若 bash shell 是以 login 方式执行时，才会读取此文件。<br/>
-该文件仅仅执行一次!默认情况下,他设置一些环境变量<br/>
-我在这里：设置终端配色、<br/>
-我在这里：设置命令别名alias ll=&#39;ls -la&#39;<br/>
-我在这里：设置环境变量：export PATH=/opt/local/bin:/opt/local/sbin:$PATH</p>
 
 
     

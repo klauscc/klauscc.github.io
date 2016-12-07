@@ -105,34 +105,23 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="14695486996976.html">
+                <a class="clearlink" href="14695486997036.html">
                 
-                  <h1>Lecture 6 Trainning Neural Networks</h1>
+                  <h1>lecture 2</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0">Prepare</h2>
+                        	<h2 id="toc_0">1. image classification</h2>
 
-<h3 id="toc_1">1.Mini-batch SGD</h3>
+<h3 id="toc_1">1.1 how to compare images: distance metric</h3>
 
-<p>Sample-&gt;Forward-&gt;Backpro-&gt;Update</p>
+<p><strong>L1 distance</strong>: \(d_1(I_1,I_2) = \Sigma_{p}(I_1^p-I_2^p)\)<br/>
+<strong>L2 distance</strong>: \(d_1(I_1,I_2) = \sqrt{\Sigma_{p}(I_1^p-I_2^p)^2}\)</p>
 
-<h3 id="toc_2">2. Batch Normalization</h3>
+<h3 id="toc_2">1.2 how to classify?</h3>
 
-<p>\(\hat{x^{(k)}} = \frac{x^{k}-E[x^{(k)}]}{\sqrt{Var[x^{(k)}]}}\)<br/>
-<strong>好处</strong>:<br/>
-1. 提升梯度流动效果<br/>
-2. 允许更高的learning rates<br/>
-3. 减少对初始化参数的依赖<br/>
-4. 作为一种regulation,轻微减少dropout的需要</p>
-
-<h2 id="toc_3">Parameter Updates</h2>
-
-<h3 id="toc_4">1. sgd</h3>
-
-<pre><code>x += - learning_rate * dx
-</code></pre>
+<p><strong>knn</strong>: too slow and not work well. Remember all the training data.</p>
 
 
                         
@@ -141,7 +130,7 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="14695486996976.html">Read more</a>&nbsp;&nbsp; 
+                   <a href="14695486997036.html">Read more</a>&nbsp;&nbsp; 
                     <span class="date">2016/7/26</span>
                     <span>posted in&nbsp;</span> 
           				  
@@ -205,23 +194,34 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="14695486997036.html">
+                <a class="clearlink" href="14695486996976.html">
                 
-                  <h1>lecture 2</h1>
+                  <h1>Lecture 6 Trainning Neural Networks</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0">1. image classification</h2>
+                        	<h2 id="toc_0">Prepare</h2>
 
-<h3 id="toc_1">1.1 how to compare images: distance metric</h3>
+<h3 id="toc_1">1.Mini-batch SGD</h3>
 
-<p><strong>L1 distance</strong>: \(d_1(I_1,I_2) = \Sigma_{p}(I_1^p-I_2^p)\)<br/>
-<strong>L2 distance</strong>: \(d_1(I_1,I_2) = \sqrt{\Sigma_{p}(I_1^p-I_2^p)^2}\)</p>
+<p>Sample-&gt;Forward-&gt;Backpro-&gt;Update</p>
 
-<h3 id="toc_2">1.2 how to classify?</h3>
+<h3 id="toc_2">2. Batch Normalization</h3>
 
-<p><strong>knn</strong>: too slow and not work well. Remember all the training data.</p>
+<p>\(\hat{x^{(k)}} = \frac{x^{k}-E[x^{(k)}]}{\sqrt{Var[x^{(k)}]}}\)<br/>
+<strong>好处</strong>:<br/>
+1. 提升梯度流动效果<br/>
+2. 允许更高的learning rates<br/>
+3. 减少对初始化参数的依赖<br/>
+4. 作为一种regulation,轻微减少dropout的需要</p>
+
+<h2 id="toc_3">Parameter Updates</h2>
+
+<h3 id="toc_4">1. sgd</h3>
+
+<pre><code>x += - learning_rate * dx
+</code></pre>
 
 
                         
@@ -230,7 +230,7 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="14695486997036.html">Read more</a>&nbsp;&nbsp; 
+                   <a href="14695486996976.html">Read more</a>&nbsp;&nbsp; 
                     <span class="date">2016/7/26</span>
                     <span>posted in&nbsp;</span> 
           				  
