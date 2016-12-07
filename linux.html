@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  PCA Whitening - 
+  linux - 
   
   </title>
   
@@ -96,175 +96,158 @@
        
 
  <script type="text/javascript">
-  $(function(){
-    $('#menu_item_index').addClass('is_active');
-  });
+	$(function(){
+		$('#menu_item_index').addClass('is_active');
+	});
 </script>
 <div class="row">
-  <div class="large-8 medium-8 columns">
-      <div class="markdown-body article-wrap">
-       <div class="article">
-          
-          <h1>PCA Whitening</h1>
-     
-        <div class="read-more clearfix">
-          <span class="date">2016/7/26</span>
-
-          <span>posted in&nbsp;</span> 
-          
-              <span class="posted-in"><a href='deep%20learning.html'>deep learning</a></span>
-           
-         
-          <span class="comments">
-            
-
-            
-          </span>
-
-        </div>
-      </div><!-- article -->
-
-      <div class="article-content">
-      <h2 id="toc_0">Introduction</h2>
-
+	<div class="large-8 medium-8 columns">
+		<div class="markdown-body home-categories">
+		
+			<div class="article">
+                <a class="clearlink" href="14810866793903.html">
+                
+                  <h1>centos7.0安装配置，cuda,cudnn安装，anaconda安装，深度学习框架caffe,torch,theano,tensorflow安装</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<ul>
+<li>
+<a href="#toc_0">0.介绍</a>
+</li>
+<li>
+<a href="#toc_1">1. 安装系统</a>
+</li>
+<li>
+<a href="#toc_2">2. 配置网络</a>
 <ul>
-<li>PCA(Principal Components Analysis),主成分分析，可以用于降维或者whitening(白化)。</li>
+<li>
+<a href="#toc_3">2.1 修改ip和网关</a>
+</li>
+<li>
+<a href="#toc_4">2.2 配置DNS服务器</a>
+</li>
 </ul>
+</li>
+<li>
+<a href="#toc_5">3. 配置安装ssh</a>
+</li>
+<li>
+<a href="#toc_6">4. 安装cuda,cudnn</a>
+<ul>
+<li>
+<a href="#toc_7">4.1 安装 cuda</a>
+<ul>
+<li>
+<a href="#toc_8">4.1.1 关闭Nouveau驱动</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_9">4.1.2 安装cuda</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_10">4.2 安装cudnn</a>
+</li>
+<li>
+<a href="#toc_11">5. 安装anaconda</a>
+</li>
+<li>
+<a href="#toc_12">6. 安装 caffe</a>
+<ul>
+<li>
+<a href="#toc_13">6.1 安装依赖</a>
+</li>
+<li>
+<a href="#toc_14">6.2 修改Makefile.config</a>
+</li>
+<li>
+<a href="#toc_15">6.3 编译并测试</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_16">xrdp.ini file version number</a>
 
-<h2 id="toc_1">PCA</h2>
 
-<p>PCA找到一个更低维度的子空间使我们的数据\(x = \{x^{(1)},x^{(2)},…,x^{(m)}\}\)投影上去：<br/>
-<center>\(x_{rot}=U^Tx\)</center><br/>
-其中U为<br/>
-<center>\(U=\left[ \begin{matrix}|&amp;|&amp;&amp;| \\ u_1 &amp; u_2 &amp;...&amp; u_3 \\ |&amp;|&amp;&amp;|&amp; \end{matrix}\right]\)</center><br/>
-\(u_1,u_2...\)为x的协方差矩阵\(\Sigma\)的特征向量, \(\lambda_1,\lambda_2...\)分别为对应的特征值，\(\lambda_1,\lambda_2...\)从大到小排序。</p>
+<h3 id="toc_0">0.介绍</h3>
 
-<span id="more"></span><!-- more -->
+<p>深度学习在linux上面会比windows上面方便很多，在windows上那叫个折腾。本文将会介绍centos7.0 的<br/>
+安装，cuda和cudnn的安装，anaconda安装，以及各种深度学习框架的安装。</p>
 
-<p>当x的均值为0时，协方差矩阵为<br/>
-<center>\(\Sigma=\frac{1}{m}\Sigma_{i=1}^{m}(x^{(i)})(x^{(i)})^T\)</center></p>
+<p>深度学习是计算密集型任务，不推荐在虚拟机中运行，装cuda和cudnn需要有nvidia显卡。</p>
 
-<h2 id="toc_2">Reduce dimension</h2>
+<p><strong>本文默认在root下运行所有命令</strong></p>
 
-<p>我们有<br/>
-<center>\(x_{rot}=U^Tx\)  （1）<br/>
-\(x=Ux_{rot}\)    （2）</center><br/>
-x为\(n*m\)维矩阵<br/>
-如果我们将\(x_{rot}\)第k+1到第n维置0.即 <br/>
-<center>\(\tilde{x}=x_{rot},where x_{rot,j}=0, k&lt;j&lt;n\)<br/>
-\(\hat{x}=U\tilde{x}\approx x\).</center><br/>
-保留的方差比例通过下式计算：<br/>
-<center>\(\frac{\Sigma_{j=1}^{k}\lambda_j}{\Sigma_{j=1}^{n}\lambda_j}\)</center><br/>
-通常选取最小的k 满足\(\frac{\Sigma_{j=1}^{k}\lambda_j}{\Sigma_{j=1}^{n}\lambda_j} \ge0.99\)</p>
+<h3 id="toc_1">1. 安装系统</h3>
 
-<h2 id="toc_3">PCA on Images</h2>
+<pre><code>  建议不要使用最小安装，否则很多工具需要自己再次安装比较麻烦。
+</code></pre>
 
-<p>在进行PCA之前，通常需要满足两个条件(1)特征的均值为0，（2）不同的特征有相似的方差。对于图片（语音，文本，词向量等）条件（2）都满足，只需要满足（1）：<br/>
-<strong>对于每个特征(比如从图片中截取的16x16的patch)，计算其均值，然后该特征的每个像素减去该均值即可</strong>。</p>
+<p>分区：自己分区，选择硬盘(比如sdb), 分区表如下<br/>
+<img src="media/14810866793903/14810871998928.jpg" alt=""/></p>
 
-<h2 id="toc_4">Whitening</h2>
+<p>选择了需要安装的软件后不停下一步就可以安装完毕。</p>
 
-<p>对于每个i, 0<i<n<br/>
-    <center>\(x_{PCAwhite,i}=\frac{x_{rot,i}}{\sqrt{\lambda_i}}\)</center><br/>
-\(\lambda_i\) 为特征向量\(u_i\)对于的特征值<br/>
-<strong>白化可以和降维结合使用，即取\(x_{rot}\)的前k维</strong></p>
+<p>安装完成后，添加源 <code>yum install epel-release</code>,这个源包含了很多base源没有的软件包，非常实用</p>
 
-<p>通常，在i接近n的时候，\(\lambda_i\)很小，\(1/\sqrt{\lambda_i}\)会很大且会导致精度丢失，所以常常加一个小常数\(\epsilon\):<br/>
-<center>\(x_{PCAwhite,i}=\frac{x_{rot,i}}{\sqrt{\lambda_i}+\epsilon}\)</center><br/>
-在\(x\)取值在[-1,1]之间时，通常取\(\epsilon \approx 10^{-5}\)</p>
+<h3 id="toc_2">2. 配置网络</h3>
 
-<h2 id="toc_5">ZCA Whitenning</h2>
+<p>centos 默认是没有联网的，如果系统没有安装图像界面如<code>gnome</code>或者<code>kde</code>等，需要在命令行配置如下</p>
 
-<p>若R是正定矩阵，则\(RR^T=R^TR=I\)。<br/>
-在这里选取R=U。定义<br/>
-<center>\(x_{ZCAwhite}=Ux_{PCAwhite}\)</center></p>
+<h4 id="toc_3">2.1 修改ip和网关</h4>
 
-<h2 id="toc_6">PCA Whitening Matlab实现</h2>
-
-<p>为了计算\(x_{PCAwhite}\), \(x_{ZCAwhite}\)，需要计算出\(x_{rot}\)，所以需要计算出U和\(\lambda\)<br/>
-实现思路: <br/>
-    1. 计算x的协方差矩阵\( sigma = 1/size(m,2) * x * x&#39; \)<br/>
-    2. 计算sigma的特征向量U和特征值S: [U,S,V]=svd(sigma) <br/>
-    3. \( x_{rot}=U^T *x \)<br/>
-    4. \(x_{PCAwhite} = 1./sqrt(diag(S)+epsilon) * U^T * x\)<br/>
-    5. \(x_{ZCAwhite} = U * x_{PCAwhite}\)</p>
-
-<p>matlab代码</p>
-
-<pre><code>%%Step 0b: Zero-mean the data (by row)
-avg = mean(x,1); %x is a n*m maxtrix, m is the nums of images, n is the dimensions of each image
-x = x - repmat(avg,size(x,1),1);
-
-%% Step 1a: Implement PCA to obtain xRot
-sigma = x * x&#39; / size(x,2);
-[U,S,V] = svd(sigma);
-xRot = U&#39; * x;
-
-%% Step 1b: Check your implementation of PCA
-covar=cov(xRot);
-
-%% Step 2: Find k(0.99),k2(0.9), the number of components to retain
-total=trace(S);
-cur=0;
-k=1;
-k2=0;
-while ( cur/total &lt; 0.99)
-    if(cur/total &gt; 0.9)
-        k2=k;
-    end
-    cur = cur + S(k,k);
-    k = k + 1;
-end
-%% Step 3: Implement PCA with dimension reduction
-xHat = U(:,1:k) * xRot(1:k,:);
-xHat90 = U(:,1:k2) * xRot(1:k2,:);
-
-%% Step 4a: Implement PCA with whitening and regularisation
-epsilon = 1e-1; 
-xPCAwhite = diag(1./sqrt(diag(S) + epsilon)) * U&#39; * x;
-
-%% Step 5: Implement ZCA whitening
-xZCAWhite = U * xPCAwhite;
-
+<pre><code>vim /etc/sysconfig/network-scripts/ifcfg-enp5s0 #enp5s0是网卡对应名称，使用`ifconfig`查看自己机器的网卡名称，然后修改对应文件
 </code></pre>
 
 
-    
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="14810866793903.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2016/12/7</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='linux.html'>linux</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
 
-      </div>
-
-      <div class="row">
-        <div class="large-6 columns">
-        <p class="text-left" style="padding:15px 0px;">
-      
-          <a href="14695486996976.html" 
-          title="Previous Post: Lecture 6 Trainning Neural Networks">&laquo; Lecture 6 Trainning Neural Networks</a>
-      
-        </p>
-        </div>
-        <div class="large-6 columns">
-      <p class="text-right" style="padding:15px 0px;">
-      
-          <a  href="14695486997036.html" 
-          title="Next Post: lecture 2">lecture 2 &raquo;</a>
-      
-      </p>
-        </div>
-      </div>
-      <div class="comments-wrap">
-        <div class="share-comments">
-          
-
-          
-
-          
-        </div>
-      </div>
-    </div><!-- article-wrap -->
-  </div><!-- large 8 -->
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+              
 
 
-
+			<div class="row">
+			  <div class="large-6 columns">
+			  <p class="text-left" style="padding-top:25px;">
+			   
+			  </p>
+			  </div>
+			  <div class="large-6 columns">
+			<p class="text-right" style="padding-top:25px;">
+			
+			</p>
+			  </div>
+			</div>
+		</div>
+	</div><!-- large 8 -->
 
  <div class="large-4 medium-4 columns">
   <div class="hide-for-small">
