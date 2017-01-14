@@ -391,6 +391,13 @@ make matcaffe -j
 make mattest
 </code></pre>
 
+<p>如果测试的时候失败，比如找不到libhdf5.so.xxx, libprotobuf.so.xxx， 原因是编译的时候使用的是ananconda中带的.so文件，但是这些.so文件没有添加到环境变量中去。解决办法是将 <code>ananconda_path/lib</code>中对应的文件复制到<code>/usr/local/lib</code>或<code>/usr/local/lib64</code>中去</p>
+
+<pre><code># 例如找不到 libprotobuf.so.10, ananconda安装路径为 /usr/local/ananconda2
+cp /usr/local/ananconda2/lib/libprotobuf.so.* /usr/local/lib
+# 如果将 /usr/local/ananconda2/lib 添加到 $LD_LIBRARY_PATH去可能会与系统中某些lib冲突，所以只能将需要的lib复制过去
+</code></pre>
+
 
     
 
@@ -510,8 +517,6 @@ make mattest
 			        <a href="14717461651736.html">10 数据的统计描述和分析</a>
 			      </li>
 		     
-		  
-		      
 		  
 		      
 		  
