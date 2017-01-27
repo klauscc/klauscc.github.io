@@ -4,13 +4,59 @@
   <title><![CDATA[klauscc]]></title>
   <link href="klauscc.github.io/atom.xml" rel="self"/>
   <link href="klauscc.github.io/"/>
-  <updated>2017-01-27T17:51:50+08:00</updated>
+  <updated>2017-01-27T18:04:52+08:00</updated>
   <id>klauscc.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[<!-- JiaThis Button BEGIN -->]]></title>
+    <link href="klauscc.github.io/14855084535106.html"/>
+    <updated>2017-01-27T17:14:13+08:00</updated>
+    <id>klauscc.github.io/14855084535106.html</id>
+    <content type="html"><![CDATA[
+<div class="jiathis_style_24x24">
+    <a class="jiathis_button_tsina"></a>
+    <a class="jiathis_button_qzone"></a>
+    <a class="jiathis_button_tqq"></a>
+    <a class="jiathis_button_weixin"></a>
+    <a class="jiathis_button_renren"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+    <a class="jiathis_counter_style"></a>
+</div>
+
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+
+<!-- JiaThis Button END -->
+
+<!-- 多说评论框 start -->
+
+<pre><code>&lt;div class=&quot;ds-thread&quot; &gt;&lt;/div&gt;
+</code></pre>
+
+<!-- 多说评论框 end -->
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"kluascc"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+
+<!-- 多说公共JS代码 end -->
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[深度学习、caffe简要入门指南]]></title>

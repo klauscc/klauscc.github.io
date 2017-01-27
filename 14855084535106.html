@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  Double Jpeg detection with the same quantization matrix (Notes) - klauscc
+  <!-- JiaThis Button BEGIN --> - klauscc
   
   </title>
   
@@ -103,14 +103,12 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>Double Jpeg detection with the same quantization matrix (Notes)</h1>
+          <h1><!-- JiaThis Button BEGIN --></h1>
      
         <div class="read-more clearfix">
-          <span class="date">2016/7/31</span>
+          <span class="date">2017/1/27</span>
 
-          <span>posted in&nbsp;</span> 
           
-              <span class="posted-in"><a href='Digital%20Image%20Forensics.html'>Digital Image Forensics</a></span>
            
          
           <span class="comments">
@@ -123,92 +121,42 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <h2 id="toc_0">1. Introduction</h2>
+      <div class="jiathis_style_24x24">
+    <a class="jiathis_button_tsina"></a>
+    <a class="jiathis_button_qzone"></a>
+    <a class="jiathis_button_tqq"></a>
+    <a class="jiathis_button_weixin"></a>
+    <a class="jiathis_button_renren"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+    <a class="jiathis_counter_style"></a>
+</div>
 
-<p>介绍一下几篇论文中等质量双压缩检测的方法，备忘。State of the-art double jepg compression detection with the same quantization matrix. </p>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
 
-<h2 id="toc_1">2. Methods</h2>
+<!-- JiaThis Button END -->
 
-<h3 id="toc_2">2.1 Proposed by Fangjun et al.</h3>
+<!-- 多说评论框 start -->
 
-<p><a href="http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=5560817">Detecting Double JPEG Compression With the Same Quantization Matrix</a> </p>
+<pre><code>&lt;div class=&quot;ds-thread&quot; &gt;&lt;/div&gt;
+</code></pre>
 
-<h4 id="toc_3">2.1.1 jpeg压缩和解压缩过程导致的三种误差</h4>
+<!-- 多说评论框 end -->
 
-<p>i. 量化误差 压缩过程中，DCT系数量化导致的误差<br/>
-ii. 截断误差 解压缩过程中，IDCT变换可能导致值在[0,255]之外，需要截断到0或者255<br/>
-iii. 舍入误差  解压缩， IDCT变换得到的值为浮点数，需要舍入为最接近的整数</p>
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 
-<h4 id="toc_4">2.1.2 jpeg多重压缩统计特征</h4>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"kluascc"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
 
-<p>\(J_n\)代表压缩n次的Jpeg图片，\(D_n\)代表 \(J_n\)和\(J_{n+1}\)中JPEG系数（量化后的DCT系数）不一样的个数，\(S_n\)代表\(J_n\)中非0 JPEG系数的个数。<br/>
-<strong>统计特征：</strong>随着n增加，\(D_n\)单调减小</p>
-
-<span id="more"></span><!-- more -->
-
-<h4 id="toc_5">2.1.3 检测方法</h4>
-
-<ol>
-<li>将原图片\(J\)压缩为\(J&#39;\),\(J\)和\(J&#39;\)的JPEG系数不一样的个数为\(D\)</li>
-<li><p>然后修改\(J&#39;\)部分(修改比率为\(mpnc\))Jpeg系数，然后压缩得到\(J_m&#39;\)，将\(J_m&#39;\)再次压缩得到\(J_m&#39;&#39;\)。</p></li>
-<li><p>\(J_m&#39;\)和\(J_m&#39;&#39;\)的JPEG系数不一样的个数为\(D_m\),重复n次取平均得到\(\bar{D}_m\)</p></li>
-<li><p>判断依据<br/>
-<center><br/>
-\(\left\{<br/>
-\begin{aligned}<br/>
-if \bar{D}_m \ge D,~J~is~a~doubly~ compressed~image \\<br/>
-if \bar{D}_m \le D,~J~is~a~singly~ compressed~image<br/>
-\end{aligned}<br/>
-\right.\)<br/>
-</center></p></li>
-</ol>
-
-<h4 id="toc_6">2.1.4 实验</h4>
-
-<p>在检测方法中，对准确率影响很重要的一个因素是\(mpnc\)。文章中是以固定步长0.001从0增加到0.118,同时检测准确率，获取准确率最高的\(mpnc\)。在预测其它数据集时，这个\(mpnc\)也有不错的泛化能力。<br/>
-<strong>交叉检测：</strong>对三个数据集训练，得到最佳的\(mpnc\)为最佳值范围的中位数，然后用这个值来预测其它数据集的图片。<br/>
-<strong>\(mpnc\)的影响：</strong> \(mpnc\)选取过大，会导致\(D_m\)过大；\(mpnc\)过小，会导致\(D_m\)过小。</p>
-
-<h4 id="toc_7">2.1.5 讨论</h4>
-
-<p><strong>为什么常数的\(mpnc\)适合不同的图片？</strong><br/>
-对于不同的图片D差异很大。虽然\(mpnc\)一样，但是由它生成的\(D_m\)和图片相关，适合于不同的图片。</p>
-
-<h3 id="toc_8">2.2 Proposed by Jianquan Yang et al.</h3>
-
-<p><a href="http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=6905821">An Effective Method for Detecting Double JPEG Compression With the Same Quantization Matrix</a></p>
-
-<h4 id="toc_9">2.2.1 摘要</h4>
-
-<p>基于误差统计特征的检测方法(error-based statistical feature extraction scheme):<br/>
-1. 将图片\(J\)解压缩到空间域时，其IDCT系数与空间域像素值之差构成一个误差图片（error image,图片的每一个像素值为解压缩时对于IDCT系数与空间域值之差）。误差图片反应了图片解压缩过程中的截断误差(Truncation error)和舍入误差(Round error)。<br/>
-2. 将error image分为一个个\(n*n\)的block(n=8,和DCT的block一样)。这些block可分为两类：\(n*n\)个值中至少存在一个截断误差，则为truncation block;否则为round block。<br/>
-3. 每个block提取13维的特征，将这些特征使用SVM分类，然后预测即可得到很好的效果。</p>
-
-<h4 id="toc_10">2.2.2 特征提取</h4>
-
-<p><img src="https://lh3.googleusercontent.com/-wLiZ4-WcYUQ/V6iWYwrDMxI/AAAAAAAAD7c/Fw2LyJ1XE9c/I/14706662767265.jpg" alt=""/><br/>
-1)压缩过n次的图片的error blocks值<center>\(R_n = RT(IDCT(\tilde{D}_n)) - IDCT(\tilde{D}_n)\)</center><br/>
-\(K_{n+1}和K_n\)的关系为：<br/>
-<center>\(K_{n+1} = [DCT(RT(IDCT(\tilde{D}_n)))/Q]\\<br/>
-~~~~~~~= [DCT(IDCT(\tilde{D}_n)+R_n)/Q] \\<br/>
-~~~~~~~= K_n + [DCT(R_n)/Q] \\<br/>
-~~~~~~~=K_n+M_n\\<br/>
-\)</center><br/>
-结合上3式可以得到：<br/>
-\(R_{n+1} = R_n + R_T ( IDCT( \tilde{D}_n ) + IDCT ( M_n × Q ) ) \\<br/>
-~~~~~~~~~~~−RT(IDCT(\tilde{D}_n))− IDCT(M_n × Q)\)</p>
-
-<p>如果\(M_n=0\)，则\(R_{n+1}=R_n\)。对于n-times压缩的error block，若\(M_{m+1}=0\)，则可认为该error block为useless（因为不会带来误差），称其为稳定的block;应该从提取特征的block中去除。<br/>
-（对于rounding block, \(M_n\)很容易为0，因为每个元素取值范围为\([-0.5,0.5]\),其DCT变换后值小于8(\(F(0,0)&lt;4\))，如果\(Q(0,0)&gt;8\)和其它\(Q(u,v)&gt;16\)时M为0）<br/>
-2）error-based statistical features(ESBF):<br/>
-1. ESBF_spatial(4维): \(mean(|R_n^r|)\), \(var(|R_n^r|)\),\(mean(|R_n^t|)\), \(var(|R_n^t|)\) (截断误差和舍入误差的均值和方差)<br/>
-2. EBSF_dct(8维): \(mean(|W_{n,D}^r|)\), \(var(|W_{n,D}^r|)\), \(mean(|W_{n,A}^r|)\), \(var(|W_{n,A}^r|)\), \(mean(|W_{n,D}^t|)\), \(var(|W_{n,D}^t|)\), \(mean(|W_{n,A}^t|)\), \(var(|W_{n,A}^t|)\) (A表示直流分量，D表示交流分量，r表示舍入误差，t表示截断误差)<br/>
-3. EBSF_ratio(1维):  \(n_r/n_a\)  (\(n_r\)表示不稳定的rounding block 个数，\(n_a\)表示不稳定的block总个数）</p>
-
-<h4 id="toc_11">2.2.3 训练</h4>
-
-<p>将提取出的13维特征使用SVM训练，高斯核函数，cross-validation, grid-search.</p>
+<!-- 多说公共JS代码 end -->
 
 
     
@@ -219,16 +167,13 @@ if \bar{D}_m \le D,~J~is~a~singly~ compressed~image<br/>
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="14810866793903.html" 
-          title="Previous Post: centos7.0安装配置，cuda,cudnn安装，anaconda安装，深度学习框架caffe,torch,theano,tensorflow安装">&laquo; centos7.0安装配置，cuda,cudnn安装，anaconda安装，深度学习框架caffe,torch,theano,tensorflow安装</a>
-      
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="14699720497183.html" 
-          title="Next Post: Digital image forensics: a booklet for beginners">Digital image forensics: a booklet for beginners &raquo;</a>
+          <a  href="14844628181225.html" 
+          title="Next Post: 深度学习、caffe简要入门指南">深度学习、caffe简要入门指南 &raquo;</a>
       
       </p>
         </div>
