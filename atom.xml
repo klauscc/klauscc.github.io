@@ -1,0 +1,927 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[klauscc]]></title>
+  <link href="klauscc.github.io/atom.xml" rel="self"/>
+  <link href="klauscc.github.io/"/>
+  <updated>2017-01-27T17:22:35+08:00</updated>
+  <id>klauscc.github.io/</id>
+  <author>
+    <name><![CDATA[]]></name>
+    
+  </author>
+  <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[深度学习、caffe简要入门指南]]></title>
+    <link href="klauscc.github.io/14844628181225.html"/>
+    <updated>2017-01-15T14:46:58+08:00</updated>
+    <id>klauscc.github.io/14844628181225.html</id>
+    <content type="html"><![CDATA[
+<p>近年来，深度学习是机器学习的一大潮流。它在计算机视觉CV，自然语言处理NLP等领域取得了极大的成就。本文以深度学习框架Caffe作为工具简要讲解深度学习入门。</p>
+
+<p><strong>对深度学习和CNN比较了解的可以直接跳至第四节，对caffe比较了解的可以直接跳过本教程。</strong></p>
+
+<span id="more"></span><!-- more -->
+
+<ul>
+<li>
+<a href="#toc_0">1. 深度学习概要</a>
+</li>
+<li>
+<a href="#toc_1">2. 神经网络</a>
+</li>
+<li>
+<a href="#toc_2">3. 卷积神经网络(Convolutional Neural Networks, CNNS or ConvNets)</a>
+</li>
+<li>
+<a href="#toc_3">4. Caffe 实战</a>
+<ul>
+<li>
+<a href="#toc_4">4.1 数据准备</a>
+</li>
+<li>
+<a href="#toc_5">4.2 定义模型</a>
+</li>
+<li>
+<a href="#toc_6">4.3 定义solver</a>
+</li>
+<li>
+<a href="#toc_7">4.4 训练模型</a>
+<ul>
+<li>
+<a href="#toc_8">4.4.1 训练</a>
+</li>
+<li>
+<a href="#toc_9">4.4.2 可视化</a>
+</li>
+<li>
+<a href="#toc_10">4.4.3 测试</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_11">4.5 迁移学习</a>
+<ul>
+<li>
+<a href="#toc_12">4.5.1 使用迁移学习解决猫狗分类</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_13">结论</a>
+</li>
+</ul>
+
+
+<h3 id="toc_0">1. 深度学习概要</h3>
+
+<p>深度学习模型是从<a href="http://ufldl.stanford.edu/wiki/index.php/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C">神经网络</a>演变而来，主流的两个模型是CNN(Convolutional Neural Network,卷积神经网络)和RNN(Recurrent Neural Network,循环神经网络)，分别对应CV领域和NLP领域。CNN的经典实例有Alexnet, Googlenet, VGG, Resnet等模型，RNN最经典的是LSTM。经过这些年的发展，在这两个领域新推出的模型几乎都是CNN和RNN的变种和组合。</p>
+
+<p>深度学习与传统机器学习最大的区别是特征由网络自动学习，而不需要手工设计特征。<br/>
+<center ><img src="media/14844628181225/14850557732034.jpg" alt=""/></center ></p>
+
+<p>作为入门，本文以caffe为工具，以<a href="https://www.kaggle.com/c/dogs-vs-cats">猫狗图片分类问题</a>， 使用Alexnet模型来简要介绍深度学习。</p>
+
+<h3 id="toc_1">2. 神经网络</h3>
+
+<p>神经元是大脑的基本组成成分，神经网络正是由生物的神经元激发的灵感，它由一个个神经元连接而成，每个神经元有一个激活函数(Sigmoid, ReLu,等)。下图是一个2隐层的前馈神经网络。<br/>
+<center ><img src="media/14844628181225/14850561002582.jpg" alt=""/> </center></p>
+
+<p>每两个神经元之间的连接有一个权值系数，而深度学习学习的目标就是找到一组这样的参数使得网络输出值与实际输出值之间的差别最小，这个差别使用Loss Function(损失函数，or 代价函数cost function)来衡量。一个最简单的损失函数是<strong>均方差损失函数</strong>(Squared-error cost function):<br/>
+<center> \(J(W,b;x,y) = \frac{1}{2}||h_{W,b}(x) - y||^2\) </center><br/>
+式中W,b是网络的权值，也是我们需要求的系数，\(h_{W,b}(x)\)是网络在参数W,b下的x的输出。</p>
+
+<p>学习的目标是<strong>最小化Loss函数</strong>，即是首先条件下求极值的问题。对于两三个参数的极值问题可以使用拉格朗日乘数法求极值，这就是<strong>符号微分</strong>。但是对于我们的网络，可能需要优化的参数有几百万个，符号微分方法不可行或者代价昂贵，在所有机器学习算法中使用的是<strong>自动化微分</strong>方法来求解。</p>
+
+<p>自动化微分的方法基本思想如下:<br/>
+    1. 训练开始时随机初始化参数。<br/>
+    2. 计算输入x在当前参数下的输出\(h_{W,b}(x)\)(Forward)<br/>
+    3. 计算Loss函数J的梯度，并使用梯度更新参数W，b(Backward)，参数更新方式有SGD,AdaGrad等方法。<br/>
+    4. 2和3是一个iteration(迭代)，如此进行多个迭代直至满足某一条件为止。</p>
+
+<p><strong>每个iteration选取训练集的一个batch的数据进行训练，一个epoch是指将训练集遍历完所需要的iteration的个数。</strong></p>
+
+<p><strong>具体学习过程参考UFLDL教程</strong>:<a href="http://ufldl.stanford.edu/tutorial/supervised/MultiLayerNeuralNetworks/">Multi-Layer Neural Network<br/>
+</a></p>
+
+<p>这种方法非常适合计算机矢量化实现，而且目前有很多优化的很好的张量运算库如mkl, cudnn等。</p>
+
+<h3 id="toc_2">3. 卷积神经网络(Convolutional Neural Networks, CNNS or ConvNets)</h3>
+
+<p>CNN是多层网络，由卷积层(Convolution),池化层(Pooling), Batch Normalization(BN,标准化，将输出变为方差0，均值1的高斯分布，防止“梯度弥散”。关于梯度弥散，一个简单的例子：0.9<sup>{30}\approx</sup> 0.04，BN将经过多层变得很小的梯度的scale变大)，全连接层(Full Connection, fc),Dropout(随机失活某些神经元，避免过拟合)等组成，每层是其中的一种。第2节中讲到的前馈神经网络是一个由3层全连接层构成的网络。CNN的训练过程和第2节训练方法一致。</p>
+
+<p><strong>具体讲解参考UFLDL教程<a href="http://ufldl.stanford.edu/tutorial/supervised/FeatureExtractionUsingConvolution/">Multi-Layer Neural Network<br/>
+</a></strong></p>
+
+<p>卷积层效果图。相当于将一个固定大小的kernel(卷积核)以stride的步长对图片进行遍历。需要注意的有kernel_size, stride, pad几个参数。kernel_size表示卷积核的大小;stride表示步长，即遍历的时候每次前进的大小;pad表示对原始图片两边(水平方向和竖直方向，pad_h和pad_w)进行补零以获得期望的输出尺寸。下图是以3x3的kernel, 1的stride, 0的pad对5x5(h_i x w_i)的图片进行convolution,输出大小为3x3(h_o x w_o)。<strong>计算公式 h_o = (h_i + 2 * pad_h - kernel_h) / stride_h + 1, w_o 类似</strong><br/>
+<img src="media/14844628181225/14855025028447.gif" alt=""/></p>
+
+<p><center><img src="media/14844628181225/14850653780486.jpg" alt=""/></center></p>
+
+<p>本文中即将使用的Alexnet结构如下:<br/>
+<center><img src="media/14844628181225/14850654959858.jpg" alt=""/></center></p>
+
+<h3 id="toc_3">4. Caffe 实战</h3>
+
+<p>caffe提供c++, python, matlab和shell接口。python 和matlab接口提供类似功能，一般在predict,feature extraction的时候才会用到，用于与其他模块结合。但是一般的训练测试过程只需要用到shell接口。</p>
+
+<p>在Caffe中训练模型有下面4步:</p>
+
+<pre><code>1. 数据准备。将数据处理为Caffe需要的形式。
+2. 定义Model。在Caffe中定义模型架构和参数使用`.prototxt`后缀名的文件
+3. 定义Solver。Solver是Caffe训练模型的入口，里面定义一些超参数如:学习率，最大Iteration数，模型参数文件保存路径等。
+4. 训练模型。在命令行执行caffe的命令即可训练模型。
+</code></pre>
+
+<p>示例代码路径: <a href="https://github.com/klauscc/dogOrCat">https://github.com/klauscc/dogOrCat</a></p>
+
+<p>上面四步只会用到shell接口。</p>
+
+<h4 id="toc_4">4.1 数据准备</h4>
+
+<p>从 <a href="https://www.kaggle.com/c/dogs-vs-cats/data">Dogs vs. Cats</a>下载数据后解压<br/>
+<code><br/>
+unzip ~/train.zip<br/>
+unzip ~/test1.zip<br/>
+rm ~/deeplearning-cats-dogs-tutorial/input/*.zip<br/>
+</code><br/>
+Caffe的输入可以使用lmdb格式的数据，也可以使用原始图片的label文件(每一行是一张图片的路径和类别)。</p>
+
+<p>创建lmdb数据库方式可以参考caffe源码中<code>./examples/imagenet/create_imagenet.sh</code>。如果你的训练数据不是原始图片(比如进行过预处理)，就必须使用lmdb的方式载入数据了,而创建方式就需要使用python或者c++接口了，需要的时候google <code>caffe python lmdb</code>就有大把的教程了。</p>
+
+<p>本文使用的是原始图片进行训练，caffe需要的文件内容如下:</p>
+
+<pre><code>./data/train/cat.10607.jpg 0
+./data/train/cat.7659.jpg 0
+./data/train/dog.3057.jpg 1
+./data/train/dog.5977.jpg 1
+./data/train/cat.9318.jpg 0
+./data/train/dog.625.jpg 1
+./data/train/cat.12339.jpg 0
+./data/train/cat.4378.jpg 0
+./data/train/cat.9347.jpg 0
+./data/train/dog.2431.jpg 1
+./data/train/cat.12228.jpg 0
+./data/train/dog.10660.jpg 1
+</code></pre>
+
+<p>生成这个文件<a href="https://github.com/klauscc/dogOrCat/blob/master/splitDataset.py">代码</a>:</p>
+
+<pre><code>import numpy as np
+import glob
+import os
+
+
+#get all the images
+database_dir=&quot;./data&quot;
+image_data = [img for img in glob.glob(database_dir+&quot;/train/*&quot;)]
+
+f_tv = open(&#39;train_val.txt&#39;,&#39;w&#39;)
+f_test = open(&#39;test.txt&#39;,&#39;w&#39;)
+
+#division the dataset into train and test set
+for in_idx, img_path in enumerate(image_data):
+    if &#39;dog&#39; in img_path:
+        label=1
+    else:
+        label=0
+
+    if in_idx % 5 ==0:
+        f_test.write(&quot;%s %d\n&quot; %(img_path, label))
+    else:
+        f_tv.write(&quot;%s %d\n&quot; %(img_path, label))
+
+f_tv.close()
+f_test.close()
+</code></pre>
+
+<h4 id="toc_5">4.2 定义模型</h4>
+
+<p>caffe 中网络模型文件使用<code>prototxt</code>后缀保存。<a href="https://github.com/klauscc/dogOrCat/blob/master/alexnet/train_val.prototxt">模型文件</a></p>
+
+<p>其基本结构如下</p>
+
+<pre><code>name: &#39;alexnet&#39;
+
+layer{
+ name: &quot;data&quot;
+  type: &quot;ImageData&quot;
+  top: &quot;data&quot;
+  top: &quot;label&quot;
+  include {
+    phase: TRAIN
+  }
+  transform_param {
+  }
+}
+
+layer {
+    bottom: &quot;data&quot;
+    top: &quot;conv1&quot;
+    ...
+}
+
+layer {
+
+}
+...
+</code></pre>
+
+<p>层间关系通过 <code>top</code>和<code>bottom</code>指定，这样一个网络结构就唯一确定下来了(回顾第三节alexnet结构图)。 这里挑选其中几层讲解,参数意义看注释</p>
+
+<pre><code>layer { #输入层
+  name: &quot;data&quot;  
+  type: &quot;ImageData&quot; #类型，这种类型使用4.1生成的label文件
+  top: &quot;data&quot;  #输出1
+  top: &quot;label&quot; #输出2
+  include {
+    phase: TRAIN #阶段，训练阶段的输入层;测试阶段的输入层:TEST。在solver中可以指定多少个iteration TEST一次
+  }
+  transform_param {
+    mirror: true  # data augmentation,将图片的水平翻转也加入数据集增加训练数据
+    crop_size: 227 #将图片crop到多大227x227
+    mean_value: 104 #归一化，rgb的mean value
+    mean_value: 117
+    mean_value: 123
+  }
+  image_data_param {
+    source: &quot;train_val.txt&quot; #数据来源
+    batch_size: 256 #batch 大小，一个iteration训练多少数据
+    new_height: 256
+    new_width: 256
+    shuffle: true  # 是否打乱训练数据
+  }
+}
+</code></pre>
+
+<p>这个输入层输出的数据尺寸为256x3x227x227(nchw. n:batchsize;c:channel;h:height;w:width. tensorflow中默认格式是nhwc)</p>
+
+<p>卷积层</p>
+
+<pre><code>layer {
+  name: &quot;conv1&quot;
+  type: &quot;Convolution&quot; 
+  bottom: &quot;data&quot;
+  top: &quot;conv1&quot;
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 96
+    kernel_size: 11
+    stride: 4
+    pad: 0
+    weight_filler {
+      type: &quot;gaussian&quot;
+      std: 0.01
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+      value: 0
+    }
+  }
+}
+</code></pre>
+
+<p>这个卷积层输入256x3x227x227(bottom: &quot;data&quot;), kernel_size, stride, pad,输出计算方法请看第三节,输出尺寸为 256x96x55x55. weight_filter 和 bias_filter是convolution参数的<strong>初始化</strong>方法。</p>
+
+<p><strong>其他各层以及每层参数意义可以参考<a href="http://caffe.berkeleyvision.org/tutorial/layers.html">caffe官方文档</a></strong></p>
+
+<h4 id="toc_6">4.3 定义solver</h4>
+
+<p>solver文件是caffe训练的入口文件，里面定义各种超参数。示例:</p>
+
+<pre><code>net: &quot;alexnet/train_val.prototxt&quot;  #网络模型路径
+test_iter: 200     #第一次测试的iteration
+test_interval: 200 #每隔多少个iteration 对模型测试一次
+test_initialization: false #是否开始训练时测试一次
+base_lr: 0.001 #基础学习率(learning rate, lr)
+lr_policy: &quot;step&quot; #lr 下降策略,step. 每隔stepsize个iteration降低lr, lr&#39; = lr * gamma
+gamma: 0.1
+stepsize: 2000 # 每隔2000个iteration调整一次学习率lr
+display: 20  # 每隔20个iteration 打印一次输出(loss, accuracy等)
+max_iter: 450000 # 到达max_iter则停止训练
+momentum: 0.9
+weight_decay: 0.0005 #防止过拟合, 给loss函数加的正则项(regulation, L1,L2)前的系数
+snapshot: 5000 #每隔多少个iteration保存一次模型
+snapshot_prefix: &quot;/data/tmp/klaus/dogVsCat/alexnet/dogvscat_alexnet_train&quot; #模型参数文件保存路径
+solver_mode: GPU #使用GPU进行训练
+</code></pre>
+
+<p><strong>更多详细参数参考 <a href="http://caffe.berkeleyvision.org/tutorial/solver.html">caffe官方文档</a></strong></p>
+
+<h4 id="toc_7">4.4 训练模型</h4>
+
+<h5 id="toc_8">4.4.1 训练</h5>
+
+<p>在定义了模型结构(train_val.prototxt)和训练超参数(solver.prototxt)以后，就可以进行训练了。</p>
+
+<pre><code>caffe train -solver ./alexnet/solver.prototxt 2&gt;&amp;1| tee dogVsCat.log
+</code></pre>
+
+<p>其中<code>2&gt;&amp;1| tee dogVsCat.log</code> 这一行是将控制台输出保存到文件中。<code>2&gt;&amp;1</code> 是将stderr重定向到stdout中</p>
+
+<h5 id="toc_9">4.4.2 可视化</h5>
+
+<p>在训练完以后，可以使用<code>dogVsCat.log</code>文件画出学习曲线</p>
+
+<pre><code>python plot_learning_curve.py ./dogVsCat.log ./dogcat_learning_curve.png
+</code></pre>
+
+<p><img src="media/14844628181225/14855045855566.jpg" alt=""/></p>
+
+<h5 id="toc_10">4.4.3 测试</h5>
+
+<p>测试模型</p>
+
+<pre><code>caffe test -model ./alexnet/train_val.prototxt -weights /data/tmp/klaus/dogVsCat/alexnet/dogvscat_alexnet_train_iter_10000.caffemodel  2&gt;&amp;1| tee dogVsCat_test.log
+</code></pre>
+
+<p>这里测试的数据是<code>train_val.prototxt</code>中<code>phase:TEST</code>对应的输入层的数据， -weights是网络权重，是训练过程保存的模型参数文件</p>
+
+<h4 id="toc_11">4.5 迁移学习</h4>
+
+<p>深度学习需要大量数据和大量资源进行训练。而迁移学习是将一个在其他数据库上训练过的模型迁移到我们的数据库上，<strong>参数初始化为其他数据库上训练完的参数</strong>，这样可以在很短时间内达到很好的效果。</p>
+
+<p>迁移学习在深度学习上一般有两种使用方式:</p>
+
+<pre><code>1. 用已训练的模型作为feature extractor: 就是固定网络的前面的若干层，只调整最后的几个全连接层
+2. fine-tune 已训练的模型: 在原有参数基础上继续训练所有层，这时候往往需要调低学习率(lr)
+</code></pre>
+
+<h5 id="toc_12">4.5.1 使用迁移学习解决猫狗分类</h5>
+
+<p>imagenet是一个具有1280000张图片，1000种分类的巨大数据库。而Alexnet在在2012年Imagenet大赛上获得了冠军，也是让深度学习再次火起来的原因之一。caffe提供了在Imagenet数据库上训练的Alexnet的模型参数。</p>
+
+<p>我们首先从 caffe 的 <a href="http://caffe.berkeleyvision.org/model_zoo.html">model zoo</a>下载alexnet模型. caffe 源码提供了相应脚本:</p>
+
+<pre><code>cd $CAFFE_ROOT #change $CAFFE_ROOT with your caffe source code dir path or set the environment variable.
+python scripts/download_model_binary.py models/bvlc_alexnet
+</code></pre>
+
+<p>这时候模型文件<code>bvlc_alexnet.caffemodel</code>下载到了<code>$CAFFE_ROOT/models/bvlc_alexnet/</code>目录下了，复制到我们的路径下，然后进行训练:</p>
+
+<pre><code>caffe train -solver ./alexnet/solver.prototxt -weights ./alexnet/bvlc_alexnet.caffemodel  2&gt;&amp;1| tee dogVsCat.log
+</code></pre>
+
+<p><code>-weights ./alexnet/bvlc_alexnet.caffemodel</code>表示参数初始化为<code>./alexnet/bvlc_alexnet.caffemodel</code>的参数。</p>
+
+<p>训练完后画出learning curve:<br/>
+<img src="media/14844628181225/14855056406821.jpg" alt=""/></p>
+
+<p>可以看到，相比于从头训练，模型的loss下降得更快而且最后效果更好。</p>
+
+<h3 id="toc_13">结论</h3>
+
+<p>关于使用python接口进行预测图片参考<a href="https://github.com/klauscc/dogOrCat/blob/master/make_predictions.py">make_predictions</a>,这里不做赘述。python接口往往是用来做application的，比如web_demo之类的。</p>
+
+<p>本文对caffe使用方法进行简单但是全面的介绍，对深度学习有些了解的童鞋应该可以使用caffe来写自己的模型了。</p>
+
+<p>对深度学习的进一步了解建议学习<a href="http://ufldl.stanford.edu/tutorial/supervised/ExerciseConvolutionalNeuralNetwork/">UFLDL教程</a> 和阅读<a href="https://github.com/songrotek/Deep-Learning-Papers-Reading-Roadmap">经典Paper</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[centos7.0安装配置，cuda,cudnn安装，anaconda安装，深度学习框架caffe,torch,theano,tensorflow安装]]></title>
+    <link href="klauscc.github.io/14810866793903.html"/>
+    <updated>2016-12-07T12:57:59+08:00</updated>
+    <id>klauscc.github.io/14810866793903.html</id>
+    <content type="html"><![CDATA[
+<p>深度学习在linux上面会比windows上面方便很多，在windows上那叫个折腾。本文将会介绍centos7.0 的<br/>
+安装，cuda和cudnn的安装，anaconda安装，以及各种深度学习框架的安装。</p>
+
+<p>深度学习是计算密集型任务，不推荐在虚拟机中运行，装cuda和cudnn需要有nvidia显卡。</p>
+
+<span id="more"></span><!-- more -->
+
+<ul>
+<li>
+<a href="#toc_0">1. 安装系统</a>
+</li>
+<li>
+<a href="#toc_1">2. 配置网络</a>
+<ul>
+<li>
+<a href="#toc_2">2.1 修改ip和网关</a>
+</li>
+<li>
+<a href="#toc_3">2.2 配置DNS服务器</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_4">3. 配置安装ssh</a>
+</li>
+<li>
+<a href="#toc_5">4. 安装cuda,cudnn</a>
+<ul>
+<li>
+<a href="#toc_6">4.1 安装 cuda</a>
+<ul>
+<li>
+<a href="#toc_7">4.1.1 关闭Nouveau驱动</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_8">4.1.2 安装cuda</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_9">4.2 安装cudnn</a>
+</li>
+<li>
+<a href="#toc_10">5. 安装anaconda</a>
+</li>
+<li>
+<a href="#toc_11">6. 安装 caffe</a>
+<ul>
+<li>
+<a href="#toc_12">6.1 安装依赖</a>
+</li>
+<li>
+<a href="#toc_13">6.2 修改Makefile.config</a>
+</li>
+<li>
+<a href="#toc_14">6.3 编译并测试</a>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<p><strong>本文默认在root下运行所有命令</strong></p>
+
+<h3 id="toc_0">1. 安装系统</h3>
+
+<pre><code>  建议不要使用最小安装，否则很多工具需要自己再次安装比较麻烦。
+</code></pre>
+
+<p>分区：自己分区，选择硬盘(比如sdb), 分区表如下<br/>
+<img src="media/14810866793903/14810871998928.jpg" alt=""/></p>
+
+<p>选择了需要安装的软件后不停下一步就可以安装完毕。</p>
+
+<p>安装完成后，添加源 <code>yum install epel-release</code>,这个源包含了很多base源没有的软件包，非常实用</p>
+
+<h3 id="toc_1">2. 配置网络</h3>
+
+<p>centos 默认是没有联网的，如果系统没有安装图像界面如<code>gnome</code>或者<code>kde</code>等，需要在命令行配置如下</p>
+
+<h4 id="toc_2">2.1 修改ip和网关</h4>
+
+<pre><code>vim /etc/sysconfig/network-scripts/ifcfg-enp5s0 #enp5s0是网卡对应名称，使用`ifconfig`查看自己机器的网卡名称，然后修改对应文件
+</code></pre>
+
+<p>将<code>ONBOOT=no</code>改为<code>ONBOOT=yes</code>, 这样开机就会自动联网了</p>
+
+<p>如果希望使用静态ip,配置如下(<strong>可选</strong>):</p>
+
+<pre><code>#静态ip的好处是重启后ip不变，在路由器开启端口转发，ssh可以正常使用(否则ip变化会找不到服务器)。
+BOOTPROTO=static     #静态获取
+IPADDR=192.168.1.139 #指定ip地址
+GATEWAY=192.168.1.1  # 指定网关
+ONBOOT=yes #重启自动联网
+</code></pre>
+
+<p>配置好了在命令行运行<code>systemctl restart network.service</code>就会联网了。</p>
+
+<h4 id="toc_3">2.2 配置DNS服务器</h4>
+
+<p>编辑文件<code>/etc/resolv.conf</code> </p>
+
+<pre><code>vim /etc/resolv.conf 
+</code></pre>
+
+<p>添加以下几行</p>
+
+<pre><code>#这两个DNS服务器是交大的DNS服务器，可以自行更改最适合自己的DNS服务器
+nameserver 202.120.2.101 #主DNS服务器
+nameserver 202.120.2.100 #备用DNS服务器
+</code></pre>
+
+<p>修改完了以后在命令行输入<code>ping www.baidu.com</code>看是否能ping通，ping的通说明配置完成。</p>
+
+<h3 id="toc_4">3. 配置安装ssh</h3>
+
+<p>centos默认已经安装了OpenSSH,所以只需配置即可。配置文件为<code>/etc/ssh/sshd_config</code><br/>
+修改下面几行</p>
+
+<pre><code>Port 22 #22修改为自己想要的端口
+PermitRootLogin no #no 改为yes, 是否允许root通过ssh登录。改为yes方便些
+ClientAliveInterval 0 #去掉前面的&#39;#&#39;注释，并将0改为60.这个是让服务器每隔60s发送一个包给客户端，避免长时间不操作客户端会timeout连接关闭
+</code></pre>
+
+<p>修改好了再命令行运行<code>systemctl restart sshd.service</code> 重启sshd服务</p>
+
+<p>如果ssh连接不上可能需要关闭selinux或防火墙才行:<br/>
+<strong>关闭selinux</strong>: 修改 <code>/etc/sysconfig/selinux</code> 将里面<code>SELINUX=enforcing</code>改为 <code>SELINUX=disabled</code><br/>
+<strong>关闭防火墙</strong>: 命令行运行<code>systemctl stop firewalld</code></p>
+
+<h3 id="toc_5">4. 安装cuda,cudnn</h3>
+
+<h4 id="toc_6">4.1 安装 cuda</h4>
+
+<p>cuda是英伟达显卡驱动，可以去官网下载<a href="https://developer.nvidia.com/cuda-downloads">https://developer.nvidia.com/cuda-downloads</a>,可能需要注册一个账号</p>
+
+<h5 id="toc_7">4.1.1 关闭Nouveau驱动</h5>
+
+<p>Nouveau 是CentOs自带的驱动，要安装cuda需要先禁用掉这个驱动.<br/>
+在命令行输入<code>lsmod | grep nouv</code>, 如果有输出表明这个驱动没用被禁用。</p>
+
+<p>禁用方法:<br/>
+修改或添加文件<code>/etc/modprobe.d/blacklist-nouveau.conf</code>:</p>
+
+<pre><code>vim /etc/modprobe.d/blacklist-nouveau.conf
+</code></pre>
+
+<p>添加以下内容:</p>
+
+<pre><code>blacklist nouveau
+options nouveau modeset=0
+</code></pre>
+
+<p>添加完毕后在命令行运行以下命令</p>
+
+<pre><code>sudo dracut --force
+reboot
+</code></pre>
+
+<h4 id="toc_8">4.1.2 安装cuda</h4>
+
+<p>重启后运行安装文件即可<code>bash cuda_8.0.44_linux-run</code><br/>
+安装路径默认即可，安装完毕后需要添加环境变量，如果希望给所有用户安装则添加到<code>/etc/profile</code>,否则添加到<code>~/.bashrc</code></p>
+
+<p>添加以下内容:</p>
+
+<pre><code># /user/local/cuda是cuda安装路径，根据自己情况修改
+export PATH=/usr/local/cuda/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH 
+</code></pre>
+
+<h3 id="toc_9">4.2 安装cudnn</h3>
+
+<p>cudnn从官网上下下来包是编译后的包,只需要解压到对应路径并添加环境变量即可,建议解压到<code>/usr/local/cudnn</code>(原安装包解压后为cuda/*， <code>mv cuda /usr/local/cudnn</code>即可)</p>
+
+<p>安装包下载地址<a href="https://developer.nvidia.com/cudnn">https://developer.nvidia.com/cudnn</a>,需要注册账号</p>
+
+<p>解压到<code>/usr/local/cudnn</code>后只需要添加环境变量即可，为所有用户安装添加到<code>/etc/profile</code></p>
+
+<pre><code>export C_INCLUDE_PATH=/usr/local/cudnn/include:$C_INCLUDE_PATH
+export CPLUS_INCLUDE_PATH=/usr/local/cudnn/include:$CPLUS_INCLUDE_PATH
+export LD_LIBRARY_PATH=/usr/local/cudnn/lib64:$LD_LIBRARY_PATH
+</code></pre>
+
+<pre><code>说明:
+$C_INCLUDE_PATH和$CPLUS_INCLUDE_PATH分别是c和c++头文件存放路径，添加了以后程序就可以找到对应的头文件了，
+$LD_LIBRARY_PATH是动态链接库和静态库的路径，使用cudnn的程序需要能够找到这些`.so`或`.a`库
+多个路径以’:‘隔开
+</code></pre>
+
+<h3 id="toc_10">5. 安装anaconda</h3>
+
+<p>anaconda是一个python发行版，为高性能计算和数据科学准备的。简单的说就是python加上一堆各种包比如numpy,scipy等，一些常用的数据预处理、数据分析、可视化等python包都在里面，也就是说不用再自己一个个安装了。</p>
+
+<p>下载地址<a href="https://www.continuum.io/downloads">https://www.continuum.io/downloads</a>, 一般选择python2.7的版本安装，如果你使用python3就下载Python3版本。</p>
+
+<p>默认安装路径是当前用户下，如果是root安装建议给所有用户安装，安装路径改为<code>\usr\local\anaconda2</code></p>
+
+<p>安装完成后，需要添加环境变量</p>
+
+<pre><code>export ANACONDA_HOME=/usr/local/anaconda2
+export PATH=$ANACONDA_HOME/bin:$PATH
+</code></pre>
+
+<p>命令 <code>source /etc/profile</code>可以让环境变量立即生效</p>
+
+<h3 id="toc_11">6. 安装 caffe</h3>
+
+<h4 id="toc_12">6.1 安装依赖</h4>
+
+<pre><code>yum install epel-realease
+
+yum install -y protobuf-devel leveldb-devel snappy-devel opencv-devel boost-devel  hdf5-devel gflags-devel glog-devel lmdb-devel 
+
+yum install -y openblas-devel
+</code></pre>
+
+<h4 id="toc_13">6.2 修改Makefile.config</h4>
+
+<p>命令行运行<code>cp Makefile.config.example Makefile.config</code><br/>
+修改以下内容</p>
+
+<pre><code>USE_CUDNN := 1 # 编译GPU则去掉前面的注释
+BLAS := open
+BLAS_INCLUDE := /usr/include/openblas
+BLAS_LIB := /usr/lib64
+
+#需要安装matcaffe 则去掉注释，并修改为MATLAB路径
+#MATLAB_DIR := /usr/local/MATLAB/R2016b  
+
+#使用anaconda
+#修改PYTHON_INCLUDE和PYTHON_LIB
+PYTHON_INCLUDE := $(ANACONDA_HOME)/include \
+                 $(ANACONDA_HOME)/include/python2.7 \
+                 $(ANACONDA_HOME)/lib/python2.7/site-packages/numpy/core/include \
+PYTHON_LIB := $(ANACONDA_HOME)/lib
+
+#运行使用python自定义层,去掉前面的&#39;#&#39;注释
+WITH_PYTHON_LAYER := 1
+
+INCLUDE_DIRS := /usr/local/include /usr/include $(PYTHON_INCLUDE)
+LIBRARY_DIRS := /usr/local/lib /usr/local/cudnn/lib64  $(PYTHON_LIB)
+</code></pre>
+
+<h4 id="toc_14">6.3 编译并测试</h4>
+
+<pre><code>#编译并运行单元测试
+make all -j
+make runtest -j
+
+#编译python接口，可选
+make pycaffe -j  
+make pytest  
+
+#编译matlab接口，可选
+make matcaffe -j
+make mattest
+</code></pre>
+
+<p>如果测试的时候失败，比如找不到libhdf5.so.xxx, libprotobuf.so.xxx， 原因是编译的时候使用的是ananconda中带的.so文件，但是这些.so文件没有添加到环境变量中去。解决办法是将 <code>ananconda_path/lib</code>中对应的文件复制到<code>/usr/local/lib</code>或<code>/usr/local/lib64</code>中去</p>
+
+<pre><code># 例如找不到 libprotobuf.so.10, ananconda安装路径为 /usr/local/ananconda2
+cp /usr/local/ananconda2/lib/libprotobuf.so.* /usr/local/lib
+# 如果将 /usr/local/ananconda2/lib 添加到 $LD_LIBRARY_PATH去可能会与系统中某些lib冲突，所以只能将需要的lib复制过去
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Double Jpeg detection with the same quantization matrix (Notes)]]></title>
+    <link href="klauscc.github.io/14699724013434.html"/>
+    <updated>2016-07-31T21:40:01+08:00</updated>
+    <id>klauscc.github.io/14699724013434.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">1. Introduction</h2>
+
+<p>介绍一下几篇论文中等质量双压缩检测的方法，备忘。State of the-art double jepg compression detection with the same quantization matrix. </p>
+
+<h2 id="toc_1">2. Methods</h2>
+
+<h3 id="toc_2">2.1 Proposed by Fangjun et al.</h3>
+
+<p><a href="http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=5560817">Detecting Double JPEG Compression With the Same Quantization Matrix</a> </p>
+
+<h4 id="toc_3">2.1.1 jpeg压缩和解压缩过程导致的三种误差</h4>
+
+<p>i. 量化误差 压缩过程中，DCT系数量化导致的误差<br/>
+ii. 截断误差 解压缩过程中，IDCT变换可能导致值在[0,255]之外，需要截断到0或者255<br/>
+iii. 舍入误差  解压缩， IDCT变换得到的值为浮点数，需要舍入为最接近的整数</p>
+
+<h4 id="toc_4">2.1.2 jpeg多重压缩统计特征</h4>
+
+<p>\(J_n\)代表压缩n次的Jpeg图片，\(D_n\)代表 \(J_n\)和\(J_{n+1}\)中JPEG系数（量化后的DCT系数）不一样的个数，\(S_n\)代表\(J_n\)中非0 JPEG系数的个数。<br/>
+<strong>统计特征：</strong>随着n增加，\(D_n\)单调减小</p>
+
+<span id="more"></span><!-- more -->
+
+<h4 id="toc_5">2.1.3 检测方法</h4>
+
+<ol>
+<li>将原图片\(J\)压缩为\(J&#39;\),\(J\)和\(J&#39;\)的JPEG系数不一样的个数为\(D\)</li>
+<li><p>然后修改\(J&#39;\)部分(修改比率为\(mpnc\))Jpeg系数，然后压缩得到\(J_m&#39;\)，将\(J_m&#39;\)再次压缩得到\(J_m&#39;&#39;\)。</p></li>
+<li><p>\(J_m&#39;\)和\(J_m&#39;&#39;\)的JPEG系数不一样的个数为\(D_m\),重复n次取平均得到\(\bar{D}_m\)</p></li>
+<li><p>判断依据<br/>
+<center><br/>
+\(\left\{<br/>
+\begin{aligned}<br/>
+if \bar{D}_m \ge D,~J~is~a~doubly~ compressed~image \\<br/>
+if \bar{D}_m \le D,~J~is~a~singly~ compressed~image<br/>
+\end{aligned}<br/>
+\right.\)<br/>
+</center></p></li>
+</ol>
+
+<h4 id="toc_6">2.1.4 实验</h4>
+
+<p>在检测方法中，对准确率影响很重要的一个因素是\(mpnc\)。文章中是以固定步长0.001从0增加到0.118,同时检测准确率，获取准确率最高的\(mpnc\)。在预测其它数据集时，这个\(mpnc\)也有不错的泛化能力。<br/>
+<strong>交叉检测：</strong>对三个数据集训练，得到最佳的\(mpnc\)为最佳值范围的中位数，然后用这个值来预测其它数据集的图片。<br/>
+<strong>\(mpnc\)的影响：</strong> \(mpnc\)选取过大，会导致\(D_m\)过大；\(mpnc\)过小，会导致\(D_m\)过小。</p>
+
+<h4 id="toc_7">2.1.5 讨论</h4>
+
+<p><strong>为什么常数的\(mpnc\)适合不同的图片？</strong><br/>
+对于不同的图片D差异很大。虽然\(mpnc\)一样，但是由它生成的\(D_m\)和图片相关，适合于不同的图片。</p>
+
+<h3 id="toc_8">2.2 Proposed by Jianquan Yang et al.</h3>
+
+<p><a href="http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=6905821">An Effective Method for Detecting Double JPEG Compression With the Same Quantization Matrix</a></p>
+
+<h4 id="toc_9">2.2.1 摘要</h4>
+
+<p>基于误差统计特征的检测方法(error-based statistical feature extraction scheme):<br/>
+1. 将图片\(J\)解压缩到空间域时，其IDCT系数与空间域像素值之差构成一个误差图片（error image,图片的每一个像素值为解压缩时对于IDCT系数与空间域值之差）。误差图片反应了图片解压缩过程中的截断误差(Truncation error)和舍入误差(Round error)。<br/>
+2. 将error image分为一个个\(n*n\)的block(n=8,和DCT的block一样)。这些block可分为两类：\(n*n\)个值中至少存在一个截断误差，则为truncation block;否则为round block。<br/>
+3. 每个block提取13维的特征，将这些特征使用SVM分类，然后预测即可得到很好的效果。</p>
+
+<h4 id="toc_10">2.2.2 特征提取</h4>
+
+<p><img src="https://lh3.googleusercontent.com/-wLiZ4-WcYUQ/V6iWYwrDMxI/AAAAAAAAD7c/Fw2LyJ1XE9c/I/14706662767265.jpg" alt=""/><br/>
+1)压缩过n次的图片的error blocks值<center>\(R_n = RT(IDCT(\tilde{D}_n)) - IDCT(\tilde{D}_n)\)</center><br/>
+\(K_{n+1}和K_n\)的关系为：<br/>
+<center>\(K_{n+1} = [DCT(RT(IDCT(\tilde{D}_n)))/Q]\\<br/>
+~~~~~~~= [DCT(IDCT(\tilde{D}_n)+R_n)/Q] \\<br/>
+~~~~~~~= K_n + [DCT(R_n)/Q] \\<br/>
+~~~~~~~=K_n+M_n\\<br/>
+\)</center><br/>
+结合上3式可以得到：<br/>
+\(R_{n+1} = R_n + R_T ( IDCT( \tilde{D}_n ) + IDCT ( M_n × Q ) ) \\<br/>
+~~~~~~~~~~~−RT(IDCT(\tilde{D}_n))− IDCT(M_n × Q)\)</p>
+
+<p>如果\(M_n=0\)，则\(R_{n+1}=R_n\)。对于n-times压缩的error block，若\(M_{m+1}=0\)，则可认为该error block为useless（因为不会带来误差），称其为稳定的block;应该从提取特征的block中去除。<br/>
+（对于rounding block, \(M_n\)很容易为0，因为每个元素取值范围为\([-0.5,0.5]\),其DCT变换后值小于8(\(F(0,0)&lt;4\))，如果\(Q(0,0)&gt;8\)和其它\(Q(u,v)&gt;16\)时M为0）<br/>
+2）error-based statistical features(ESBF):<br/>
+1. ESBF_spatial(4维): \(mean(|R_n^r|)\), \(var(|R_n^r|)\),\(mean(|R_n^t|)\), \(var(|R_n^t|)\) (截断误差和舍入误差的均值和方差)<br/>
+2. EBSF_dct(8维): \(mean(|W_{n,D}^r|)\), \(var(|W_{n,D}^r|)\), \(mean(|W_{n,A}^r|)\), \(var(|W_{n,A}^r|)\), \(mean(|W_{n,D}^t|)\), \(var(|W_{n,D}^t|)\), \(mean(|W_{n,A}^t|)\), \(var(|W_{n,A}^t|)\) (A表示直流分量，D表示交流分量，r表示舍入误差，t表示截断误差)<br/>
+3. EBSF_ratio(1维):  \(n_r/n_a\)  (\(n_r\)表示不稳定的rounding block 个数，\(n_a\)表示不稳定的block总个数）</p>
+
+<h4 id="toc_11">2.2.3 训练</h4>
+
+<p>将提取出的13维特征使用SVM训练，高斯核函数，cross-validation, grid-search.</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Digital image forensics: a booklet for beginners]]></title>
+    <link href="klauscc.github.io/14699720497183.html"/>
+    <updated>2016-07-31T21:34:09+08:00</updated>
+    <id>klauscc.github.io/14699720497183.html</id>
+    <content type="html"><![CDATA[
+<h3 id="toc_0">1. Introduction</h3>
+
+<ul>
+<li><strong>Digital image forensics(DIF)</strong>
+
+<ul>
+<li>two principal research paths:
+
+<ol>
+<li>attempt at answering question a)(device captured the image as declared), by <strong>performing some kind of ballistic analysis</strong> to identify the device that captured the image, or at least to determine which devices did not capture it. </li>
+<li><strong>exposing traces of semantic manipulation</strong> (i.e. forgeries) by studying inconsistencies in natural image statistics. </li>
+</ol></li>
+</ul></li>
+</ul>
+
+<h3 id="toc_1">2. the role of digital image forensics in multimedia security</h3>
+
+<ul>
+<li><p>acquisition process and the tampering techniques leave subtle traces</p>
+
+<ul>
+<li><strong>active protection</strong>: watermarking</li>
+</ul>
+
+<h2 id="toc_2">- <strong>passive protection</strong>: tools in digital image forensics</h2>
+
+<span id="more"></span><!-- more --></li>
+</ul>
+
+<h3 id="toc_3">3. image source device identification</h3>
+
+<h4 id="toc_4">3.1 image acquisition and storage</h4>
+
+<h5 id="toc_5">stage might introduce imperfections:</h5>
+
+<ul>
+<li>lens distortion, chromatic aberration, pixel defects or CCD sensor imperfections, statistical dependencies related to proprietary CFA interpolation algorithms and other intrinsic image regularities</li>
+</ul>
+
+<h4 id="toc_6">3.2  forensics methods for image source identification</h4>
+
+<h5 id="toc_7">3.2.1 artifacts produced in the acquisition phase</h5>
+
+<p><strong>lens aberration. lateral chromatic aberration analysis<br/>
+demosaicing</strong>, introduces a specific type of correlation between the color value of one pixel and its neighboring samples in the same color channel.   so detect traces of CFA interpolation in color bands by using the <strong>expectation/maximization (EM) algorithm</strong>. </p>
+
+<h5 id="toc_8">3.2.2 sensor imperfecitons</h5>
+
+<p>sensor noise result from: pixel defects, fixed pattern noise(FPN), Photo Response Non Uniform(PRNU)</p>
+
+<h5 id="toc_9">3.3.3 source identification using properties of imaging device</h5>
+
+<h6 id="toc_10">post-processing performed in the storage phase</h6>
+
+<ul>
+<li>image features: color-related measurements,image quality features</li>
+<li>identification of the quantization table(JPEG compress)
+
+<ul>
+<li><strong>image thumbnails</strong>( it involves filtering operation, contrast adjustment,jpeg compression, depends on imaging device manufacturer and device model)</li>
+</ul></li>
+</ul>
+
+<h3 id="toc_11">4. tampering detection</h3>
+
+<h4 id="toc_12">4.1 forgeries:</h4>
+
+<ol>
+<li>remove information   in-painting methods, seam carving method</li>
+<li>add information   Blending and matting techniques;  Rotation, scaling and translation </li>
+</ol>
+
+<h4 id="toc_13">4.2 methods for forgery detection</h4>
+
+<h5 id="toc_14">4.2.1 detecting tampering performed ion a single image</h5>
+
+<ul>
+<li><p>copy-move of an image region，the tampered area still shares most of its intrinsic properties (e.g. pattern noise or color palette) </p>
+
+<ol>
+<li>[34] proposed to look for matches among DCT representations of image segments. </li>
+<li>[78] perform a principal component analysis(PCA) for the description of image segments
+exploits SIFT features, represent image segments in a Fourier-Mellin Transform domain.  to obtain robust to scaling and rotation operations</li>
+</ol></li>
+<li><p>to detect forgeries by in-painting and content-aware resizing techniques</p>
+
+<ol>
+<li>[83]observe that seam carving introduces inconsistencies in the image high frequency DCT components </li>
+<li>[33] extracting energy-bias-based features and wavelet absolute moments. </li>
+</ol></li>
+</ul>
+
+<h5 id="toc_15">4.2.2 detecting image composition</h5>
+
+<ul>
+<li>Bicoherence features [27]</li>
+<li>incident light direction[46][48]<br/></li>
+</ul>
+
+<h5 id="toc_16">4.2.3 tampering detection independent on the type of forgery</h5>
+
+<ul>
+<li><p>three different types of artifacts: traces of re-sampling, compression artifacts and inconsistencies in acquisition device fingerprints. </p></li>
+<li><p>to detect re-sampling process, which produces correlation among the image pixel, [80] use the Expectation/ Maximization algorithm to estimate the probability of each pixel to be correlated with its neighbors </p>
+
+<ul>
+<li>[31]another method is to check if diferrent zones of the image have diferrent “compression histories”</li>
+</ul></li>
+<li><p>a more general scenario: <strong>double compression</strong></p>
+
+<ul>
+<li>it introduces specific artifacts in the DCT coefficient histograms </li>
+<li>that represent important cues in tampering detection. </li>
+<li>[77] proposed the first theoretical analysis ,mainly due to the effects of double quantization: \(s_{ab}[t] = q_{ab}(u) = \lfloor\lfloor \frac{u}{b}\rfloor \frac{b}{a}\rfloor\)</li>
+</ul></li>
+</ul>
+
+<h3 id="toc_17">5. A new phase: counter-forensics</h3>
+
+<h4 id="toc_18">5.1 tamper hiding</h4>
+
+<ul>
+<li>[54]hiding traces of region re-sampling targeted on [80] which exposes forgeries by detecting the linear dependencies that re-sampling typically induces among pixels. <strong>post-processing the image with a median(non linear) filter, geometric distortions</strong></li>
+</ul>
+
+<h4 id="toc_19">5.2 image source counterfeiting</h4>
+
+<ul>
+<li>[39] attempt to fool source device identification method[65],which is based on the extraction and the analysis of the camera pattern noise </li>
+<li>[39] use flat-fielding to estimate both the FPN and the PRNU for the device of interest. 
+
+<ul>
+<li>pattern noise can be eventually suppressed from image x by:       \(J = \frac{I- d}{K}\)</li>
+<li>another device in terms of \((d_e, K_e)\) : \(J_{cont} = J* K_e +d_e\)</li>
+<li>forged in the polished image to counterfeit the camera signature</li>
+</ul></li>
+</ul>
+
+<h4 id="toc_20">5.3 countering counter-forensics</h4>
+
+<h3 id="toc_21">6. conclusions</h3>
+
+<h4 id="toc_22">concern:</h4>
+
+<ol>
+<li>the robustness of the existing tools</li>
+<li>confirming or strengthening the robustness of DIF techniques is a present priority for DIF experts </li>
+<li>the development of counter-forensics is to be encouraged</li>
+<li>future efforts in DIF should be also addressed towards video authentication. </li>
+<li>the major challenge in the future of image forensics consists in integrating it with visual perception. </li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>
