@@ -4,7 +4,7 @@
   <title><![CDATA[klauscc]]></title>
   <link href="klauscc.github.io/atom.xml" rel="self"/>
   <link href="klauscc.github.io/"/>
-  <updated>2017-02-13T14:52:10+08:00</updated>
+  <updated>2017-02-13T14:53:38+08:00</updated>
   <id>klauscc.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -24,7 +24,7 @@ shadowsocks 翻墙客户端<br/>
 proxychains 让命令行可以通过ss代理<br/>
 genpac生成proxy.pac文件以达到局部代理效果</p>
 
-<!--more-->
+<span id="more"></span><!-- more -->
 
 <ul>
 <li>
