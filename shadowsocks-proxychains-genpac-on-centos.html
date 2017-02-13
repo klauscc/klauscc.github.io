@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>  
 	  
-  	Archives - klauscc
+  	centos 安装shadowsocks,proxychains,genpac科学上网 - klauscc
   	
 	</title>
 
@@ -116,113 +116,163 @@
 		</div>	
 		<div class="mid-col">
 			<div class="mid-col-container"> <div id="content" class="inner">
-	<div itemscope itemtype="http://schema.org/Blog">
-		<section class="archives">
 
-		
-			 
-			  	<h1 style="top: auto;" class="year">2017</h1>
-			
-			
+	<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+		<h1 class="title" itemprop="name">centos 安装shadowsocks,proxychains,genpac科学上网</h1>
+		<div class="entry-content" itemprop="articleBody">
+			<p>本文说明的是如何让centos系统能够翻墙，而不是作为ss服务器。<br/>
+shadowsocks 翻墙客户端<br/>
+proxychains 让命令行可以通过ss代理<br/>
+genpac生成proxy.pac文件以达到局部代理效果</p>
 
-				<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-					<div class="meta">
-						<span class="date"><time datetime="2017-02-13T14:28:05+08:00" itemprop="datePublished">2月 13</time></span>
-						<br>
-						 
-						<span class="tags">posted in 
-						
-						    <a class='category' href='linux.html'>linux</a>&nbsp;
-						 
-						</span>
-					    
-					</div>
-					<h1 class="title" itemprop="name"><a href="shadowsocks-proxychains-genpac-on-centos.html">
-					centos 安装shadowsocks,proxychains,genpac科学上网</a></h1>
-				</article>
-	 	
-			
-			
+<!--more-->
 
-				<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-					<div class="meta">
-						<span class="date"><time datetime="2017-01-15T14:46:58+08:00" itemprop="datePublished">1月 15</time></span>
-						<br>
-						 
-						<span class="tags">posted in 
-						
-						    <a class='category' href='deep%20learning.html'>deep learning</a>&nbsp;
-						 
-						</span>
-					    
-					</div>
-					<h1 class="title" itemprop="name"><a href="caffe-simple-beginner-guide.html">
-					深度学习、caffe简要入门指南</a></h1>
-				</article>
-	 	
-			 
-			  	<h1 style="top: auto;" class="year">2016</h1>
-			
-			
+<ul>
+<li>
+<a href="#toc_0">1. 安装 shadowsocks</a>
+</li>
+<li>
+<a href="#toc_1">2. 安装 proxychains-ng,让命令行可以翻墙</a>
+</li>
+<li>
+<a href="#toc_2">3. 安装genpac, 让浏览器局部代理</a>
+</li>
+</ul>
 
-				<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-					<div class="meta">
-						<span class="date"><time datetime="2016-12-07T12:57:59+08:00" itemprop="datePublished">12月 07</time></span>
-						<br>
-						 
-						<span class="tags">posted in 
-						
-						    <a class='category' href='linux.html'>linux</a>&nbsp;
-						
-						    <a class='category' href='deep%20learning.html'>deep learning</a>&nbsp;
-						 
-						</span>
-					    
-					</div>
-					<h1 class="title" itemprop="name"><a href="centos-setup-deeplearning-environment.html">
-					centos7.0安装配置，cuda,cudnn安装，anaconda安装，深度学习框架caffe,torch,theano,tensorflow安装</a></h1>
-				</article>
-	 	
-			
-			
 
-				<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-					<div class="meta">
-						<span class="date"><time datetime="2016-07-31T21:40:01+08:00" itemprop="datePublished">7月 31</time></span>
-						<br>
-						 
-						<span class="tags">posted in 
-						
-						    <a class='category' href='Digital%20Image%20Forensics.html'>Digital Image Forensics</a>&nbsp;
-						 
-						</span>
-					    
-					</div>
-					<h1 class="title" itemprop="name"><a href="14699724013434.html">
-					Double Jpeg detection with the same quantization matrix (Notes)</a></h1>
-				</article>
-	 	
-			
-			
+<h3 id="toc_0">1. 安装 shadowsocks</h3>
 
-				<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-					<div class="meta">
-						<span class="date"><time datetime="2016-07-31T21:34:09+08:00" itemprop="datePublished">7月 31</time></span>
-						<br>
-						 
-						<span class="tags">posted in 
-						
-						    <a class='category' href='Digital%20Image%20Forensics.html'>Digital Image Forensics</a>&nbsp;
-						 
-						</span>
-					    
-					</div>
-					<h1 class="title" itemprop="name"><a href="14699720497183.html">
-					Digital image forensics: a booklet for beginners</a></h1>
-				</article>
-	 	
+<p>默认有root权限，否则在命令前加<code>sudo</code></p>
 
-	  </section>
+<p>如果已经安装了pip则</p>
+
+<pre><code>pip install shadowsocks
+</code></pre>
+
+<p>pip 安装</p>
+
+<pre><code>wget https://bootstrap.pypa.io/get-pip.py
+python get-pip.py
+</code></pre>
+
+<p>安装完毕以后创建配置文件 <code>/etc/shadowsocks.json</code></p>
+
+<pre><code>{
+&quot;server&quot;:&quot;your-ssserver-ip-address&quot;,
+&quot;server_port&quot;:your-port,
+&quot;local_address&quot;: &quot;127.0.0.1&quot;,
+&quot;local_port&quot;:1080,
+&quot;password&quot;:&quot;your-password&quot;,
+&quot;timeout&quot;:600,
+&quot;method&quot;:&quot;aes-256-cfb&quot;
+}
+</code></pre>
+
+<p>运行sslocal:</p>
+
+<pre><code>sslocal -c /etc/shadowsocks.json -d start
+</code></pre>
+
+<p>让开机运行:</p>
+
+<pre><code>crontab -e
+</code></pre>
+
+<p>然后再最后添加一行:</p>
+
+<pre><code>@reboot /usr/bin/sslocal -c /etc/shadowsocks.json -d start
+</code></pre>
+
+<h3 id="toc_1">2. 安装 proxychains-ng,让命令行可以翻墙</h3>
+
+<p>proxychains-ng github地址:<a href="https://github.com/rofl0r/proxychains-ng">https://github.com/rofl0r/proxychains-ng</a></p>
+
+<pre><code>git clone https://github.com/rofl0r/proxychains-ng
+cd proxychains-ng
+./configure --prefix=/usr --sysconfdir=/etc
+make 
+make install
+sudo make install-config
+</code></pre>
+
+<p>安装以后修改配置:</p>
+
+<pre><code>vim /etc/proxychains.conf
+</code></pre>
+
+<p>找到<code>[ProxyList]</code>,修改为</p>
+
+<pre><code>[ProxyList]
+ # add proxy here ...
+ # meanwile
+ # defaults set to &quot;tor&quot;
+ socks5  127.0.0.1 1080
+ #socks4     127.0.0.1 9050
+</code></pre>
+
+<p>配置完以后就可以在命令行翻墙了,测试:</p>
+
+<pre><code>proxychains4 wget www.google.com
+</code></pre>
+
+<h3 id="toc_2">3. 安装genpac, 让浏览器局部代理</h3>
+
+<p>安装:</p>
+
+<pre><code>pip install genpac
+</code></pre>
+
+<p>安装完以后，我们可以生成proxy.pac文件并保存在一个目录下,比如<code>/home/config/shadowsocks</code></p>
+
+<pre><code>mkdir -p /home/config/shadowsocks
+cd /home/config/shadowsocks
+genpac --proxy=&quot;SOCKS5 127.0.0.1:1080&quot; --gfwlist-proxy=&quot;SOCKS5 127.0.0.1:1080&quot; -o autoproxy.pac --gfwlist-url=&quot;https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt&quot;
+</code></pre>
+
+<p>然后会生成一个<code>autoproxy.pac</code>文件</p>
+
+<p>之后就是配置浏览器代理，以firefox为例,<code>Preferences&gt;Advanced&gt;Network&gt;Settings</code><br/>
+<img src="media/14869672857615/14869685627762.jpg" alt=""/></p>
+
+<p>配置好以后，在浏览器中打开<code>www.google.com</code>测试是否成功。</p>
+
+		</div>
+	</article>
+	<div class="share-comment">
+	 <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+    <a class="jiathis_button_tsina"></a>
+    <a class="jiathis_button_qzone"></a>
+    <a class="jiathis_button_tqq"></a>
+    <a class="jiathis_button_weixin"></a>
+    <a class="jiathis_button_renren"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+    <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+<!-- 多说评论框 start -->
+	<div class="ds-thread" ></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"kluascc"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+
+	  
+
+	  
+
 	</div>
 </div>        </div>
 			<footer id="footer" class="inner">Copyright &copy; 2014
