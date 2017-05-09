@@ -4,7 +4,7 @@
   <title><![CDATA[klauscc]]></title>
   <link href="klauscc.github.io/atom.xml" rel="self"/>
   <link href="klauscc.github.io/"/>
-  <updated>2017-02-13T14:54:37+08:00</updated>
+  <updated>2017-02-13T14:56:16+08:00</updated>
   <id>klauscc.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -270,13 +270,14 @@ genpac --proxy=&quot;SOCKS5 127.0.0.1:1080&quot; --gfwlist-proxy=&quot;SOCKS5 12
 
 <h4 id="toc_4">4.1 数据准备</h4>
 
-<p>从 <a href="https://www.kaggle.com/c/dogs-vs-cats/data">Dogs vs. Cats</a>下载数据后解压<br/>
-<code><br/>
-unzip ~/train.zip<br/>
-unzip ~/test1.zip<br/>
-rm ~/deeplearning-cats-dogs-tutorial/input/*.zip<br/>
-</code><br/>
-Caffe的输入可以使用lmdb格式的数据，也可以使用原始图片的label文件(每一行是一张图片的路径和类别)。</p>
+<p>从 <a href="https://www.kaggle.com/c/dogs-vs-cats/data">Dogs vs. Cats</a>下载数据后解压</p>
+
+<pre><code>unzip ~/train.zip
+unzip ~/test1.zip
+rm ~/deeplearning-cats-dogs-tutorial/input/*.zip
+</code></pre>
+
+<p>Caffe的输入可以使用lmdb格式的数据，也可以使用原始图片的label文件(每一行是一张图片的路径和类别)。</p>
 
 <p>创建lmdb数据库方式可以参考caffe源码中<code>./examples/imagenet/create_imagenet.sh</code>。如果你的训练数据不是原始图片(比如进行过预处理)，就必须使用lmdb的方式载入数据了,而创建方式就需要使用python或者c++接口了，需要的时候google <code>caffe python lmdb</code>就有大把的教程了。</p>
 
@@ -569,19 +570,16 @@ python scripts/download_model_binary.py models/bvlc_alexnet
 <a href="#toc_9">4.2 安装cudnn</a>
 </li>
 <li>
-<a href="#toc_10">5. 安装anaconda</a>
-</li>
-<li>
-<a href="#toc_11">6. 安装 caffe</a>
+<a href="#toc_10">5. 安装 caffe</a>
 <ul>
 <li>
-<a href="#toc_12">6.1 安装依赖</a>
+<a href="#toc_11">5.1 安装依赖</a>
 </li>
 <li>
-<a href="#toc_13">6.2 修改Makefile.config</a>
+<a href="#toc_12">5.2 修改Makefile.config</a>
 </li>
 <li>
-<a href="#toc_14">6.3 编译并测试</a>
+<a href="#toc_13">5.3 编译并测试</a>
 </li>
 </ul>
 </li>
@@ -716,25 +714,9 @@ $LD_LIBRARY_PATH是动态链接库和静态库的路径，使用cudnn的程序�
 多个路径以’:‘隔开
 </code></pre>
 
-<h3 id="toc_10">5. 安装anaconda</h3>
+<h3 id="toc_10">5. 安装 caffe</h3>
 
-<p>anaconda是一个python发行版，为高性能计算和数据科学准备的。简单的说就是python加上一堆各种包比如numpy,scipy等，一些常用的数据预处理、数据分析、可视化等python包都在里面，也就是说不用再自己一个个安装了。</p>
-
-<p>下载地址<a href="https://www.continuum.io/downloads">https://www.continuum.io/downloads</a>, 一般选择python2.7的版本安装，如果你使用python3就下载Python3版本。</p>
-
-<p>默认安装路径是当前用户下，如果是root安装建议给所有用户安装，安装路径改为<code>\usr\local\anaconda2</code></p>
-
-<p>安装完成后，需要添加环境变量</p>
-
-<pre><code>export ANACONDA_HOME=/usr/local/anaconda2
-export PATH=$ANACONDA_HOME/bin:$PATH
-</code></pre>
-
-<p>命令 <code>source /etc/profile</code>可以让环境变量立即生效</p>
-
-<h3 id="toc_11">6. 安装 caffe</h3>
-
-<h4 id="toc_12">6.1 安装依赖</h4>
+<h4 id="toc_11">5.1 安装依赖</h4>
 
 <pre><code>yum install epel-realease
 
@@ -743,7 +725,7 @@ yum install -y protobuf-devel leveldb-devel snappy-devel opencv-devel boost-deve
 yum install -y openblas-devel
 </code></pre>
 
-<h4 id="toc_13">6.2 修改Makefile.config</h4>
+<h4 id="toc_12">5.2 修改Makefile.config</h4>
 
 <p>命令行运行<code>cp Makefile.config.example Makefile.config</code><br/>
 修改以下内容</p>
@@ -758,10 +740,10 @@ BLAS_LIB := /usr/lib64
 
 #使用anaconda
 #修改PYTHON_INCLUDE和PYTHON_LIB
-PYTHON_INCLUDE := $(ANACONDA_HOME)/include \
+#PYTHON_INCLUDE := $(ANACONDA_HOME)/include \
                  $(ANACONDA_HOME)/include/python2.7 \
                  $(ANACONDA_HOME)/lib/python2.7/site-packages/numpy/core/include \
-PYTHON_LIB := $(ANACONDA_HOME)/lib
+#PYTHON_LIB := $(ANACONDA_HOME)/lib
 
 #运行使用python自定义层,去掉前面的&#39;#&#39;注释
 WITH_PYTHON_LAYER := 1
@@ -770,7 +752,7 @@ INCLUDE_DIRS := /usr/local/include /usr/include $(PYTHON_INCLUDE)
 LIBRARY_DIRS := /usr/local/lib /usr/local/cudnn/lib64  $(PYTHON_LIB)
 </code></pre>
 
-<h4 id="toc_14">6.3 编译并测试</h4>
+<h4 id="toc_13">5.3 编译并测试</h4>
 
 <pre><code>#编译并运行单元测试
 make all -j
@@ -783,13 +765,6 @@ make pytest
 #编译matlab接口，可选
 make matcaffe -j
 make mattest
-</code></pre>
-
-<p>如果测试的时候失败，比如找不到libhdf5.so.xxx, libprotobuf.so.xxx， 原因是编译的时候使用的是ananconda中带的.so文件，但是这些.so文件没有添加到环境变量中去。解决办法是将 <code>ananconda_path/lib</code>中对应的文件复制到<code>/usr/local/lib</code>或<code>/usr/local/lib64</code>中去</p>
-
-<pre><code># 例如找不到 libprotobuf.so.10, ananconda安装路径为 /usr/local/ananconda2
-cp /usr/local/ananconda2/lib/libprotobuf.so.* /usr/local/lib
-# 如果将 /usr/local/ananconda2/lib 添加到 $LD_LIBRARY_PATH去可能会与系统中某些lib冲突，所以只能将需要的lib复制过去
 </code></pre>
 
 ]]></content>

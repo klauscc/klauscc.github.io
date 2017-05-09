@@ -246,13 +246,14 @@
 
 <h4 id="toc_4">4.1 数据准备</h4>
 
-<p>从 <a href="https://www.kaggle.com/c/dogs-vs-cats/data">Dogs vs. Cats</a>下载数据后解压<br/>
-<code><br/>
-unzip ~/train.zip<br/>
-unzip ~/test1.zip<br/>
-rm ~/deeplearning-cats-dogs-tutorial/input/*.zip<br/>
-</code><br/>
-Caffe的输入可以使用lmdb格式的数据，也可以使用原始图片的label文件(每一行是一张图片的路径和类别)。</p>
+<p>从 <a href="https://www.kaggle.com/c/dogs-vs-cats/data">Dogs vs. Cats</a>下载数据后解压</p>
+
+<pre><code>unzip ~/train.zip
+unzip ~/test1.zip
+rm ~/deeplearning-cats-dogs-tutorial/input/*.zip
+</code></pre>
+
+<p>Caffe的输入可以使用lmdb格式的数据，也可以使用原始图片的label文件(每一行是一张图片的路径和类别)。</p>
 
 <p>创建lmdb数据库方式可以参考caffe源码中<code>./examples/imagenet/create_imagenet.sh</code>。如果你的训练数据不是原始图片(比如进行过预处理)，就必须使用lmdb的方式载入数据了,而创建方式就需要使用python或者c++接口了，需要的时候google <code>caffe python lmdb</code>就有大把的教程了。</p>
 
