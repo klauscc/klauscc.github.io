@@ -122,6 +122,40 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2017-09-06T11:32:56+08:00" itemprop="datePublished">2017/9/6</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='linux.html'>linux</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="config-static-ipv6-address-on-ubuntu.html" itemprop="url">
+		Ubuntu 配置静态ipv6地址</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>在网上搜了很多ipv6配置教程，然而重启以后并不会生效。解决办法:</p>
+
+<p><code>vim etc/sysctl.d/10-ipv6-privacy.conf</code><br/>
+将内容改为:</p>
+
+<pre><code>net.ipv6.conf.all.use_tempaddr = 0
+net.ipv6.conf.default.use_tempaddr = 0
+</code></pre>
+
+
+
+			 
+			<a href="config-static-ipv6-address-on-ubuntu.html#more" class="more-link">Read on &rarr;</a>
+    		
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2017-02-13T14:28:05+08:00" itemprop="datePublished">2017/2/13</time>
 			</div>
 			<div class="tags">posted in 
