@@ -4,14 +4,13 @@
   <title><![CDATA[klauscc]]></title>
   <link href="klauscc.github.io/atom.xml" rel="self"/>
   <link href="klauscc.github.io/"/>
-  <updated>2017-11-03T17:00:25+08:00</updated>
+  <updated>2017-11-03T17:01:54+08:00</updated>
   <id>klauscc.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
-  <generator uri="http://www.coderforart.com/">CoderForArt</generator>
-
+  <generator uri="http://www.mweb.im/">MWeb</generator>
   
   <entry>
     <title type="html"><![CDATA[lvm cache配置 -- 用固态硬盘提升大的存储盘的性能]]></title>
