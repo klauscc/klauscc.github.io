@@ -4,7 +4,7 @@
   <title><![CDATA[klauscc]]></title>
   <link href="klauscc.github.io/atom.xml" rel="self"/>
   <link href="klauscc.github.io/"/>
-  <updated>2017-11-03T17:06:17+08:00</updated>
+  <updated>2017-11-21T13:18:57+08:00</updated>
   <id>klauscc.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -14,9 +14,9 @@
   
   <entry>
     <title type="html"><![CDATA[linux入门与服务器使用指南]]></title>
-    <link href="klauscc.github.io/15107235953639.html"/>
+    <link href="klauscc.github.io/linux-beginner:%20lib%20and%20conda.html"/>
     <updated>2017-11-15T13:26:35+08:00</updated>
-    <id>klauscc.github.io/15107235953639.html</id>
+    <id>klauscc.github.io/linux-beginner:%20lib%20and%20conda.html</id>
     <content type="html"><![CDATA[
 <p>深度学习的体系依托于python,在linux系统繁华，希望从事深度学习研究非常有必要对linux有一个很好的了解。</p>
 
