@@ -4,7 +4,7 @@
   <title><![CDATA[klauscc]]></title>
   <link href="klauscc.github.io/atom.xml" rel="self"/>
   <link href="klauscc.github.io/"/>
-  <updated>2017-11-21T13:18:57+08:00</updated>
+  <updated>2017-11-21T13:23:41+08:00</updated>
   <id>klauscc.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -35,6 +35,8 @@
 2. 自己编译软件，拥有不google也可以解决依赖各种不对应的问题的能力。
 3. 使用conda管理自己的环境，管理自己的依赖包
 </code></pre>
+
+<span id="more"></span><!-- more -->
 
 <hr/>
 
