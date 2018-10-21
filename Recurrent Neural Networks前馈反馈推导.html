@@ -40,9 +40,13 @@
       <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
         <ul id="main-menu" class="left">
         
-        <li id=""><a target="self" href="index.html">Home</a></li>
+        <li id=""><a target="_self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="all.html">Blogs</a></li>
         
         <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li id=""><a target="_self" href="publication.html">Publications</a></li>
         
         </ul>
 
@@ -83,6 +87,8 @@
             <li><a href="deep%20learning.html">deep learning</a></li>
         
             <li><a href="Digital%20Image%20Forensics.html">Digital Image Forensics</a></li>
+        
+            <li><a href="engineering.html">engineering</a></li>
          
 
       </ul>
@@ -158,10 +164,10 @@
     2. 隐层(hidden layer)有H个神经元<br/>
     3. 输出层有K个神经元.输出维度为(K,T)</p>
 
-<p>输入为\(x:\{x^1,x^2,...,x^T\}\),其中\(x^t = \{x_1^t,x_2^t,...,x_I^T\}\)。则\(x_i^t\)为时间t第i个神经元的输入。<br/>
+<p>输入为\(x:\{x^1,x^2,...,x^T\}\),其中\(x^t = \{x_1^t,x_2^t,...,x_I^t\}\)。则\(x_i^t\)为时间t第i个神经元的输入。<br/>
 对于第L层，\(a_i^t\)为这一层的输入，\(b_i^t\)为这一层的输出。这一层的权重\(W = \{w_{ij}\}_{h\times k}\),h为L-1层的神经元个数，k为L层的神经元个数。\(w_{ij}\)为第L-1层第i个神经元与第L层第j个神经元的连接权重。</p>
 
-<p>每一层的输入输出如下。\(\theta(x)为激活函数，rnn中一般为sigmoid。\theta&#39;(x) = \theta(x)(1-\theta(1-x))\)<br/>
+<p>每一层的输入输出如下。\(\theta(x)为激活函数，rnn中一般为sigmoid。\theta&#39;(x) = \theta(x)(1-\theta(x))\)<br/>
 Hidden Layer:<br/>
     1. Input(x): \(x: \{x_i^t\}\)<br/>
     2. Output(\(b_h^t\)):<br/>
@@ -191,7 +197,7 @@ Output Layer:<br/>
 \(\delta(a_k^t) = \theta&#39;(a_k^t)\delta(b_k^t)\)<br/>
 \(\delta(w_{hk}) = \frac{\partial L}{\partial w_{hk}} = \sum_{t=1}^{T}\frac{\partial L}{\partial a_k^t}* \frac{\partial a_k^t}{w_{hk}} = \sum_{t=1}^{T} \delta(a_k^t)b_h^t \)<br/>
 <strong>隐层</strong>: with respect to Layer Output(\(b_h^t\)),parameter(\(w_{ih}, w_(h&#39;h)\)), input(\(x_i^t\))<br/>
-\(\delta(b_h^t) = \frac{\partial L}{\partial b_h^t} = \sum_{k=1}^{K}\frac{\partial L}{\partial a_k^t}*\frac{\partial a_k^t}{b_h^t} + \sum_{h&#39;=1}^{H}\frac{\partial L}{\partial a_{h&#39;}^{t+1 }}*\frac{\partial a_{h&#39;}^{t+1}}{\partial b_h^{t}} \)<br/>
+\(\delta(b_h^t) = \frac{\partial L}{\partial b_h^t} = \sum_{k=1}^{K}\frac{\partial L}{\partial a_k^t}*\frac{\partial a_k^t}{b_h^t} + \sum_{h&#39;=1}^{H}\frac{\partial L}{\partial b_{h&#39;}^{t+1 }}*\frac{\partial b_{h&#39;}^{t+1}}{\partial b_h^{t}} \)<br/>
  \( = \sum_{k=1}^{K}\delta(a_k^t)w_{hk} + \sum_{h&#39;=1}^{H}\delta(b_{h&#39;}^{t+1})w_{hh&#39;}\)<br/>
  \(\delta(a_h^t) = \frac{\partial L}{a_h^t} = \frac{\partial L}{b_h^t} * \frac{\partial b_h^t}{a_h^t} = \delta(b_h^t) \theta&#39;(a_h^t)\)</p>
 
@@ -287,8 +293,10 @@ var duoshuoQuery = {short_name:"kluascc"};
     <div id="sidebar" class="sidebar">
           <div id="site-info" class="site-info">
             
+                <div class="site-a-logo"><img src="media/15398729316255/%E7%A8%8B%E5%B3%B0%E5%89%AF%E6%9C%AC.jpg" /></div>
+            
                 <h1>klauscc</h1>
-                <div class="site-des">Klaus 的博客</div>
+                <div class="site-des">An Obsessional programmer</div>
                 <div class="social">
 
 
@@ -323,6 +331,8 @@ var duoshuoQuery = {short_name:"kluascc"};
             <a href="deep%20learning.html"><strong>deep learning</strong></a>
         
             <a href="Digital%20Image%20Forensics.html"><strong>Digital Image Forensics</strong></a>
+        
+            <a href="engineering.html"><strong>engineering</strong></a>
          
         </p>
 
@@ -339,7 +349,7 @@ var duoshuoQuery = {short_name:"kluascc"};
 	      
 		      
 			      <li class="post">
-			        <a href="linux-beginner_lib%20and%20conda.html">linux入门与服务器使用指南</a>
+			        <a href="15260272539482.html">Stream摄像头内容到浏览器</a>
 			      </li>
 		     
 		  

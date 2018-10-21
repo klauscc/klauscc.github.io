@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  theory - klauscc
+  engineering - klauscc
   
   </title>
   
@@ -111,28 +111,36 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="Recurrent%20Neural%20Networks%E5%89%8D%E9%A6%88%E5%8F%8D%E9%A6%88%E6%8E%A8%E5%AF%BC.html">
+                <a class="clearlink" href="15260272539482.html">
                 
-                  <h1>Recurrent Neural Networks前馈反馈推导</h1>
+                  <h1>Stream摄像头内容到浏览器</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>本文推导了RNN的前馈和反馈过程公式。</p>
+                        	<p><strong>需求</strong>： 将网络摄像头的流截取下来，进行处理如人脸识别等以后，重新发布到浏览器中直接通过浏览器访问。</p>
+
+<p>本文采用了一个简单的容易实现的方案，使用java语言springboot 框架实现，其它语言应该也是类似。示例代码<a href="https://github.com/klauscc/webcamera-stream-demo">webcamera-stream-demo</a></p>
+
+<hr/>
+
+<h2 id="toc_0">1. 实现思路</h2>
+
+<p>使用websocket，客户端和服务器端建立一个长连接，服务器端以固定时间间隔发送一帧(一帧图片的jpeg的base64编码)给前端通过<code>&lt;img&gt;</code>展示。具体流程:</p>
+
+<ol>
+<li>通过opencv 读取摄像头的RTSP视频流。RTSP协议被大多数网络摄像头支持，摄像头的RTSP流的url可以搜索一下<code>各主流摄像头的rtsp地址格式</code></li>
+<li>对读取的帧进行想要的操作</li>
+<li>通过websocket发布操作后的帧</li>
+</ol>
+
+<h2 id="toc_1">2. 具体实现</h2>
 
 <ul>
-<li>
-<a href="#toc_0">1. Introduction</a>
-</li>
-<li>
-<a href="#toc_1">2. Forward Pass</a>
-</li>
-<li>
-<a href="#toc_2">3. Backward Pass</a>
-</li>
+<li><code>PreviewController.java</code> <code>greeting()</code>方法会每隔50ms(20fps)调用一次，每次将最新的一帧发布出去</li>
+<li><code>Camera.java</code> 创建一个后台进程不断读取摄像头的视频流</li>
+<li><code>resources/static/index.html(app.js)</code> 客户端订阅socket接收帧，每接收到一帧就更新一次图片，20fps可以达到流畅的视频效果。</li>
 </ul>
-
-
 
                         
                       </div>
@@ -140,11 +148,11 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="Recurrent%20Neural%20Networks%E5%89%8D%E9%A6%88%E5%8F%8D%E9%A6%88%E6%8E%A8%E5%AF%BC.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/5/16</span>
+                  
+                    <span class="date">2018/5/11</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='theory.html'>theory</a></span>
+          					    <span class="posted-in"><a href='engineering.html'>engineering</a></span>
           				   
                   </div>
                   <div class="more-right right">

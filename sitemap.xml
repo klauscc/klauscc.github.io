@@ -2,12 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
   <loc>klauscc.github.io/</loc>
-  <lastmod>2017-12-19T17:11:41+08:00</lastmod>
+  <lastmod>2018-10-21T18:06:19+08:00</lastmod>
 </url>
 
 <url>
-  <loc>klauscc.github.io/linux-beginner_lib%20and%20conda.html</loc>
-  <lastmod>2017-11-15T13:26:35+08:00</lastmod>
+  <loc>klauscc.github.io/15260272539482.html</loc>
+  <lastmod>2018-05-11T16:27:33+08:00</lastmod>
 </url>
 
 <url>
@@ -56,6 +56,16 @@
 </url>
 
 
+<url>
+  <loc>klauscc.github.io/linux-starter-about-lib-and-conda.html</loc>
+  <lastmod>2018-10-18T21:54:32+08:00</lastmod>
+</url>
+
+<url>
+  <loc>klauscc.github.io/resume.html</loc>
+  <lastmod>2018-10-18T22:30:28+08:00</lastmod>
+</url>
+
 
 <url>
   <loc>klauscc.github.io/linux.html</loc>
@@ -75,6 +85,10 @@
 
 <url>
   <loc>klauscc.github.io/Digital%20Image%20Forensics.html</loc>
+</url>
+
+<url>
+  <loc>klauscc.github.io/engineering.html</loc>
 </url>
 
 

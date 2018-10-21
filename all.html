@@ -40,9 +40,13 @@
       <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
         <ul id="main-menu" class="left">
         
-        <li id=""><a target="self" href="index.html">Home</a></li>
+        <li id=""><a target="_self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="all.html">Blogs</a></li>
         
         <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li id=""><a target="_self" href="publication.html">Publications</a></li>
         
         </ul>
 
@@ -83,6 +87,8 @@
             <li><a href="deep%20learning.html">deep learning</a></li>
         
             <li><a href="Digital%20Image%20Forensics.html">Digital Image Forensics</a></li>
+        
+            <li><a href="engineering.html">engineering</a></li>
          
 
       </ul>
@@ -105,31 +111,36 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="linux-beginner_lib%20and%20conda.html">
+                <a class="clearlink" href="15260272539482.html">
                 
-                  <h1>linux入门与服务器使用指南</h1>
+                  <h1>Stream摄像头内容到浏览器</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>深度学习的体系依托于python,在linux系统繁华，希望从事深度学习研究非常有必要对linux有一个很好的了解。</p>
+                        	<p><strong>需求</strong>： 将网络摄像头的流截取下来，进行处理如人脸识别等以后，重新发布到浏览器中直接通过浏览器访问。</p>
 
-<p><strong>本教程并非一个从零开始或者完全指南，你需要以下能力:</strong></p>
+<p>本文采用了一个简单的容易实现的方案，使用java语言springboot 框架实现，其它语言应该也是类似。示例代码<a href="https://github.com/klauscc/webcamera-stream-demo">webcamera-stream-demo</a></p>
 
-<pre><code>1. 了解linux 文件结构
-2. 能使用命令行在各个路径下自由切换，查看文件夹和文件属性等
-3. 了解什么是环境变量. 
-4. 了解两个重要的文件的作用： /etc/profile, ~/.bashrc
-5. 使用过pip安装package,在自己代码中使用过自己安装的package
-</code></pre>
+<hr/>
 
-<p>看完本教程你将会掌握一下能力</p>
+<h2 id="toc_0">1. 实现思路</h2>
 
-<pre><code>1. 在无root权限的情况下自由的使用服务器
-2. 自己编译软件，拥有不google也可以解决依赖各种不对应的问题的能力。
-3. 使用conda管理自己的环境，管理自己的依赖包
-</code></pre>
+<p>使用websocket，客户端和服务器端建立一个长连接，服务器端以固定时间间隔发送一帧(一帧图片的jpeg的base64编码)给前端通过<code>&lt;img&gt;</code>展示。具体流程:</p>
 
+<ol>
+<li>通过opencv 读取摄像头的RTSP视频流。RTSP协议被大多数网络摄像头支持，摄像头的RTSP流的url可以搜索一下<code>各主流摄像头的rtsp地址格式</code></li>
+<li>对读取的帧进行想要的操作</li>
+<li>通过websocket发布操作后的帧</li>
+</ol>
+
+<h2 id="toc_1">2. 具体实现</h2>
+
+<ul>
+<li><code>PreviewController.java</code> <code>greeting()</code>方法会每隔50ms(20fps)调用一次，每次将最新的一帧发布出去</li>
+<li><code>Camera.java</code> 创建一个后台进程不断读取摄像头的视频流</li>
+<li><code>resources/static/index.html(app.js)</code> 客户端订阅socket接收帧，每接收到一帧就更新一次图片，20fps可以达到流畅的视频效果。</li>
+</ul>
 
                         
                       </div>
@@ -137,11 +148,11 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="linux-beginner_lib%20and%20conda.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/11/15</span>
+                  
+                    <span class="date">2018/5/11</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='linux.html'>linux</a></span>
+          					    <span class="posted-in"><a href='engineering.html'>engineering</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -614,8 +625,10 @@ iii. 舍入误差  解压缩， IDCT变换得到的值为浮点数，需要舍�
     <div id="sidebar" class="sidebar">
           <div id="site-info" class="site-info">
             
+                <div class="site-a-logo"><img src="media/15398729316255/%E7%A8%8B%E5%B3%B0%E5%89%AF%E6%9C%AC.jpg" /></div>
+            
                 <h1>klauscc</h1>
-                <div class="site-des">Klaus 的博客</div>
+                <div class="site-des">An Obsessional programmer</div>
                 <div class="social">
 
 
@@ -650,6 +663,8 @@ iii. 舍入误差  解压缩， IDCT变换得到的值为浮点数，需要舍�
             <a href="deep%20learning.html"><strong>deep learning</strong></a>
         
             <a href="Digital%20Image%20Forensics.html"><strong>Digital Image Forensics</strong></a>
+        
+            <a href="engineering.html"><strong>engineering</strong></a>
          
         </p>
 
@@ -666,7 +681,7 @@ iii. 舍入误差  解压缩， IDCT变换得到的值为浮点数，需要舍�
 	      
 		      
 			      <li class="post">
-			        <a href="linux-beginner_lib%20and%20conda.html">linux入门与服务器使用指南</a>
+			        <a href="15260272539482.html">Stream摄像头内容到浏览器</a>
 			      </li>
 		     
 		  
