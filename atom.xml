@@ -4,24 +4,13 @@
   <title><![CDATA[klauscc]]></title>
   <link href="klauscc.github.io/atom.xml" rel="self"/>
   <link href="klauscc.github.io/"/>
-  <updated>2018-10-22T16:50:52+08:00</updated>
+  <updated>2018-10-22T16:54:34+08:00</updated>
   <id>klauscc.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
-  
-  <entry>
-    <title type="html"><![CDATA[Test]]></title>
-    <link href="klauscc.github.io/15401982270717.html"/>
-    <updated>2018-10-22T16:50:27+08:00</updated>
-    <id>klauscc.github.io/15401982270717.html</id>
-    <content type="html"><![CDATA[
-<p>This is a test.</p>
-
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[Stream摄像头内容到浏览器]]></title>
