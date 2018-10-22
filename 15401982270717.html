@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  centos7.0安装配置，cuda,cudnn安装，anaconda安装，深度学习框架caffe,torch,theano,tensorflow安装 - klauscc
+  Test - klauscc
   
   </title>
   
@@ -111,16 +111,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>centos7.0安装配置，cuda,cudnn安装，anaconda安装，深度学习框架caffe,torch,theano,tensorflow安装</h1>
+          <h1>Test</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2016/12/7</span>
+          <span class="date">2018/10/22</span>
 
           <span>posted in&nbsp;</span> 
           
-              <span class="posted-in"><a href='linux.html'>linux</a></span>
-          
-              <span class="posted-in"><a href='deep%20learning.html'>deep learning</a></span>
+              <span class="posted-in"><a href='engineering.html'>engineering</a></span>
            
          
           <span class="comments">
@@ -133,247 +131,7 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>深度学习在linux上面会比windows上面方便很多，在windows上那叫个折腾。本文将会介绍centos7.0 的<br/>
-安装，cuda和cudnn的安装，anaconda安装，以及各种深度学习框架的安装。</p>
-
-<p>深度学习是计算密集型任务，不推荐在虚拟机中运行，装cuda和cudnn需要有nvidia显卡。</p>
-
-<span id="more"></span><!-- more -->
-
-<ul>
-<li>
-<a href="#toc_0">1. 安装系统</a>
-</li>
-<li>
-<a href="#toc_1">2. 配置网络</a>
-<ul>
-<li>
-<a href="#toc_2">2.1 修改ip和网关</a>
-</li>
-<li>
-<a href="#toc_3">2.2 配置DNS服务器</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="#toc_4">3. 配置安装ssh</a>
-</li>
-<li>
-<a href="#toc_5">4. 安装cuda,cudnn</a>
-<ul>
-<li>
-<a href="#toc_6">4.1 安装 cuda</a>
-<ul>
-<li>
-<a href="#toc_7">4.1.1 关闭Nouveau驱动</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="#toc_8">4.1.2 安装cuda</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="#toc_9">4.2 安装cudnn</a>
-</li>
-<li>
-<a href="#toc_10">5. 安装 caffe</a>
-<ul>
-<li>
-<a href="#toc_11">5.1 安装依赖</a>
-</li>
-<li>
-<a href="#toc_12">5.2 修改Makefile.config</a>
-</li>
-<li>
-<a href="#toc_13">5.3 编译并测试</a>
-</li>
-</ul>
-</li>
-</ul>
-
-
-<p><strong>本文默认在root下运行所有命令</strong></p>
-
-<h3 id="toc_0">1. 安装系统</h3>
-
-<pre><code>  建议不要使用最小安装，否则很多工具需要自己再次安装比较麻烦。
-</code></pre>
-
-<p>分区：自己分区，选择硬盘(比如sdb), 分区表如下<br/>
-<img src="media/14810866793903/14810871998928.jpg" alt=""/></p>
-
-<p>选择了需要安装的软件后不停下一步就可以安装完毕。</p>
-
-<p>安装完成后，添加源 <code>yum install epel-release</code>,这个源包含了很多base源没有的软件包，非常实用</p>
-
-<h3 id="toc_1">2. 配置网络</h3>
-
-<p>centos 默认是没有联网的，如果系统没有安装图像界面如<code>gnome</code>或者<code>kde</code>等，需要在命令行配置如下</p>
-
-<h4 id="toc_2">2.1 修改ip和网关</h4>
-
-<pre><code>vim /etc/sysconfig/network-scripts/ifcfg-enp5s0 #enp5s0是网卡对应名称，使用`ifconfig`查看自己机器的网卡名称，然后修改对应文件
-</code></pre>
-
-<p>将<code>ONBOOT=no</code>改为<code>ONBOOT=yes</code>, 这样开机就会自动联网了</p>
-
-<p>如果希望使用静态ip,配置如下(<strong>可选</strong>):</p>
-
-<pre><code>#静态ip的好处是重启后ip不变，在路由器开启端口转发，ssh可以正常使用(否则ip变化会找不到服务器)。
-BOOTPROTO=static     #静态获取
-IPADDR=192.168.1.139 #指定ip地址
-GATEWAY=192.168.1.1  # 指定网关
-ONBOOT=yes #重启自动联网
-</code></pre>
-
-<p>配置好了在命令行运行<code>systemctl restart network.service</code>就会联网了。</p>
-
-<h4 id="toc_3">2.2 配置DNS服务器</h4>
-
-<p>编辑文件<code>/etc/resolv.conf</code> </p>
-
-<pre><code>vim /etc/resolv.conf 
-</code></pre>
-
-<p>添加以下几行</p>
-
-<pre><code>#这两个DNS服务器是交大的DNS服务器，可以自行更改最适合自己的DNS服务器
-nameserver 202.120.2.101 #主DNS服务器
-nameserver 202.120.2.100 #备用DNS服务器
-</code></pre>
-
-<p>修改完了以后在命令行输入<code>ping www.baidu.com</code>看是否能ping通，ping的通说明配置完成。</p>
-
-<h3 id="toc_4">3. 配置安装ssh</h3>
-
-<p>centos默认已经安装了OpenSSH,所以只需配置即可。配置文件为<code>/etc/ssh/sshd_config</code><br/>
-修改下面几行</p>
-
-<pre><code>Port 22 #22修改为自己想要的端口
-PermitRootLogin no #no 改为yes, 是否允许root通过ssh登录。改为yes方便些
-ClientAliveInterval 0 #去掉前面的&#39;#&#39;注释，并将0改为60.这个是让服务器每隔60s发送一个包给客户端，避免长时间不操作客户端会timeout连接关闭
-</code></pre>
-
-<p>修改好了再命令行运行<code>systemctl restart sshd.service</code> 重启sshd服务</p>
-
-<p>如果ssh连接不上可能需要关闭selinux或防火墙才行:<br/>
-<strong>关闭selinux</strong>: 修改 <code>/etc/sysconfig/selinux</code> 将里面<code>SELINUX=enforcing</code>改为 <code>SELINUX=disabled</code><br/>
-<strong>关闭防火墙</strong>: 命令行运行<code>systemctl stop firewalld</code></p>
-
-<h3 id="toc_5">4. 安装cuda,cudnn</h3>
-
-<h4 id="toc_6">4.1 安装 cuda</h4>
-
-<p>cuda是英伟达显卡驱动，可以去官网下载<a href="https://developer.nvidia.com/cuda-downloads">https://developer.nvidia.com/cuda-downloads</a>,可能需要注册一个账号</p>
-
-<h5 id="toc_7">4.1.1 关闭Nouveau驱动</h5>
-
-<p>Nouveau 是CentOs自带的驱动，要安装cuda需要先禁用掉这个驱动.<br/>
-在命令行输入<code>lsmod | grep nouv</code>, 如果有输出表明这个驱动没用被禁用。</p>
-
-<p>禁用方法:<br/>
-修改或添加文件<code>/etc/modprobe.d/blacklist-nouveau.conf</code>:</p>
-
-<pre><code>vim /etc/modprobe.d/blacklist-nouveau.conf
-</code></pre>
-
-<p>添加以下内容:</p>
-
-<pre><code>blacklist nouveau
-options nouveau modeset=0
-</code></pre>
-
-<p>添加完毕后在命令行运行以下命令</p>
-
-<pre><code>sudo dracut --force
-reboot
-</code></pre>
-
-<h4 id="toc_8">4.1.2 安装cuda</h4>
-
-<p>重启后运行安装文件即可<code>bash cuda_8.0.44_linux-run</code><br/>
-安装路径默认即可，安装完毕后需要添加环境变量，如果希望给所有用户安装则添加到<code>/etc/profile</code>,否则添加到<code>~/.bashrc</code></p>
-
-<p>添加以下内容:</p>
-
-<pre><code># /user/local/cuda是cuda安装路径，根据自己情况修改
-export PATH=/usr/local/cuda/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH 
-</code></pre>
-
-<h3 id="toc_9">4.2 安装cudnn</h3>
-
-<p>cudnn从官网上下下来包是编译后的包,只需要解压到对应路径并添加环境变量即可,建议解压到<code>/usr/local/cudnn</code>(原安装包解压后为cuda/*， <code>mv cuda /usr/local/cudnn</code>即可)</p>
-
-<p>安装包下载地址<a href="https://developer.nvidia.com/cudnn">https://developer.nvidia.com/cudnn</a>,需要注册账号</p>
-
-<p>解压到<code>/usr/local/cudnn</code>后只需要添加环境变量即可，为所有用户安装添加到<code>/etc/profile</code></p>
-
-<pre><code>export C_INCLUDE_PATH=/usr/local/cudnn/include:$C_INCLUDE_PATH
-export CPLUS_INCLUDE_PATH=/usr/local/cudnn/include:$CPLUS_INCLUDE_PATH
-export LD_LIBRARY_PATH=/usr/local/cudnn/lib64:$LD_LIBRARY_PATH
-</code></pre>
-
-<pre><code>说明:
-$C_INCLUDE_PATH和$CPLUS_INCLUDE_PATH分别是c和c++头文件存放路径，添加了以后程序就可以找到对应的头文件了，
-$LD_LIBRARY_PATH是动态链接库和静态库的路径，使用cudnn的程序需要能够找到这些`.so`或`.a`库
-多个路径以’:‘隔开
-</code></pre>
-
-<h3 id="toc_10">5. 安装 caffe</h3>
-
-<h4 id="toc_11">5.1 安装依赖</h4>
-
-<pre><code>yum install epel-realease
-
-yum install -y protobuf-devel leveldb-devel snappy-devel opencv-devel boost-devel  hdf5-devel gflags-devel glog-devel lmdb-devel 
-
-yum install -y openblas-devel
-</code></pre>
-
-<h4 id="toc_12">5.2 修改Makefile.config</h4>
-
-<p>命令行运行<code>cp Makefile.config.example Makefile.config</code><br/>
-修改以下内容</p>
-
-<pre><code>USE_CUDNN := 1 # 编译GPU则去掉前面的注释
-BLAS := open
-BLAS_INCLUDE := /usr/include/openblas
-BLAS_LIB := /usr/lib64
-
-#需要安装matcaffe 则去掉注释，并修改为MATLAB路径
-#MATLAB_DIR := /usr/local/MATLAB/R2016b  
-
-#使用anaconda
-#修改PYTHON_INCLUDE和PYTHON_LIB
-#PYTHON_INCLUDE := $(ANACONDA_HOME)/include \
-                 $(ANACONDA_HOME)/include/python2.7 \
-                 $(ANACONDA_HOME)/lib/python2.7/site-packages/numpy/core/include \
-#PYTHON_LIB := $(ANACONDA_HOME)/lib
-
-#运行使用python自定义层,去掉前面的&#39;#&#39;注释
-WITH_PYTHON_LAYER := 1
-
-INCLUDE_DIRS := /usr/local/include /usr/include $(PYTHON_INCLUDE)
-LIBRARY_DIRS := /usr/local/lib /usr/local/cudnn/lib64  $(PYTHON_LIB)
-</code></pre>
-
-<h4 id="toc_13">5.3 编译并测试</h4>
-
-<pre><code>#编译并运行单元测试
-make all -j
-make runtest -j
-
-#编译python接口，可选
-make pycaffe -j  
-make pytest  
-
-#编译matlab接口，可选
-make matcaffe -j
-make mattest
-</code></pre>
+      <p>This is a test.</p>
 
 
     
@@ -384,16 +142,13 @@ make mattest
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="caffe-simple-beginner-guide.html" 
-          title="Previous Post: 深度学习、caffe简要入门指南">&laquo; 深度学习、caffe简要入门指南</a>
-      
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="14699724013434.html" 
-          title="Next Post: Double Jpeg detection with the same quantization matrix (Notes)">Double Jpeg detection with the same quantization matrix (Notes) &raquo;</a>
+          <a  href="15260272539482.html" 
+          title="Next Post: Stream摄像头内容到浏览器">Stream摄像头内容到浏览器 &raquo;</a>
       
       </p>
         </div>
