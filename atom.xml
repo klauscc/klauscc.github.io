@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[klauscc]]></title>
+  <title><![CDATA[Feng Cheng]]></title>
   <link href="klauscc.github.io/atom.xml" rel="self"/>
   <link href="klauscc.github.io/"/>
-  <updated>2018-11-23T22:24:19+08:00</updated>
+  <updated>2022-06-21T00:38:36-07:00</updated>
   <id>klauscc.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -13,9 +13,137 @@
   <generator uri="http://www.mweb.im/">MWeb</generator>
   
   <entry>
+    <title type="html"><![CDATA[Feng Cheng]]></title>
+    <link href="klauscc.github.io/Feng_Cheng.html"/>
+    <updated>2018-10-21T20:23:35-07:00</updated>
+    <id>klauscc.github.io/Feng_Cheng.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">About me</h2>
+
+<p>I am currently a Ph.D student in Department of Computer Science at UNC at Chapel Hill, advised by Prof. <a href="https://www.gedasbertasius.com">Gedas Bertasius</a>. My current research interests lie in computer vision. Specifically, I&#39;m interested in video understanding, efficiency of video models and multi-modality.</p>
+
+<p>Prior to joining Gedas&#39;s Group, I worked with Prof. <a href="https://scholar.google.com/citations?user=v6VYQC8AAAAJ&amp;hl=en">Dinggang Shen</a> and Prof. <a href="https://scholar.google.com/citations?user=QGdnthwAAAAJ&amp;hl=en">Pew-Thian Yap</a> at UNC on medical imaging. I obtained both my B.S. degree in Information Security in 2016 and M.S. degree in ECE in 2019 at Shanghai JiaoTong University. During my M.S. study, I worked with Prof. <a href="https://scholar.google.com/citations?hl=zh-CN&amp;user=8tg3mv0AAAAJ&amp;view_op=list_works">Shilin Wang</a>.</p>
+
+<h2 id="toc_1">Publications</h2>
+
+<ul>
+<li><p><a href="https://arxiv.org/abs/2204.01680">TALLFormer: Temporal Action Localization with Long-memory Transformer</a> <br/>
+<strong>Feng Cheng</strong>, Gedas Bertasius <br/>
+<strong>Preprint</strong> [<a href="https://github.com/klauscc/TALLFormer">Code</a>]</p></li>
+<li><p><a href="https://arxiv.org/abs/2203.16755">Stochastic Backpropagation: A Memory Efficient Strategy for Training Video Models</a> <br/>
+<strong>Feng Cheng</strong>, Mingze Xu, Yuanjun Xiong, Hao Chen, Xinyu Li, Wei Li, Wei Xia<br/>
+<strong>CVPR 2022</strong> (<span style="color:red"><strong>Oral</strong></span>) [<a href="https://github.com/amazon-research/stochastic-backpropagation">Code</a>]</p></li>
+<li><p><a href="https://openaccess.thecvf.com/content_ICCV_2019/papers/Zhang_Spatio-Temporal_Fusion_Based_Convolutional_Sequence_Learning_for_Lip_Reading_ICCV_2019_paper.pdf">Spatio-Temporal Fusion based Convolutional Sequence Learning for Lip Reading</a> <br/>
+Xingxuan Zhang, <strong>Feng Cheng</strong>, and Shi-Lin Wang <br/>
+<strong>ICCV 2019</strong></p></li>
+<li><p><a href="https://www.ismrm.org/21/program-files/TeaserSlides/TeasersPresentations/0170-Teaser.html">Submillimeter 3D MR Fingerprinting with Whole-Brain Coverage via Dual-Domain Deep Learning Reconstruction</a> <br/>
+<strong>Feng Cheng</strong>, Yong Chen and Pew-Thian Yap <br/>
+<strong>ISMRM 2021</strong>. (<span style="color:red"><strong>Oral</strong></span>, “magna cum laude” award)</p></li>
+<li><p><a href="https://link.springer.com/chapter/10.1007/978-3-030-59713-9_16">Acceleration of High-Resolution 3D MR Fingerprinting via a Graph Convolutional Network</a> <br/>
+<strong>Feng Cheng</strong>, Yong Chen, Xiaopeng Zong, Weili Lin, Pew-Thian Yap,<br/>
+Dinggang Shen<br/>
+<strong>MICCAI 2020</strong></p></li>
+<li><p><a href="https://www.sciencedirect.com/science/article/abs/pii/S0031320318302152">Visual speaker authentication with random prompt texts by a dual-task CNN framework</a><br/>
+<strong>Feng Cheng</strong>, Shi-Lin Wang, and Alan Wee-Chung Liew.<br/>
+<strong>Pattern Recognition 2018</strong></p></li>
+</ul>
+
+<h2 id="toc_2">Experiences</h2>
+
+<ul>
+<li><strong>2022 /05 ~ 2022 /08</strong> Applied Scientist Intern at Amazon AWS AI 
+Mentor: <a href="https://scholar.google.com/citations?user=c8WhHZkAAAAJ&amp;hl=en">Bing Shuai</a> &amp; <a href="https://scholar.google.com/citations?user=KNcECJQAAAAJ&amp;hl=en">Mingze Xu</a></li>
+<li><strong>2021 /05 ~ 2021 /08</strong> Applied Scientist Intern at Amazon AWS AI
+Mentor: <a href="https://scholar.google.com/citations?user=KNcECJQAAAAJ&amp;hl=en">Mingze Xu</a> &amp; <a href="https://scholar.google.com/citations?user=ojKsx6AAAAAJ&amp;hl=en">Yuanjun Xiong</a></li>
+</ul>
+
+<h2 id="toc_3">Honors</h2>
+
+<ul>
+<li><strong>2016</strong> <strong>First prize</strong> of the Ninth National Information Security Competition</li>
+<li><strong>2016</strong> <strong>Second Prize</strong> of the 13th Huawei Cup National Graduate Mathematical Modeling Contest</li>
+<li><strong>2017</strong> Wenyuan Pan scholarship (<strong>7000 RMB</strong>)</li>
+<li><strong>2018</strong> National Cyberspace safety scholarship(<strong>50000 RMB</strong>)</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Techniques in convolution]]></title>
+    <link href="klauscc.github.io/convs.html"/>
+    <updated>2019-05-08T02:48:34-07:00</updated>
+    <id>klauscc.github.io/convs.html</id>
+    <content type="html"><![CDATA[
+<ul>
+<li>
+<a href="#toc_0">1. Convolution Variants</a>
+<ul>
+<li>
+<a href="#toc_1">1.1 Normal Convolution</a>
+</li>
+<li>
+<a href="#toc_2">1.2 Depth-wise Convolution and Point-wise Convolution</a>
+</li>
+<li>
+<a href="#toc_3">1.3 Deformable Convolution</a>
+</li>
+<li>
+<a href="#toc_4">1.4 Dynamic Convolution</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_5">2. Classic Blocks</a>
+<ul>
+<li>
+<a href="#toc_6">1. ResNet: Residual-Block</a>
+</li>
+<li>
+<a href="#toc_7">2. DenseNet: Dense-Block</a>
+</li>
+<li>
+<a href="#toc_8">3. SENet: SE-Block</a>
+</li>
+<li>
+<a href="#toc_9">4. MobileNet: Dw-conv &amp; Pw-conv</a>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<p>performance: ResNet -&gt; DenseNet -&gt; SENet</p>
+
+<p>speed: </p>
+
+<h2 id="toc_0">1. Convolution Variants</h2>
+
+<h3 id="toc_1">1.1 Normal Convolution</h3>
+
+<h3 id="toc_2">1.2 Depth-wise Convolution and Point-wise Convolution</h3>
+
+<h3 id="toc_3">1.3 Deformable Convolution</h3>
+
+<h3 id="toc_4">1.4 Dynamic Convolution</h3>
+
+<h2 id="toc_5">2. Classic Blocks</h2>
+
+<h3 id="toc_6">1. ResNet: Residual-Block</h3>
+
+<h3 id="toc_7">2. DenseNet: Dense-Block</h3>
+
+<h3 id="toc_8">3. SENet: SE-Block</h3>
+
+<h3 id="toc_9">4. MobileNet: Dw-conv &amp; Pw-conv</h3>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Stream摄像头内容到浏览器]]></title>
     <link href="klauscc.github.io/15260272539482.html"/>
-    <updated>2018-05-11T16:27:33+08:00</updated>
+    <updated>2018-05-11T01:27:33-07:00</updated>
     <id>klauscc.github.io/15260272539482.html</id>
     <content type="html"><![CDATA[
 <p><strong>需求</strong>： 将网络摄像头的流截取下来，进行处理如人脸识别等以后，重新发布到浏览器中直接通过浏览器访问。</p>
@@ -48,7 +176,7 @@
   <entry>
     <title type="html"><![CDATA[linux入门与服务器使用指南]]></title>
     <link href="klauscc.github.io/linux-starter-about-lib-and-conda.html"/>
-    <updated>2017-11-15T13:26:35+08:00</updated>
+    <updated>2017-11-14T21:26:35-08:00</updated>
     <id>klauscc.github.io/linux-starter-about-lib-and-conda.html</id>
     <content type="html"><![CDATA[
 <p>深度学习的体系依托于python,在linux系统繁华，希望从事深度学习研究非常有必要对linux有一个很好的了解。</p>
@@ -513,7 +641,7 @@ Dynamic section at offset 0x1de8 contains 27 entries:
   <entry>
     <title type="html"><![CDATA[lvm cache配置 -- 用固态硬盘提升大的存储盘的性能]]></title>
     <link href="klauscc.github.io/lvm-cache%20config:%20improve%20hdd%20performance%20via%20a%20ssd.html"/>
-    <updated>2017-11-03T16:03:56+08:00</updated>
+    <updated>2017-11-03T01:03:56-07:00</updated>
     <id>klauscc.github.io/lvm-cache%20config:%20improve%20hdd%20performance%20via%20a%20ssd.html</id>
     <content type="html"><![CDATA[
 <p>在深度学习任务中，经常会频繁读取大量文件(如图片等)，这些大的数据集往往保存在机械硬盘上，机械硬盘上小文件读取速度缓慢，往往GPU需要等待硬盘IO而降低训练效率。<strong>本文讲解了怎么通过固态硬盘作cache提升系统IO性能</strong></p>
@@ -609,7 +737,7 @@ lvconvert --uncache my_vg/slow_lv
   <entry>
     <title type="html"><![CDATA[[阅读笔记] Recursive Recurrent Nets with Attention Modeling for OCR in the Wild]]></title>
     <link href="klauscc.github.io/reading-note_Recursive-Recurrent-Nets-with-Attention-Modeling-for-OCR-in-the-Wild.html"/>
-    <updated>2017-09-24T13:33:56+08:00</updated>
+    <updated>2017-09-23T22:33:56-07:00</updated>
     <id>klauscc.github.io/reading-note_Recursive-Recurrent-Nets-with-Attention-Modeling-for-OCR-in-the-Wild.html</id>
     <content type="html"><![CDATA[
 <ul>
@@ -675,7 +803,7 @@ iii. 用 soft-attention来选择更好的特征组合，并且可以end-to-end�
   <entry>
     <title type="html"><![CDATA[Ubuntu 配置静态ipv6地址]]></title>
     <link href="klauscc.github.io/config-static-ipv6-address-on-ubuntu.html"/>
-    <updated>2017-09-06T11:32:56+08:00</updated>
+    <updated>2017-09-05T20:32:56-07:00</updated>
     <id>klauscc.github.io/config-static-ipv6-address-on-ubuntu.html</id>
     <content type="html"><![CDATA[
 <p>在网上搜了很多ipv6配置教程，然而重启以后并不会生效。解决办法:</p>
@@ -717,7 +845,7 @@ sudo ip -6 route add default via public_ipv6_gateway dev eth0
   <entry>
     <title type="html"><![CDATA[Recurrent Neural Networks前馈反馈推导]]></title>
     <link href="klauscc.github.io/Recurrent%20Neural%20Networks%E5%89%8D%E9%A6%88%E5%8F%8D%E9%A6%88%E6%8E%A8%E5%AF%BC.html"/>
-    <updated>2017-05-16T18:06:16+08:00</updated>
+    <updated>2017-05-16T03:06:16-07:00</updated>
     <id>klauscc.github.io/Recurrent%20Neural%20Networks%E5%89%8D%E9%A6%88%E5%8F%8D%E9%A6%88%E6%8E%A8%E5%AF%BC.html</id>
     <content type="html"><![CDATA[
 <p>本文推导了RNN的前馈和反馈过程公式。</p>
@@ -817,7 +945,7 @@ Output Layer:<br/>
   <entry>
     <title type="html"><![CDATA[centos 安装shadowsocks,proxychains,genpac科学上网]]></title>
     <link href="klauscc.github.io/shadowsocks-proxychains-genpac-on-centos.html"/>
-    <updated>2017-02-13T14:28:05+08:00</updated>
+    <updated>2017-02-12T22:28:05-08:00</updated>
     <id>klauscc.github.io/shadowsocks-proxychains-genpac-on-centos.html</id>
     <content type="html"><![CDATA[
 <p>本文说明的是如何让centos系统能够翻墙，而不是作为ss服务器。<br/>
@@ -942,7 +1070,7 @@ genpac --proxy=&quot;SOCKS5 127.0.0.1:1080&quot; --gfwlist-proxy=&quot;SOCKS5 12
   <entry>
     <title type="html"><![CDATA[深度学习、caffe简要入门指南]]></title>
     <link href="klauscc.github.io/caffe-simple-beginner-guide.html"/>
-    <updated>2017-01-15T14:46:58+08:00</updated>
+    <updated>2017-01-14T22:46:58-08:00</updated>
     <id>klauscc.github.io/caffe-simple-beginner-guide.html</id>
     <content type="html"><![CDATA[
 <p>近年来，深度学习是机器学习的一大潮流。它在计算机视觉CV，自然语言处理NLP等领域取得了极大的成就。本文以深度学习框架Caffe作为工具简要讲解深度学习入门。</p>
@@ -1323,7 +1451,7 @@ python scripts/download_model_binary.py models/bvlc_alexnet
   <entry>
     <title type="html"><![CDATA[centos7.0安装配置，cuda,cudnn安装，anaconda安装，深度学习框架caffe,torch,theano,tensorflow安装]]></title>
     <link href="klauscc.github.io/centos-setup-deeplearning-environment.html"/>
-    <updated>2016-12-07T12:57:59+08:00</updated>
+    <updated>2016-12-06T20:57:59-08:00</updated>
     <id>klauscc.github.io/centos-setup-deeplearning-environment.html</id>
     <content type="html"><![CDATA[
 <p>深度学习在linux上面会比windows上面方便很多，在windows上那叫个折腾。本文将会介绍centos7.0 的<br/>
@@ -1574,7 +1702,7 @@ make mattest
   <entry>
     <title type="html"><![CDATA[Double Jpeg detection with the same quantization matrix (Notes)]]></title>
     <link href="klauscc.github.io/14699724013434.html"/>
-    <updated>2016-07-31T21:40:01+08:00</updated>
+    <updated>2016-07-31T06:40:01-07:00</updated>
     <id>klauscc.github.io/14699724013434.html</id>
     <content type="html"><![CDATA[
 <h2 id="toc_0">1. Introduction</h2>
@@ -1670,7 +1798,7 @@ if \bar{D}_m \le D,~J~is~a~singly~ compressed~image<br/>
   <entry>
     <title type="html"><![CDATA[Digital image forensics: a booklet for beginners]]></title>
     <link href="klauscc.github.io/14699720497183.html"/>
-    <updated>2016-07-31T21:34:09+08:00</updated>
+    <updated>2016-07-31T06:34:09-07:00</updated>
     <id>klauscc.github.io/14699720497183.html</id>
     <content type="html"><![CDATA[
 <h3 id="toc_0">1. Introduction</h3>

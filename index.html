@@ -5,17 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  Feng Cheng - klauscc
+  Feng Cheng
   
   </title>
   
   
-  <link href="atom.xml" rel="alternate" title="klauscc" type="application/atom+xml">
+  
+  <link href="atom.xml" rel="alternate" title="Feng Cheng" type="application/atom+xml">
     <link rel="stylesheet" href="asset/css/foundation.min.css" />
     <link rel="stylesheet" href="asset/css/docs.css" />
     <script src="asset/js/vendor/modernizr.js"></script>
     <script src="asset/js/vendor/jquery.js"></script>
   <script src="asset/highlightjs/highlight.pack.js"></script>
+  
   <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script>hljs.initHighlightingOnLoad();</script>
 <script type="text/javascript">
@@ -40,7 +42,7 @@
       <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
         <ul id="main-menu" class="left">
         
-        <li id=""><a target="_self" href="index.html">Home</a></li>
+        <li id=""><a target="_self" href="Feng_Cheng.html">Home</a></li>
         
         <li id=""><a target="_self" href="all.html">Blogs</a></li>
         
@@ -52,7 +54,7 @@
 
         <ul class="right" id="search-wrap">
           <li>
-<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+<form target="_blank" onsubmit="return before_search();" action="https://google.com/search" method="get">
     <input type="hidden" id="search_q" name="q" value="" />
     <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
 </form>
@@ -66,16 +68,21 @@
 
         <nav class="tab-bar show-for-small">
   <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
-    <span> &nbsp; klauscc</span>
+    <span> &nbsp; Feng Cheng</span>
   </a>
 </nav>
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="Feng_Cheng.html">Home</a></li>
+        
+        <li><a target="_self" href="all.html">Blogs</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="https://drive.google.com/file/d/1QF5IMbwHXaI3nDLWRp45e-5nzzcRO1Ju/view?usp=sharing">Resume</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -103,40 +110,61 @@
 
  <script type="text/javascript">
 	$(function(){
-		var currentURL = 'index.html';
-		currentURL = currentURL.substr(0,currentURL.length-5);
-		$('#menu_item_'+currentURL).addClass('is_active');
+		$('#menu_item_index').addClass('is_active');
 	});
 </script>
 <div class="row">
-  <div class="large-8 medium-8 columns">
-    <!-- <div id="single-page-wrap"> -->
-        <div class="markdown-body article-wrap">
-        <h1>Feng Cheng</h1>
+	<div class="large-8 medium-8 columns">
+		<div class="markdown-body home-categories">
+		
+			<div class="article">
+                <a class="clearlink" href="Feng_Cheng.html">
+                
+                  <h1>Feng Cheng</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">About me</h2>
 
-        <div class="markdown-body post-page">
-        <p><img src="media/15398729316255/911540113332_.pic.jpg" alt="911540113332_.pi" style="width:960px;"/></p>
+<p>I am currently a Ph.D student in Department of Computer Science at UNC at Chapel Hill, advised by Prof. <a href="https://www.gedasbertasius.com">Gedas Bertasius</a>. My current research interests lie in computer vision. Specifically, I&#39;m interested in video understanding, efficiency of video models and multi-modality.</p>
+
+<p>Prior to joining Gedas&#39;s Group, I worked with Prof. <a href="https://scholar.google.com/citations?user=v6VYQC8AAAAJ&amp;hl=en">Dinggang Shen</a> and Prof. <a href="https://scholar.google.com/citations?user=QGdnthwAAAAJ&amp;hl=en">Pew-Thian Yap</a> at UNC on medical imaging. I obtained both my B.S. degree in Information Security in 2016 and M.S. degree in ECE in 2019 at Shanghai JiaoTong University. During my M.S. study, I worked with Prof. <a href="https://scholar.google.com/citations?hl=zh-CN&amp;user=8tg3mv0AAAAJ&amp;view_op=list_works">Shilin Wang</a>.</p>
+
+<h2 id="toc_1">Publications</h2>
 
 <ul>
-<li>I am currently a Master student at Shanghai Jiao Tong Univerisity, and I&#39;m expected to graduate in March, 2019. My research advisor is <strong><a href="http://infosec.sjtu.edu.cn/en.php?m=article&amp;f=view&amp;id=149">Dr. Shi-Lin Wang</a></strong>.</li>
-<li>I received my Bachelor&#39;s degree in Shanghai Jiao Tong University.</li>
-<li>My primary research interests include spatial-temporal sequence learning, lip content recognition and authentication.</li>
-<li><p>I am skilled in c/c++, python, java. Beyond  these, I can quickly transfer to a new language or new area if needed (they are almost the same except for the rules). I have written several projects in several languages actually:</p>
-
-<ul>
-<li>A c library <a href="https://github.com/klauscc/jpeg_toolbox_python">jpeg_toolbox_python</a> with both c API and python API. The library is to extract the DCT coefficient of the JPEG images.</li>
-<li>My implementation of paper <a href="https://arxiv.org/abs/1611.01599">LipNet: End-to-End Sentence-level Lipreading</a> using Keras(Tensorflow backend). Interestingly, this project got 16 stars and 7 forks.</li>
-<li>An Android app which implements the idea proposed in my paper<a href="https://www.sciencedirect.com/science/article/pii/S0031320318302152">Visual speaker authentication with random prompt texts by a dual-task CNN framework</a>. We perform authentication with liveness detection only with <strong>visual information, specifically, the lip region</strong>. The code has not been open-sourced due to business limits. <a href="media/15401786151592/vsa_demo.mp4">click here for video demo</a></li>
-</ul></li>
+<li><p><a href="https://arxiv.org/abs/2204.01680">TALLFormer: Temporal Action Localization with Long-memory Transformer</a> <br/>
+<strong>Feng Cheng</strong>, Gedas Bertasius <br/>
+<strong>Preprint</strong> [<a href="https://github.com/klauscc/TALLFormer">Code</a>]</p></li>
+<li><p><a href="https://arxiv.org/abs/2203.16755">Stochastic Backpropagation: A Memory Efficient Strategy for Training Video Models</a> <br/>
+<strong>Feng Cheng</strong>, Mingze Xu, Yuanjun Xiong, Hao Chen, Xinyu Li, Wei Li, Wei Xia<br/>
+<strong>CVPR 2022</strong> (<span style="color:red"><strong>Oral</strong></span>) [<a href="https://github.com/amazon-research/stochastic-backpropagation">Code</a>]</p></li>
+<li><p><a href="https://openaccess.thecvf.com/content_ICCV_2019/papers/Zhang_Spatio-Temporal_Fusion_Based_Convolutional_Sequence_Learning_for_Lip_Reading_ICCV_2019_paper.pdf">Spatio-Temporal Fusion based Convolutional Sequence Learning for Lip Reading</a> <br/>
+Xingxuan Zhang, <strong>Feng Cheng</strong>, and Shi-Lin Wang <br/>
+<strong>ICCV 2019</strong></p></li>
+<li><p><a href="https://www.ismrm.org/21/program-files/TeaserSlides/TeasersPresentations/0170-Teaser.html">Submillimeter 3D MR Fingerprinting with Whole-Brain Coverage via Dual-Domain Deep Learning Reconstruction</a> <br/>
+<strong>Feng Cheng</strong>, Yong Chen and Pew-Thian Yap <br/>
+<strong>ISMRM 2021</strong>. (<span style="color:red"><strong>Oral</strong></span>, “magna cum laude” award)</p></li>
+<li><p><a href="https://link.springer.com/chapter/10.1007/978-3-030-59713-9_16">Acceleration of High-Resolution 3D MR Fingerprinting via a Graph Convolutional Network</a> <br/>
+<strong>Feng Cheng</strong>, Yong Chen, Xiaopeng Zong, Weili Lin, Pew-Thian Yap,<br/>
+Dinggang Shen<br/>
+<strong>MICCAI 2020</strong></p></li>
+<li><p><a href="https://www.sciencedirect.com/science/article/abs/pii/S0031320318302152">Visual speaker authentication with random prompt texts by a dual-task CNN framework</a><br/>
+<strong>Feng Cheng</strong>, Shi-Lin Wang, and Alan Wee-Chung Liew.<br/>
+<strong>Pattern Recognition 2018</strong></p></li>
 </ul>
 
-<h2 id="toc_0">Publications</h2>
+<h2 id="toc_2">Experiences</h2>
 
-<p>[1] Feng Cheng, Shi-Lin Wang, and Alan Wee-Chung Liew. Visual speaker authentication with random prompt texts by a dual-task CNN framework. Pattern Recognition 83 (2018): 340-352.<br/>
-[2] Xizi Wang, Feng Cheng, Shi-Lin Wang, et al. Adult Image Classification by a Local-Context Aware Network. In 2018 25th IEEE International Conference on Image Processing (ICIP) (pp. 2989-2993). IEEE, 2018.<br/>
-[3] Feng Cheng, Shi-Lin Wang, Xizi Wang, et al. A global and local context integratin DCNN for adult image classification. <font color=red>In submission to Pattern Recognition</font>. </p>
+<ul>
+<li><strong>2022 /05 ~ 2022 /08</strong> Applied Scientist Intern at Amazon AWS AI 
+Mentor: <a href="https://scholar.google.com/citations?user=c8WhHZkAAAAJ&amp;hl=en">Bing Shuai</a> &amp; <a href="https://scholar.google.com/citations?user=KNcECJQAAAAJ&amp;hl=en">Mingze Xu</a></li>
+<li><strong>2021 /05 ~ 2021 /08</strong> Applied Scientist Intern at Amazon AWS AI
+Mentor: <a href="https://scholar.google.com/citations?user=KNcECJQAAAAJ&amp;hl=en">Mingze Xu</a> &amp; <a href="https://scholar.google.com/citations?user=ojKsx6AAAAAJ&amp;hl=en">Yuanjun Xiong</a></li>
+</ul>
 
-<h2 id="toc_1">Honors</h2>
+<h2 id="toc_3">Honors</h2>
 
 <ul>
 <li><strong>2016</strong> <strong>First prize</strong> of the Ninth National Information Security Competition</li>
@@ -145,19 +173,54 @@
 <li><strong>2018</strong> National Cyberspace safety scholarship(<strong>50000 RMB</strong>)</li>
 </ul>
 
-        </div>
-    </div>
-</div>
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2022/6/1</span>
+                    
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
 
-<div class="large-4 medium-4 columns">
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+              
+
+
+			<div class="row">
+			  <div class="large-6 columns">
+			  <p class="text-left" style="padding-top:25px;">
+			   
+			  </p>
+			  </div>
+			  <div class="large-6 columns">
+			<p class="text-right" style="padding-top:25px;">
+			 <a href="all_1.html">&raquo; Next Page</a> 
+			</p>
+			  </div>
+			</div>
+		</div>
+	</div><!-- large 8 -->
+
+ <div class="large-4 medium-4 columns">
   <div class="hide-for-small">
     <div id="sidebar" class="sidebar">
           <div id="site-info" class="site-info">
             
-                <div class="site-a-logo"><img src="media/15401786151592/%E7%A8%8B%E5%B3%B0%E5%89%AF%E6%9C%AC.jpg" /></div>
+                <div class="site-a-logo"><img src="media/15401786151592/logo.jpg" /></div>
             
-                <h1>klauscc</h1>
-                <div class="site-des">An obsessed programmer<br>Vim lover</div>
+                <h1>Feng Cheng</h1>
+                <div class="site-des">Ph.D student <br> University of North Carolina at Chapel Hill</div>
                 <div class="social">
 
 
@@ -169,11 +232,11 @@
 
 
 <a target="_blank" class="github" target="_blank" href="https://github.com/klauscc" title="GitHub">GitHub</a>
-<a target="_blank" class="email" href="mailto:klaus.cheng@qq.com" title="Email">Email</a>
+<a target="_blank" class="email" href="mailto:fengchan@cs.unc.edu" title="Email">Email</a>
   <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
                 
-                 </div>
-            </div>
+              	 </div>
+          	</div>
 
              
 
@@ -183,7 +246,7 @@
                 </div>
                 <div class="side-content">
 
-        <p class="cat-list">
+      	<p class="cat-list">
         
             <a href="linux.html"><strong>linux</strong></a>
         
@@ -207,58 +270,61 @@
                 </div>
                 <div class="side-content">
                 <ul class="posts-list">
-          
-              
-                  <li class="post">
-                    <a href="15260272539482.html">Stream摄像头内容到浏览器</a>
-                  </li>
-             
-          
-              
-                  <li class="post">
-                    <a href="linux-starter-about-lib-and-conda.html">linux入门与服务器使用指南</a>
-                  </li>
-             
-          
-              
-                  <li class="post">
-                    <a href="lvm-cache%20config:%20improve%20hdd%20performance%20via%20a%20ssd.html">lvm cache配置 -- 用固态硬盘提升大的存储盘的性能</a>
-                  </li>
-             
-          
-              
-                  <li class="post">
-                    <a href="reading-note_Recursive-Recurrent-Nets-with-Attention-Modeling-for-OCR-in-the-Wild.html">[阅读笔记] Recursive Recurrent Nets with Attention Modeling for OCR in the Wild</a>
-                  </li>
-             
-          
-              
-                  <li class="post">
-                    <a href="config-static-ipv6-address-on-ubuntu.html">Ubuntu 配置静态ipv6地址</a>
-                  </li>
-             
-          
-              
-          
-              
-          
-              
-          
-              
-          
-              
-          
-              
-           
-                </ul>
+	      
+		      
+			      <li class="post">
+			        <a href="Feng_Cheng.html">Feng Cheng</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="convs.html">Techniques in convolution</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15260272539482.html">Stream摄像头内容到浏览器</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="linux-starter-about-lib-and-conda.html">linux入门与服务器使用指南</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="lvm-cache%20config:%20improve%20hdd%20performance%20via%20a%20ssd.html">lvm cache配置 -- 用固态硬盘提升大的存储盘的性能</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
                 </div>
               </div>
         </div><!-- sidebar -->
       </div><!-- hide for small -->
 </div><!-- large 4 -->
 
-</div>  
-
+</div><!-- row -->
 
  <div class="page-bottom clearfix">
   <div class="row">

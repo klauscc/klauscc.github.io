@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  Digital Image Forensics - Feng Cheng
+  Feng Cheng - Feng Cheng
   
   </title>
   
@@ -109,84 +109,134 @@
        
 
  <script type="text/javascript">
-	$(function(){
-		$('#menu_item_index').addClass('is_active');
-	});
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
 </script>
 <div class="row">
-	<div class="large-8 medium-8 columns">
-		<div class="markdown-body home-categories">
-		
-			<div class="article">
-                <a class="clearlink" href="14699724013434.html">
-                
-                  <h1>Double Jpeg detection with the same quantization matrix (Notes)</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">1. Introduction</h2>
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>Feng Cheng</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2022/6/1</span>
 
-<p>介绍一下几篇论文中等质量双压缩检测的方法，备忘。State of the-art double jepg compression detection with the same quantization matrix. </p>
+          
+           
+         
+          <span class="comments">
+            
 
-<h2 id="toc_1">2. Methods</h2>
+            
+          </span>
 
-<h3 id="toc_2">2.1 Proposed by Fangjun et al.</h3>
+        </div>
+      </div><!-- article -->
 
-<p><a href="http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=5560817">Detecting Double JPEG Compression With the Same Quantization Matrix</a> </p>
+      <div class="article-content">
+      <h2 id="toc_0">About me</h2>
 
-<h4 id="toc_3">2.1.1 jpeg压缩和解压缩过程导致的三种误差</h4>
+<p>I am currently a Ph.D student in Department of Computer Science at UNC at Chapel Hill, advised by Prof. <a href="https://www.gedasbertasius.com">Gedas Bertasius</a>. My current research interests lie in computer vision. Specifically, I&#39;m interested in video understanding, efficiency of video models and multi-modality.</p>
 
-<p>i. 量化误差 压缩过程中，DCT系数量化导致的误差<br/>
-ii. 截断误差 解压缩过程中，IDCT变换可能导致值在[0,255]之外，需要截断到0或者255<br/>
-iii. 舍入误差  解压缩， IDCT变换得到的值为浮点数，需要舍入为最接近的整数</p>
+<p>Prior to joining Gedas&#39;s Group, I worked with Prof. <a href="https://scholar.google.com/citations?user=v6VYQC8AAAAJ&amp;hl=en">Dinggang Shen</a> and Prof. <a href="https://scholar.google.com/citations?user=QGdnthwAAAAJ&amp;hl=en">Pew-Thian Yap</a> at UNC on medical imaging. I obtained both my B.S. degree in Information Security in 2016 and M.S. degree in ECE in 2019 at Shanghai JiaoTong University. During my M.S. study, I worked with Prof. <a href="https://scholar.google.com/citations?hl=zh-CN&amp;user=8tg3mv0AAAAJ&amp;view_op=list_works">Shilin Wang</a>.</p>
 
-<h4 id="toc_4">2.1.2 jpeg多重压缩统计特征</h4>
+<h2 id="toc_1">Publications</h2>
 
-<p>\(J_n\)代表压缩n次的Jpeg图片，\(D_n\)代表 \(J_n\)和\(J_{n+1}\)中JPEG系数（量化后的DCT系数）不一样的个数，\(S_n\)代表\(J_n\)中非0 JPEG系数的个数。<br/>
-<strong>统计特征：</strong>随着n增加，\(D_n\)单调减小</p>
+<ul>
+<li><p><a href="https://arxiv.org/abs/2204.01680">TALLFormer: Temporal Action Localization with Long-memory Transformer</a> <br/>
+<strong>Feng Cheng</strong>, Gedas Bertasius <br/>
+<strong>Preprint</strong> [<a href="https://github.com/klauscc/TALLFormer">Code</a>]</p></li>
+<li><p><a href="https://arxiv.org/abs/2203.16755">Stochastic Backpropagation: A Memory Efficient Strategy for Training Video Models</a> <br/>
+<strong>Feng Cheng</strong>, Mingze Xu, Yuanjun Xiong, Hao Chen, Xinyu Li, Wei Li, Wei Xia<br/>
+<strong>CVPR 2022</strong> (<span style="color:red"><strong>Oral</strong></span>) [<a href="https://github.com/amazon-research/stochastic-backpropagation">Code</a>]</p></li>
+<li><p><a href="https://openaccess.thecvf.com/content_ICCV_2019/papers/Zhang_Spatio-Temporal_Fusion_Based_Convolutional_Sequence_Learning_for_Lip_Reading_ICCV_2019_paper.pdf">Spatio-Temporal Fusion based Convolutional Sequence Learning for Lip Reading</a> <br/>
+Xingxuan Zhang, <strong>Feng Cheng</strong>, and Shi-Lin Wang <br/>
+<strong>ICCV 2019</strong></p></li>
+<li><p><a href="https://www.ismrm.org/21/program-files/TeaserSlides/TeasersPresentations/0170-Teaser.html">Submillimeter 3D MR Fingerprinting with Whole-Brain Coverage via Dual-Domain Deep Learning Reconstruction</a> <br/>
+<strong>Feng Cheng</strong>, Yong Chen and Pew-Thian Yap <br/>
+<strong>ISMRM 2021</strong>. (<span style="color:red"><strong>Oral</strong></span>, “magna cum laude” award)</p></li>
+<li><p><a href="https://link.springer.com/chapter/10.1007/978-3-030-59713-9_16">Acceleration of High-Resolution 3D MR Fingerprinting via a Graph Convolutional Network</a> <br/>
+<strong>Feng Cheng</strong>, Yong Chen, Xiaopeng Zong, Weili Lin, Pew-Thian Yap,<br/>
+Dinggang Shen<br/>
+<strong>MICCAI 2020</strong></p></li>
+<li><p><a href="https://www.sciencedirect.com/science/article/abs/pii/S0031320318302152">Visual speaker authentication with random prompt texts by a dual-task CNN framework</a><br/>
+<strong>Feng Cheng</strong>, Shi-Lin Wang, and Alan Wee-Chung Liew.<br/>
+<strong>Pattern Recognition 2018</strong></p></li>
+</ul>
+
+<h2 id="toc_2">Experiences</h2>
+
+<ul>
+<li><strong>2022 /05 ~ 2022 /08</strong> Applied Scientist Intern at Amazon AWS AI 
+Mentor: <a href="https://scholar.google.com/citations?user=c8WhHZkAAAAJ&amp;hl=en">Bing Shuai</a> &amp; <a href="https://scholar.google.com/citations?user=KNcECJQAAAAJ&amp;hl=en">Mingze Xu</a></li>
+<li><strong>2021 /05 ~ 2021 /08</strong> Applied Scientist Intern at Amazon AWS AI
+Mentor: <a href="https://scholar.google.com/citations?user=KNcECJQAAAAJ&amp;hl=en">Mingze Xu</a> &amp; <a href="https://scholar.google.com/citations?user=ojKsx6AAAAAJ&amp;hl=en">Yuanjun Xiong</a></li>
+</ul>
+
+<h2 id="toc_3">Honors</h2>
+
+<ul>
+<li><strong>2016</strong> <strong>First prize</strong> of the Ninth National Information Security Competition</li>
+<li><strong>2016</strong> <strong>Second Prize</strong> of the 13th Huawei Cup National Graduate Mathematical Modeling Contest</li>
+<li><strong>2017</strong> Wenyuan Pan scholarship (<strong>7000 RMB</strong>)</li>
+<li><strong>2018</strong> National Cyberspace safety scholarship(<strong>50000 RMB</strong>)</li>
+</ul>
 
 
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="14699724013434.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2016/7/31</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Digital%20Image%20Forensics.html'>Digital Image Forensics</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
+    
 
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-              
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="convs.html" 
+          title="Next Post: Techniques in convolution">Techniques in convolution &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          <div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = klauscc.github.io;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = klauscc; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://klauscc.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
 
 
-			<div class="row">
-			  <div class="large-6 columns">
-			  <p class="text-left" style="padding-top:25px;">
-			   
-			  </p>
-			  </div>
-			  <div class="large-6 columns">
-			<p class="text-right" style="padding-top:25px;">
-			 <a href="Digital Image Forensics_1.html">&raquo; Next Page</a> 
-			</p>
-			  </div>
-			</div>
-		</div>
-	</div><!-- large 8 -->
+
 
  <div class="large-4 medium-4 columns">
   <div class="hide-for-small">

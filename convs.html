@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  Digital Image Forensics - Feng Cheng
+  Techniques in convolution - Feng Cheng
   
   </title>
   
@@ -109,84 +109,153 @@
        
 
  <script type="text/javascript">
-	$(function(){
-		$('#menu_item_index').addClass('is_active');
-	});
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
 </script>
 <div class="row">
-	<div class="large-8 medium-8 columns">
-		<div class="markdown-body home-categories">
-		
-			<div class="article">
-                <a class="clearlink" href="14699724013434.html">
-                
-                  <h1>Double Jpeg detection with the same quantization matrix (Notes)</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">1. Introduction</h2>
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>Techniques in convolution</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2019/5/8</span>
 
-<p>介绍一下几篇论文中等质量双压缩检测的方法，备忘。State of the-art double jepg compression detection with the same quantization matrix. </p>
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='theory.html'>theory</a></span>
+           
+         
+          <span class="comments">
+            
 
-<h2 id="toc_1">2. Methods</h2>
+            
+          </span>
 
-<h3 id="toc_2">2.1 Proposed by Fangjun et al.</h3>
+        </div>
+      </div><!-- article -->
 
-<p><a href="http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=5560817">Detecting Double JPEG Compression With the Same Quantization Matrix</a> </p>
+      <div class="article-content">
+      <ul>
+<li>
+<a href="#toc_0">1. Convolution Variants</a>
+<ul>
+<li>
+<a href="#toc_1">1.1 Normal Convolution</a>
+</li>
+<li>
+<a href="#toc_2">1.2 Depth-wise Convolution and Point-wise Convolution</a>
+</li>
+<li>
+<a href="#toc_3">1.3 Deformable Convolution</a>
+</li>
+<li>
+<a href="#toc_4">1.4 Dynamic Convolution</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_5">2. Classic Blocks</a>
+<ul>
+<li>
+<a href="#toc_6">1. ResNet: Residual-Block</a>
+</li>
+<li>
+<a href="#toc_7">2. DenseNet: Dense-Block</a>
+</li>
+<li>
+<a href="#toc_8">3. SENet: SE-Block</a>
+</li>
+<li>
+<a href="#toc_9">4. MobileNet: Dw-conv &amp; Pw-conv</a>
+</li>
+</ul>
+</li>
+</ul>
 
-<h4 id="toc_3">2.1.1 jpeg压缩和解压缩过程导致的三种误差</h4>
 
-<p>i. 量化误差 压缩过程中，DCT系数量化导致的误差<br/>
-ii. 截断误差 解压缩过程中，IDCT变换可能导致值在[0,255]之外，需要截断到0或者255<br/>
-iii. 舍入误差  解压缩， IDCT变换得到的值为浮点数，需要舍入为最接近的整数</p>
+<p>performance: ResNet -&gt; DenseNet -&gt; SENet</p>
 
-<h4 id="toc_4">2.1.2 jpeg多重压缩统计特征</h4>
+<p>speed: </p>
 
-<p>\(J_n\)代表压缩n次的Jpeg图片，\(D_n\)代表 \(J_n\)和\(J_{n+1}\)中JPEG系数（量化后的DCT系数）不一样的个数，\(S_n\)代表\(J_n\)中非0 JPEG系数的个数。<br/>
-<strong>统计特征：</strong>随着n增加，\(D_n\)单调减小</p>
+<h2 id="toc_0">1. Convolution Variants</h2>
 
+<h3 id="toc_1">1.1 Normal Convolution</h3>
 
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="14699724013434.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2016/7/31</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Digital%20Image%20Forensics.html'>Digital Image Forensics</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
+<h3 id="toc_2">1.2 Depth-wise Convolution and Point-wise Convolution</h3>
 
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-              
+<h3 id="toc_3">1.3 Deformable Convolution</h3>
+
+<h3 id="toc_4">1.4 Dynamic Convolution</h3>
+
+<h2 id="toc_5">2. Classic Blocks</h2>
+
+<h3 id="toc_6">1. ResNet: Residual-Block</h3>
+
+<h3 id="toc_7">2. DenseNet: Dense-Block</h3>
+
+<h3 id="toc_8">3. SENet: SE-Block</h3>
+
+<h3 id="toc_9">4. MobileNet: Dw-conv &amp; Pw-conv</h3>
 
 
-			<div class="row">
-			  <div class="large-6 columns">
-			  <p class="text-left" style="padding-top:25px;">
-			   
-			  </p>
-			  </div>
-			  <div class="large-6 columns">
-			<p class="text-right" style="padding-top:25px;">
-			 <a href="Digital Image Forensics_1.html">&raquo; Next Page</a> 
-			</p>
-			  </div>
-			</div>
-		</div>
-	</div><!-- large 8 -->
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="Feng_Cheng.html" 
+          title="Previous Post: Feng Cheng">&laquo; Feng Cheng</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15260272539482.html" 
+          title="Next Post: Stream摄像头内容到浏览器">Stream摄像头内容到浏览器 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          <div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = klauscc.github.io;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = klauscc; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://klauscc.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
 
  <div class="large-4 medium-4 columns">
   <div class="hide-for-small">

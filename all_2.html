@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  Digital Image Forensics - Feng Cheng
+  Feng Cheng
   
   </title>
   
@@ -118,34 +118,36 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="14699724013434.html">
+                <a class="clearlink" href="15260272539482.html">
                 
-                  <h1>Double Jpeg detection with the same quantization matrix (Notes)</h1>
+                  <h1>Stream摄像头内容到浏览器</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0">1. Introduction</h2>
+                        	<p><strong>需求</strong>： 将网络摄像头的流截取下来，进行处理如人脸识别等以后，重新发布到浏览器中直接通过浏览器访问。</p>
 
-<p>介绍一下几篇论文中等质量双压缩检测的方法，备忘。State of the-art double jepg compression detection with the same quantization matrix. </p>
+<p>本文采用了一个简单的容易实现的方案，使用java语言springboot 框架实现，其它语言应该也是类似。示例代码<a href="https://github.com/klauscc/webcamera-stream-demo">webcamera-stream-demo</a></p>
 
-<h2 id="toc_1">2. Methods</h2>
+<hr/>
 
-<h3 id="toc_2">2.1 Proposed by Fangjun et al.</h3>
+<h2 id="toc_0">1. 实现思路</h2>
 
-<p><a href="http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=5560817">Detecting Double JPEG Compression With the Same Quantization Matrix</a> </p>
+<p>使用websocket，客户端和服务器端建立一个长连接，服务器端以固定时间间隔发送一帧(一帧图片的jpeg的base64编码)给前端通过<code>&lt;img&gt;</code>展示。具体流程:</p>
 
-<h4 id="toc_3">2.1.1 jpeg压缩和解压缩过程导致的三种误差</h4>
+<ol>
+<li>通过opencv 读取摄像头的RTSP视频流。RTSP协议被大多数网络摄像头支持，摄像头的RTSP流的url可以搜索一下<code>各主流摄像头的rtsp地址格式</code></li>
+<li>对读取的帧进行想要的操作</li>
+<li>通过websocket发布操作后的帧</li>
+</ol>
 
-<p>i. 量化误差 压缩过程中，DCT系数量化导致的误差<br/>
-ii. 截断误差 解压缩过程中，IDCT变换可能导致值在[0,255]之外，需要截断到0或者255<br/>
-iii. 舍入误差  解压缩， IDCT变换得到的值为浮点数，需要舍入为最接近的整数</p>
+<h2 id="toc_1">2. 具体实现</h2>
 
-<h4 id="toc_4">2.1.2 jpeg多重压缩统计特征</h4>
-
-<p>\(J_n\)代表压缩n次的Jpeg图片，\(D_n\)代表 \(J_n\)和\(J_{n+1}\)中JPEG系数（量化后的DCT系数）不一样的个数，\(S_n\)代表\(J_n\)中非0 JPEG系数的个数。<br/>
-<strong>统计特征：</strong>随着n增加，\(D_n\)单调减小</p>
-
+<ul>
+<li><code>PreviewController.java</code> <code>greeting()</code>方法会每隔50ms(20fps)调用一次，每次将最新的一帧发布出去</li>
+<li><code>Camera.java</code> 创建一个后台进程不断读取摄像头的视频流</li>
+<li><code>resources/static/index.html(app.js)</code> 客户端订阅socket接收帧，每接收到一帧就更新一次图片，20fps可以达到流畅的视频效果。</li>
+</ul>
 
                         
                       </div>
@@ -153,11 +155,11 @@ iii. 舍入误差  解压缩， IDCT变换得到的值为浮点数，需要舍�
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="14699724013434.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2016/7/31</span>
+                  
+                    <span class="date">2018/5/11</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='Digital%20Image%20Forensics.html'>Digital Image Forensics</a></span>
+          					    <span class="posted-in"><a href='engineering.html'>engineering</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -176,12 +178,12 @@ iii. 舍入误差  解压缩， IDCT变换得到的值为浮点数，需要舍�
 			<div class="row">
 			  <div class="large-6 columns">
 			  <p class="text-left" style="padding-top:25px;">
-			   
+			   <a href="all_1.html">&laquo; Prev Page</a>  
 			  </p>
 			  </div>
 			  <div class="large-6 columns">
 			<p class="text-right" style="padding-top:25px;">
-			 <a href="Digital Image Forensics_1.html">&raquo; Next Page</a> 
+			 <a href="all_3.html">&raquo; Next Page</a> 
 			</p>
 			  </div>
 			</div>

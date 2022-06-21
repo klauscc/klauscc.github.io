@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  Digital Image Forensics - Feng Cheng
+  Feng Cheng
   
   </title>
   
@@ -118,33 +118,30 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="14699724013434.html">
+                <a class="clearlink" href="linux-starter-about-lib-and-conda.html">
                 
-                  <h1>Double Jpeg detection with the same quantization matrix (Notes)</h1>
+                  <h1>linux入门与服务器使用指南</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0">1. Introduction</h2>
+                        	<p>深度学习的体系依托于python,在linux系统繁华，希望从事深度学习研究非常有必要对linux有一个很好的了解。</p>
 
-<p>介绍一下几篇论文中等质量双压缩检测的方法，备忘。State of the-art double jepg compression detection with the same quantization matrix. </p>
+<p><strong>本教程并非一个从零开始或者完全指南，你需要以下能力:</strong></p>
 
-<h2 id="toc_1">2. Methods</h2>
+<pre><code>1. 了解linux 文件结构
+2. 能使用命令行在各个路径下自由切换，查看文件夹和文件属性等
+3. 了解什么是环境变量. 
+4. 了解两个重要的文件的作用： /etc/profile, ~/.bashrc
+5. 使用过pip安装package,在自己代码中使用过自己安装的package
+</code></pre>
 
-<h3 id="toc_2">2.1 Proposed by Fangjun et al.</h3>
+<p>看完本教程你将会掌握一下能力</p>
 
-<p><a href="http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=5560817">Detecting Double JPEG Compression With the Same Quantization Matrix</a> </p>
-
-<h4 id="toc_3">2.1.1 jpeg压缩和解压缩过程导致的三种误差</h4>
-
-<p>i. 量化误差 压缩过程中，DCT系数量化导致的误差<br/>
-ii. 截断误差 解压缩过程中，IDCT变换可能导致值在[0,255]之外，需要截断到0或者255<br/>
-iii. 舍入误差  解压缩， IDCT变换得到的值为浮点数，需要舍入为最接近的整数</p>
-
-<h4 id="toc_4">2.1.2 jpeg多重压缩统计特征</h4>
-
-<p>\(J_n\)代表压缩n次的Jpeg图片，\(D_n\)代表 \(J_n\)和\(J_{n+1}\)中JPEG系数（量化后的DCT系数）不一样的个数，\(S_n\)代表\(J_n\)中非0 JPEG系数的个数。<br/>
-<strong>统计特征：</strong>随着n增加，\(D_n\)单调减小</p>
+<pre><code>1. 在无root权限的情况下自由的使用服务器
+2. 自己编译软件，拥有不google也可以解决依赖各种不对应的问题的能力。
+3. 使用conda管理自己的环境，管理自己的依赖包
+</code></pre>
 
 
                         
@@ -153,11 +150,11 @@ iii. 舍入误差  解压缩， IDCT变换得到的值为浮点数，需要舍�
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="14699724013434.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2016/7/31</span>
+                   <a href="linux-starter-about-lib-and-conda.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/10/14</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='Digital%20Image%20Forensics.html'>Digital Image Forensics</a></span>
+          					    <span class="posted-in"><a href='linux.html'>linux</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -176,12 +173,12 @@ iii. 舍入误差  解压缩， IDCT变换得到的值为浮点数，需要舍�
 			<div class="row">
 			  <div class="large-6 columns">
 			  <p class="text-left" style="padding-top:25px;">
-			   
+			   <a href="all_2.html">&laquo; Prev Page</a>  
 			  </p>
 			  </div>
 			  <div class="large-6 columns">
 			<p class="text-right" style="padding-top:25px;">
-			 <a href="Digital Image Forensics_1.html">&raquo; Next Page</a> 
+			 <a href="all_4.html">&raquo; Next Page</a> 
 			</p>
 			  </div>
 			</div>

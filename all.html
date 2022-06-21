@@ -5,17 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  klauscc
+  Feng Cheng
   
   </title>
-  <meta name="keywords" content="deep learning, cnn, linux, 深度学习" />
-  <meta name="description" content="klauscc's blog for deep learning and linux and c progamming" />
-  <link href="atom.xml" rel="alternate" title="klauscc" type="application/atom+xml">
+  
+  
+  
+  <link href="atom.xml" rel="alternate" title="Feng Cheng" type="application/atom+xml">
     <link rel="stylesheet" href="asset/css/foundation.min.css" />
     <link rel="stylesheet" href="asset/css/docs.css" />
     <script src="asset/js/vendor/modernizr.js"></script>
     <script src="asset/js/vendor/jquery.js"></script>
   <script src="asset/highlightjs/highlight.pack.js"></script>
+  
   <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script>hljs.initHighlightingOnLoad();</script>
 <script type="text/javascript">
@@ -40,7 +42,7 @@
       <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
         <ul id="main-menu" class="left">
         
-        <li id=""><a target="_self" href="index.html">Home</a></li>
+        <li id=""><a target="_self" href="Feng_Cheng.html">Home</a></li>
         
         <li id=""><a target="_self" href="all.html">Blogs</a></li>
         
@@ -52,7 +54,7 @@
 
         <ul class="right" id="search-wrap">
           <li>
-<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+<form target="_blank" onsubmit="return before_search();" action="https://google.com/search" method="get">
     <input type="hidden" id="search_q" name="q" value="" />
     <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
 </form>
@@ -66,16 +68,21 @@
 
         <nav class="tab-bar show-for-small">
   <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
-    <span> &nbsp; klauscc</span>
+    <span> &nbsp; Feng Cheng</span>
   </a>
 </nav>
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="Feng_Cheng.html">Home</a></li>
+        
+        <li><a target="_self" href="all.html">Blogs</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="https://drive.google.com/file/d/1QF5IMbwHXaI3nDLWRp45e-5nzzcRO1Ju/view?usp=sharing">Resume</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -111,35 +118,59 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="15260272539482.html">
+                <a class="clearlink" href="Feng_Cheng.html">
                 
-                  <h1>Stream摄像头内容到浏览器</h1>
+                  <h1>Feng Cheng</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p><strong>需求</strong>： 将网络摄像头的流截取下来，进行处理如人脸识别等以后，重新发布到浏览器中直接通过浏览器访问。</p>
+                        	<h2 id="toc_0">About me</h2>
 
-<p>本文采用了一个简单的容易实现的方案，使用java语言springboot 框架实现，其它语言应该也是类似。示例代码<a href="https://github.com/klauscc/webcamera-stream-demo">webcamera-stream-demo</a></p>
+<p>I am currently a Ph.D student in Department of Computer Science at UNC at Chapel Hill, advised by Prof. <a href="https://www.gedasbertasius.com">Gedas Bertasius</a>. My current research interests lie in computer vision. Specifically, I&#39;m interested in video understanding, efficiency of video models and multi-modality.</p>
 
-<hr/>
+<p>Prior to joining Gedas&#39;s Group, I worked with Prof. <a href="https://scholar.google.com/citations?user=v6VYQC8AAAAJ&amp;hl=en">Dinggang Shen</a> and Prof. <a href="https://scholar.google.com/citations?user=QGdnthwAAAAJ&amp;hl=en">Pew-Thian Yap</a> at UNC on medical imaging. I obtained both my B.S. degree in Information Security in 2016 and M.S. degree in ECE in 2019 at Shanghai JiaoTong University. During my M.S. study, I worked with Prof. <a href="https://scholar.google.com/citations?hl=zh-CN&amp;user=8tg3mv0AAAAJ&amp;view_op=list_works">Shilin Wang</a>.</p>
 
-<h2 id="toc_0">1. 实现思路</h2>
-
-<p>使用websocket，客户端和服务器端建立一个长连接，服务器端以固定时间间隔发送一帧(一帧图片的jpeg的base64编码)给前端通过<code>&lt;img&gt;</code>展示。具体流程:</p>
-
-<ol>
-<li>通过opencv 读取摄像头的RTSP视频流。RTSP协议被大多数网络摄像头支持，摄像头的RTSP流的url可以搜索一下<code>各主流摄像头的rtsp地址格式</code></li>
-<li>对读取的帧进行想要的操作</li>
-<li>通过websocket发布操作后的帧</li>
-</ol>
-
-<h2 id="toc_1">2. 具体实现</h2>
+<h2 id="toc_1">Publications</h2>
 
 <ul>
-<li><code>PreviewController.java</code> <code>greeting()</code>方法会每隔50ms(20fps)调用一次，每次将最新的一帧发布出去</li>
-<li><code>Camera.java</code> 创建一个后台进程不断读取摄像头的视频流</li>
-<li><code>resources/static/index.html(app.js)</code> 客户端订阅socket接收帧，每接收到一帧就更新一次图片，20fps可以达到流畅的视频效果。</li>
+<li><p><a href="https://arxiv.org/abs/2204.01680">TALLFormer: Temporal Action Localization with Long-memory Transformer</a> <br/>
+<strong>Feng Cheng</strong>, Gedas Bertasius <br/>
+<strong>Preprint</strong> [<a href="https://github.com/klauscc/TALLFormer">Code</a>]</p></li>
+<li><p><a href="https://arxiv.org/abs/2203.16755">Stochastic Backpropagation: A Memory Efficient Strategy for Training Video Models</a> <br/>
+<strong>Feng Cheng</strong>, Mingze Xu, Yuanjun Xiong, Hao Chen, Xinyu Li, Wei Li, Wei Xia<br/>
+<strong>CVPR 2022</strong> (<span style="color:red"><strong>Oral</strong></span>) [<a href="https://github.com/amazon-research/stochastic-backpropagation">Code</a>]</p></li>
+<li><p><a href="https://openaccess.thecvf.com/content_ICCV_2019/papers/Zhang_Spatio-Temporal_Fusion_Based_Convolutional_Sequence_Learning_for_Lip_Reading_ICCV_2019_paper.pdf">Spatio-Temporal Fusion based Convolutional Sequence Learning for Lip Reading</a> <br/>
+Xingxuan Zhang, <strong>Feng Cheng</strong>, and Shi-Lin Wang <br/>
+<strong>ICCV 2019</strong></p></li>
+<li><p><a href="https://www.ismrm.org/21/program-files/TeaserSlides/TeasersPresentations/0170-Teaser.html">Submillimeter 3D MR Fingerprinting with Whole-Brain Coverage via Dual-Domain Deep Learning Reconstruction</a> <br/>
+<strong>Feng Cheng</strong>, Yong Chen and Pew-Thian Yap <br/>
+<strong>ISMRM 2021</strong>. (<span style="color:red"><strong>Oral</strong></span>, “magna cum laude” award)</p></li>
+<li><p><a href="https://link.springer.com/chapter/10.1007/978-3-030-59713-9_16">Acceleration of High-Resolution 3D MR Fingerprinting via a Graph Convolutional Network</a> <br/>
+<strong>Feng Cheng</strong>, Yong Chen, Xiaopeng Zong, Weili Lin, Pew-Thian Yap,<br/>
+Dinggang Shen<br/>
+<strong>MICCAI 2020</strong></p></li>
+<li><p><a href="https://www.sciencedirect.com/science/article/abs/pii/S0031320318302152">Visual speaker authentication with random prompt texts by a dual-task CNN framework</a><br/>
+<strong>Feng Cheng</strong>, Shi-Lin Wang, and Alan Wee-Chung Liew.<br/>
+<strong>Pattern Recognition 2018</strong></p></li>
+</ul>
+
+<h2 id="toc_2">Experiences</h2>
+
+<ul>
+<li><strong>2022 /05 ~ 2022 /08</strong> Applied Scientist Intern at Amazon AWS AI 
+Mentor: <a href="https://scholar.google.com/citations?user=c8WhHZkAAAAJ&amp;hl=en">Bing Shuai</a> &amp; <a href="https://scholar.google.com/citations?user=KNcECJQAAAAJ&amp;hl=en">Mingze Xu</a></li>
+<li><strong>2021 /05 ~ 2021 /08</strong> Applied Scientist Intern at Amazon AWS AI
+Mentor: <a href="https://scholar.google.com/citations?user=KNcECJQAAAAJ&amp;hl=en">Mingze Xu</a> &amp; <a href="https://scholar.google.com/citations?user=ojKsx6AAAAAJ&amp;hl=en">Yuanjun Xiong</a></li>
+</ul>
+
+<h2 id="toc_3">Honors</h2>
+
+<ul>
+<li><strong>2016</strong> <strong>First prize</strong> of the Ninth National Information Security Competition</li>
+<li><strong>2016</strong> <strong>Second Prize</strong> of the 13th Huawei Cup National Graduate Mathematical Modeling Contest</li>
+<li><strong>2017</strong> Wenyuan Pan scholarship (<strong>7000 RMB</strong>)</li>
+<li><strong>2018</strong> National Cyberspace safety scholarship(<strong>50000 RMB</strong>)</li>
 </ul>
 
                         
@@ -149,497 +180,8 @@
                 <div class="read-more clearfix">
                   <div class="more-left left">
                   
-                    <span class="date">2018/5/11</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='engineering.html'>engineering</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="linux-starter-about-lib-and-conda.html">
-                
-                  <h1>linux入门与服务器使用指南</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>深度学习的体系依托于python,在linux系统繁华，希望从事深度学习研究非常有必要对linux有一个很好的了解。</p>
-
-<p><strong>本教程并非一个从零开始或者完全指南，你需要以下能力:</strong></p>
-
-<pre><code>1. 了解linux 文件结构
-2. 能使用命令行在各个路径下自由切换，查看文件夹和文件属性等
-3. 了解什么是环境变量. 
-4. 了解两个重要的文件的作用： /etc/profile, ~/.bashrc
-5. 使用过pip安装package,在自己代码中使用过自己安装的package
-</code></pre>
-
-<p>看完本教程你将会掌握一下能力</p>
-
-<pre><code>1. 在无root权限的情况下自由的使用服务器
-2. 自己编译软件，拥有不google也可以解决依赖各种不对应的问题的能力。
-3. 使用conda管理自己的环境，管理自己的依赖包
-</code></pre>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="linux-starter-about-lib-and-conda.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/10/15</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='linux.html'>linux</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="lvm-cache%20config:%20improve%20hdd%20performance%20via%20a%20ssd.html">
-                
-                  <h1>lvm cache配置 -- 用固态硬盘提升大的存储盘的性能</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>在深度学习任务中，经常会频繁读取大量文件(如图片等)，这些大的数据集往往保存在机械硬盘上，机械硬盘上小文件读取速度缓慢，往往GPU需要等待硬盘IO而降低训练效率。<strong>本文讲解了怎么通过固态硬盘作cache提升系统IO性能</strong></p>
-
-<ul>
-<li>
-<a href="#toc_0">1.什么是LVM</a>
-</li>
-<li>
-<a href="#toc_1">2. LVM-Cache</a>
-</li>
-<li>
-<a href="#toc_2">3. LVM + LVM-Cache 实战</a>
-<ul>
-<li>
-<a href="#toc_3">3.1 创建PV, VG, LV</a>
-</li>
-<li>
-<a href="#toc_4">3.2 创建chache pool lv</a>
-</li>
-<li>
-<a href="#toc_5">3.3 缓存slow lv</a>
-</li>
-<li>
-<a href="#toc_6">3.4 移除cache</a>
-</li>
-</ul>
-</li>
-</ul>
-
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="lvm-cache%20config:%20improve%20hdd%20performance%20via%20a%20ssd.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/11/3</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='linux.html'>linux</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="reading-note_Recursive-Recurrent-Nets-with-Attention-Modeling-for-OCR-in-the-Wild.html">
-                
-                  <h1>[阅读笔记] Recursive Recurrent Nets with Attention Modeling for OCR in the Wild</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<ul>
-<li>
-<a href="#toc_0">1. 简介</a>
-</li>
-<li>
-<a href="#toc_1">2. 方法介绍</a>
-<ul>
-<li>
-<a href="#toc_2">2.1 Recursive Convolution</a>
-</li>
-<li>
-<a href="#toc_3">2.2 RNNs for character-level language modeling</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="#toc_4">3. 总结</a>
-</li>
-</ul>
-
-
-<h2 id="toc_0">1. 简介</h2>
-
-<p>论文提出了 \(R^2AM\) 模型用来在自然图片中的OCR。<br/>
-主要有三个贡献:</p>
-
-<pre><code>i. 用recursive cnn 来用同样多的参数却增加了网络的层数，即增加了特征提取能力。
-ii. 用RNN来model character-level language。
-iii. 用 soft-attention来选择更好的特征组合，并且可以end-to-end的backpropagation训练。
-</code></pre>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="reading-note_Recursive-Recurrent-Nets-with-Attention-Modeling-for-OCR-in-the-Wild.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/9/24</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='paper%20reading.html'>paper reading</a></span>
-          				  
-          					    <span class="posted-in"><a href='deep%20learning.html'>deep learning</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="config-static-ipv6-address-on-ubuntu.html">
-                
-                  <h1>Ubuntu 配置静态ipv6地址</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>在网上搜了很多ipv6配置教程，然而重启以后并不会生效。解决办法:</p>
-
-<p><code>vim etc/sysctl.d/10-ipv6-privacy.conf</code><br/>
-将内容改为:</p>
-
-<pre><code>net.ipv6.conf.all.use_tempaddr = 0
-net.ipv6.conf.default.use_tempaddr = 0
-</code></pre>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="config-static-ipv6-address-on-ubuntu.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/9/6</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='linux.html'>linux</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="Recurrent%20Neural%20Networks%E5%89%8D%E9%A6%88%E5%8F%8D%E9%A6%88%E6%8E%A8%E5%AF%BC.html">
-                
-                  <h1>Recurrent Neural Networks前馈反馈推导</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>本文推导了RNN的前馈和反馈过程公式。</p>
-
-<ul>
-<li>
-<a href="#toc_0">1. Introduction</a>
-</li>
-<li>
-<a href="#toc_1">2. Forward Pass</a>
-</li>
-<li>
-<a href="#toc_2">3. Backward Pass</a>
-</li>
-</ul>
-
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="Recurrent%20Neural%20Networks%E5%89%8D%E9%A6%88%E5%8F%8D%E9%A6%88%E6%8E%A8%E5%AF%BC.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/5/16</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='theory.html'>theory</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="shadowsocks-proxychains-genpac-on-centos.html">
-                
-                  <h1>centos 安装shadowsocks,proxychains,genpac科学上网</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>本文说明的是如何让centos系统能够翻墙，而不是作为ss服务器。<br/>
-shadowsocks 翻墙客户端<br/>
-proxychains 让命令行可以通过ss代理<br/>
-genpac生成proxy.pac文件以达到局部代理效果</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="shadowsocks-proxychains-genpac-on-centos.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/2/13</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='linux.html'>linux</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="caffe-simple-beginner-guide.html">
-                
-                  <h1>深度学习、caffe简要入门指南</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>近年来，深度学习是机器学习的一大潮流。它在计算机视觉CV，自然语言处理NLP等领域取得了极大的成就。本文以深度学习框架Caffe作为工具简要讲解深度学习入门。</p>
-
-<p><strong>对深度学习和CNN比较了解的可以直接跳至第四节，对caffe比较了解的可以直接跳过本教程。</strong></p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="caffe-simple-beginner-guide.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/1/15</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='deep%20learning.html'>deep learning</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="centos-setup-deeplearning-environment.html">
-                
-                  <h1>centos7.0安装配置，cuda,cudnn安装，anaconda安装，深度学习框架caffe,torch,theano,tensorflow安装</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>深度学习在linux上面会比windows上面方便很多，在windows上那叫个折腾。本文将会介绍centos7.0 的<br/>
-安装，cuda和cudnn的安装，anaconda安装，以及各种深度学习框架的安装。</p>
-
-<p>深度学习是计算密集型任务，不推荐在虚拟机中运行，装cuda和cudnn需要有nvidia显卡。</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="centos-setup-deeplearning-environment.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2016/12/7</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='linux.html'>linux</a></span>
-          				  
-          					    <span class="posted-in"><a href='deep%20learning.html'>deep learning</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="14699724013434.html">
-                
-                  <h1>Double Jpeg detection with the same quantization matrix (Notes)</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">1. Introduction</h2>
-
-<p>介绍一下几篇论文中等质量双压缩检测的方法，备忘。State of the-art double jepg compression detection with the same quantization matrix. </p>
-
-<h2 id="toc_1">2. Methods</h2>
-
-<h3 id="toc_2">2.1 Proposed by Fangjun et al.</h3>
-
-<p><a href="http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=5560817">Detecting Double JPEG Compression With the Same Quantization Matrix</a> </p>
-
-<h4 id="toc_3">2.1.1 jpeg压缩和解压缩过程导致的三种误差</h4>
-
-<p>i. 量化误差 压缩过程中，DCT系数量化导致的误差<br/>
-ii. 截断误差 解压缩过程中，IDCT变换可能导致值在[0,255]之外，需要截断到0或者255<br/>
-iii. 舍入误差  解压缩， IDCT变换得到的值为浮点数，需要舍入为最接近的整数</p>
-
-<h4 id="toc_4">2.1.2 jpeg多重压缩统计特征</h4>
-
-<p>\(J_n\)代表压缩n次的Jpeg图片，\(D_n\)代表 \(J_n\)和\(J_{n+1}\)中JPEG系数（量化后的DCT系数）不一样的个数，\(S_n\)代表\(J_n\)中非0 JPEG系数的个数。<br/>
-<strong>统计特征：</strong>随着n增加，\(D_n\)单调减小</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="14699724013434.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2016/7/31</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Digital%20Image%20Forensics.html'>Digital Image Forensics</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="14699720497183.html">
-                
-                  <h1>Digital image forensics: a booklet for beginners</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h3 id="toc_0">1. Introduction</h3>
-
-<ul>
-<li><strong>Digital image forensics(DIF)</strong>
-
-<ul>
-<li>two principal research paths:
-
-<ol>
-<li>attempt at answering question a)(device captured the image as declared), by <strong>performing some kind of ballistic analysis</strong> to identify the device that captured the image, or at least to determine which devices did not capture it. </li>
-<li><strong>exposing traces of semantic manipulation</strong> (i.e. forgeries) by studying inconsistencies in natural image statistics. </li>
-</ol></li>
-</ul></li>
-</ul>
-
-<h3 id="toc_1">2. the role of digital image forensics in multimedia security</h3>
-
-<ul>
-<li><p>acquisition process and the tampering techniques leave subtle traces</p>
-
-<ul>
-<li><strong>active protection</strong>: watermarking</li>
-</ul>
-
-<h2 id="toc_2">- <strong>passive protection</strong>: tools in digital image forensics</h2>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="14699720497183.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2016/7/31</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Digital%20Image%20Forensics.html'>Digital Image Forensics</a></span>
+                    <span class="date">2022/6/1</span>
+                    
           				   
                   </div>
                   <div class="more-right right">
@@ -663,7 +205,7 @@ iii. 舍入误差  解压缩， IDCT变换得到的值为浮点数，需要舍�
 			  </div>
 			  <div class="large-6 columns">
 			<p class="text-right" style="padding-top:25px;">
-			
+			 <a href="all_1.html">&raquo; Next Page</a> 
 			</p>
 			  </div>
 			</div>
@@ -675,10 +217,10 @@ iii. 舍入误差  解压缩， IDCT变换得到的值为浮点数，需要舍�
     <div id="sidebar" class="sidebar">
           <div id="site-info" class="site-info">
             
-                <div class="site-a-logo"><img src="media/15401786151592/%E7%A8%8B%E5%B3%B0%E5%89%AF%E6%9C%AC.jpg" /></div>
+                <div class="site-a-logo"><img src="media/15401786151592/logo.jpg" /></div>
             
-                <h1>klauscc</h1>
-                <div class="site-des">An obsessed programmer<br>Vim lover</div>
+                <h1>Feng Cheng</h1>
+                <div class="site-des">Ph.D student <br> University of North Carolina at Chapel Hill</div>
                 <div class="social">
 
 
@@ -690,7 +232,7 @@ iii. 舍入误差  解压缩， IDCT变换得到的值为浮点数，需要舍�
 
 
 <a target="_blank" class="github" target="_blank" href="https://github.com/klauscc" title="GitHub">GitHub</a>
-<a target="_blank" class="email" href="mailto:klaus.cheng@qq.com" title="Email">Email</a>
+<a target="_blank" class="email" href="mailto:fengchan@cs.unc.edu" title="Email">Email</a>
   <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
                 
               	 </div>
@@ -731,6 +273,18 @@ iii. 舍入误差  解压缩， IDCT变换得到的值为浮点数，需要舍�
 	      
 		      
 			      <li class="post">
+			        <a href="Feng_Cheng.html">Feng Cheng</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="convs.html">Techniques in convolution</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="15260272539482.html">Stream摄像头内容到浏览器</a>
 			      </li>
 		     
@@ -748,16 +302,8 @@ iii. 舍入误差  解压缩， IDCT变换得到的值为浮点数，需要舍�
 		     
 		  
 		      
-			      <li class="post">
-			        <a href="reading-note_Recursive-Recurrent-Nets-with-Attention-Modeling-for-OCR-in-the-Wild.html">[阅读笔记] Recursive Recurrent Nets with Attention Modeling for OCR in the Wild</a>
-			      </li>
-		     
 		  
 		      
-			      <li class="post">
-			        <a href="config-static-ipv6-address-on-ubuntu.html">Ubuntu 配置静态ipv6地址</a>
-			      </li>
-		     
 		  
 		      
 		  
