@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Feng Cheng]]></title>
-  <link href="klauscc.github.io/atom.xml" rel="self"/>
-  <link href="klauscc.github.io/"/>
-  <updated>2022-06-21T01:47:34-07:00</updated>
-  <id>klauscc.github.io/</id>
+  <link href="https://klauscc.github.io/atom.xml" rel="self"/>
+  <link href="https://klauscc.github.io/"/>
+  <updated>2022-06-21T02:15:32-07:00</updated>
+  <id>https://klauscc.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
     
@@ -14,9 +14,9 @@
   
   <entry>
     <title type="html"><![CDATA[Feng Cheng]]></title>
-    <link href="klauscc.github.io/Feng_Cheng.html"/>
+    <link href="https://klauscc.github.io/Feng_Cheng.html"/>
     <updated>2018-10-21T20:23:35-07:00</updated>
-    <id>klauscc.github.io/Feng_Cheng.html</id>
+    <id>https://klauscc.github.io/Feng_Cheng.html</id>
     <content type="html"><![CDATA[
 <h2 id="toc_0">About me</h2>
 
@@ -71,9 +71,9 @@ Mentor: <a href="https://scholar.google.com/citations?user=KNcECJQAAAAJ&amp;hl=e
   
   <entry>
     <title type="html"><![CDATA[Techniques in convolution]]></title>
-    <link href="klauscc.github.io/convs.html"/>
+    <link href="https://klauscc.github.io/convs.html"/>
     <updated>2019-05-08T02:48:34-07:00</updated>
-    <id>klauscc.github.io/convs.html</id>
+    <id>https://klauscc.github.io/convs.html</id>
     <content type="html"><![CDATA[
 <ul>
 <li>
@@ -142,9 +142,9 @@ Mentor: <a href="https://scholar.google.com/citations?user=KNcECJQAAAAJ&amp;hl=e
   
   <entry>
     <title type="html"><![CDATA[Stream摄像头内容到浏览器]]></title>
-    <link href="klauscc.github.io/15260272539482.html"/>
+    <link href="https://klauscc.github.io/15260272539482.html"/>
     <updated>2018-05-11T01:27:33-07:00</updated>
-    <id>klauscc.github.io/15260272539482.html</id>
+    <id>https://klauscc.github.io/15260272539482.html</id>
     <content type="html"><![CDATA[
 <p><strong>需求</strong>： 将网络摄像头的流截取下来，进行处理如人脸识别等以后，重新发布到浏览器中直接通过浏览器访问。</p>
 
@@ -175,9 +175,9 @@ Mentor: <a href="https://scholar.google.com/citations?user=KNcECJQAAAAJ&amp;hl=e
   
   <entry>
     <title type="html"><![CDATA[linux入门与服务器使用指南]]></title>
-    <link href="klauscc.github.io/linux-starter-about-lib-and-conda.html"/>
+    <link href="https://klauscc.github.io/linux-starter-about-lib-and-conda.html"/>
     <updated>2017-11-14T21:26:35-08:00</updated>
-    <id>klauscc.github.io/linux-starter-about-lib-and-conda.html</id>
+    <id>https://klauscc.github.io/linux-starter-about-lib-and-conda.html</id>
     <content type="html"><![CDATA[
 <p>深度学习的体系依托于python,在linux系统繁华，希望从事深度学习研究非常有必要对linux有一个很好的了解。</p>
 
@@ -640,9 +640,9 @@ Dynamic section at offset 0x1de8 contains 27 entries:
   
   <entry>
     <title type="html"><![CDATA[lvm cache配置 -- 用固态硬盘提升大的存储盘的性能]]></title>
-    <link href="klauscc.github.io/lvm-cache%20config:%20improve%20hdd%20performance%20via%20a%20ssd.html"/>
+    <link href="https://klauscc.github.io/lvm-cache%20config:%20improve%20hdd%20performance%20via%20a%20ssd.html"/>
     <updated>2017-11-03T01:03:56-07:00</updated>
-    <id>klauscc.github.io/lvm-cache%20config:%20improve%20hdd%20performance%20via%20a%20ssd.html</id>
+    <id>https://klauscc.github.io/lvm-cache%20config:%20improve%20hdd%20performance%20via%20a%20ssd.html</id>
     <content type="html"><![CDATA[
 <p>在深度学习任务中，经常会频繁读取大量文件(如图片等)，这些大的数据集往往保存在机械硬盘上，机械硬盘上小文件读取速度缓慢，往往GPU需要等待硬盘IO而降低训练效率。<strong>本文讲解了怎么通过固态硬盘作cache提升系统IO性能</strong></p>
 
@@ -736,9 +736,9 @@ lvconvert --uncache my_vg/slow_lv
   
   <entry>
     <title type="html"><![CDATA[[阅读笔记] Recursive Recurrent Nets with Attention Modeling for OCR in the Wild]]></title>
-    <link href="klauscc.github.io/reading-note_Recursive-Recurrent-Nets-with-Attention-Modeling-for-OCR-in-the-Wild.html"/>
+    <link href="https://klauscc.github.io/reading-note_Recursive-Recurrent-Nets-with-Attention-Modeling-for-OCR-in-the-Wild.html"/>
     <updated>2017-09-23T22:33:56-07:00</updated>
-    <id>klauscc.github.io/reading-note_Recursive-Recurrent-Nets-with-Attention-Modeling-for-OCR-in-the-Wild.html</id>
+    <id>https://klauscc.github.io/reading-note_Recursive-Recurrent-Nets-with-Attention-Modeling-for-OCR-in-the-Wild.html</id>
     <content type="html"><![CDATA[
 <ul>
 <li>
@@ -802,9 +802,9 @@ iii. 用 soft-attention来选择更好的特征组合，并且可以end-to-end�
   
   <entry>
     <title type="html"><![CDATA[Ubuntu 配置静态ipv6地址]]></title>
-    <link href="klauscc.github.io/config-static-ipv6-address-on-ubuntu.html"/>
+    <link href="https://klauscc.github.io/config-static-ipv6-address-on-ubuntu.html"/>
     <updated>2017-09-05T20:32:56-07:00</updated>
-    <id>klauscc.github.io/config-static-ipv6-address-on-ubuntu.html</id>
+    <id>https://klauscc.github.io/config-static-ipv6-address-on-ubuntu.html</id>
     <content type="html"><![CDATA[
 <p>在网上搜了很多ipv6配置教程，然而重启以后并不会生效。解决办法:</p>
 
@@ -844,9 +844,9 @@ sudo ip -6 route add default via public_ipv6_gateway dev eth0
   
   <entry>
     <title type="html"><![CDATA[Recurrent Neural Networks前馈反馈推导]]></title>
-    <link href="klauscc.github.io/Recurrent%20Neural%20Networks%E5%89%8D%E9%A6%88%E5%8F%8D%E9%A6%88%E6%8E%A8%E5%AF%BC.html"/>
+    <link href="https://klauscc.github.io/Recurrent%20Neural%20Networks%E5%89%8D%E9%A6%88%E5%8F%8D%E9%A6%88%E6%8E%A8%E5%AF%BC.html"/>
     <updated>2017-05-16T03:06:16-07:00</updated>
-    <id>klauscc.github.io/Recurrent%20Neural%20Networks%E5%89%8D%E9%A6%88%E5%8F%8D%E9%A6%88%E6%8E%A8%E5%AF%BC.html</id>
+    <id>https://klauscc.github.io/Recurrent%20Neural%20Networks%E5%89%8D%E9%A6%88%E5%8F%8D%E9%A6%88%E6%8E%A8%E5%AF%BC.html</id>
     <content type="html"><![CDATA[
 <p>本文推导了RNN的前馈和反馈过程公式。</p>
 
@@ -944,9 +944,9 @@ Output Layer:<br/>
   
   <entry>
     <title type="html"><![CDATA[centos 安装shadowsocks,proxychains,genpac科学上网]]></title>
-    <link href="klauscc.github.io/shadowsocks-proxychains-genpac-on-centos.html"/>
+    <link href="https://klauscc.github.io/shadowsocks-proxychains-genpac-on-centos.html"/>
     <updated>2017-02-12T22:28:05-08:00</updated>
-    <id>klauscc.github.io/shadowsocks-proxychains-genpac-on-centos.html</id>
+    <id>https://klauscc.github.io/shadowsocks-proxychains-genpac-on-centos.html</id>
     <content type="html"><![CDATA[
 <p>本文说明的是如何让centos系统能够翻墙，而不是作为ss服务器。<br/>
 shadowsocks 翻墙客户端<br/>
@@ -1069,9 +1069,9 @@ genpac --proxy=&quot;SOCKS5 127.0.0.1:1080&quot; --gfwlist-proxy=&quot;SOCKS5 12
   
   <entry>
     <title type="html"><![CDATA[深度学习、caffe简要入门指南]]></title>
-    <link href="klauscc.github.io/caffe-simple-beginner-guide.html"/>
+    <link href="https://klauscc.github.io/caffe-simple-beginner-guide.html"/>
     <updated>2017-01-14T22:46:58-08:00</updated>
-    <id>klauscc.github.io/caffe-simple-beginner-guide.html</id>
+    <id>https://klauscc.github.io/caffe-simple-beginner-guide.html</id>
     <content type="html"><![CDATA[
 <p>近年来，深度学习是机器学习的一大潮流。它在计算机视觉CV，自然语言处理NLP等领域取得了极大的成就。本文以深度学习框架Caffe作为工具简要讲解深度学习入门。</p>
 
@@ -1450,9 +1450,9 @@ python scripts/download_model_binary.py models/bvlc_alexnet
   
   <entry>
     <title type="html"><![CDATA[centos7.0安装配置，cuda,cudnn安装，anaconda安装，深度学习框架caffe,torch,theano,tensorflow安装]]></title>
-    <link href="klauscc.github.io/centos-setup-deeplearning-environment.html"/>
+    <link href="https://klauscc.github.io/centos-setup-deeplearning-environment.html"/>
     <updated>2016-12-06T20:57:59-08:00</updated>
-    <id>klauscc.github.io/centos-setup-deeplearning-environment.html</id>
+    <id>https://klauscc.github.io/centos-setup-deeplearning-environment.html</id>
     <content type="html"><![CDATA[
 <p>深度学习在linux上面会比windows上面方便很多，在windows上那叫个折腾。本文将会介绍centos7.0 的<br/>
 安装，cuda和cudnn的安装，anaconda安装，以及各种深度学习框架的安装。</p>
@@ -1701,9 +1701,9 @@ make mattest
   
   <entry>
     <title type="html"><![CDATA[Double Jpeg detection with the same quantization matrix (Notes)]]></title>
-    <link href="klauscc.github.io/14699724013434.html"/>
+    <link href="https://klauscc.github.io/14699724013434.html"/>
     <updated>2016-07-31T06:40:01-07:00</updated>
-    <id>klauscc.github.io/14699724013434.html</id>
+    <id>https://klauscc.github.io/14699724013434.html</id>
     <content type="html"><![CDATA[
 <h2 id="toc_0">1. Introduction</h2>
 
@@ -1797,9 +1797,9 @@ if \bar{D}_m \le D,~J~is~a~singly~ compressed~image<br/>
   
   <entry>
     <title type="html"><![CDATA[Digital image forensics: a booklet for beginners]]></title>
-    <link href="klauscc.github.io/14699720497183.html"/>
+    <link href="https://klauscc.github.io/14699720497183.html"/>
     <updated>2016-07-31T06:34:09-07:00</updated>
-    <id>klauscc.github.io/14699720497183.html</id>
+    <id>https://klauscc.github.io/14699720497183.html</id>
     <content type="html"><![CDATA[
 <h3 id="toc_0">1. Introduction</h3>
 
