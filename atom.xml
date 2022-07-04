@@ -4,7 +4,7 @@
   <title><![CDATA[Feng Cheng]]></title>
   <link href="https://klauscc.github.io/atom.xml" rel="self"/>
   <link href="https://klauscc.github.io/"/>
-  <updated>2022-06-21T02:15:32-07:00</updated>
+  <updated>2022-07-03T18:03:22-07:00</updated>
   <id>https://klauscc.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -29,7 +29,7 @@
 <ul>
 <li><p><a href="https://arxiv.org/abs/2204.01680">TALLFormer: Temporal Action Localization with Long-memory Transformer</a> <br/>
 <strong>Feng Cheng</strong>, Gedas Bertasius <br/>
-<strong>Preprint</strong> [<a href="https://github.com/klauscc/TALLFormer">Code</a>]</p></li>
+<strong>Preprint</strong> (accepted by ECCV2022) [<a href="https://github.com/klauscc/TALLFormer">Code</a>]</p></li>
 <li><p><a href="https://arxiv.org/abs/2203.16755">Stochastic Backpropagation: A Memory Efficient Strategy for Training Video Models</a> <br/>
 <strong>Feng Cheng</strong>, Mingze Xu, Yuanjun Xiong, Hao Chen, Xinyu Li, Wei Li, Wei Xia<br/>
 <strong>CVPR 2022</strong> (<span style="color:red"><strong>Oral</strong></span>) [<a href="https://github.com/amazon-research/stochastic-backpropagation">Code</a>]</p></li>
@@ -57,14 +57,11 @@ Mentor: <a href="https://scholar.google.com/citations?user=c8WhHZkAAAAJ&amp;hl=e
 Mentor: <a href="https://scholar.google.com/citations?user=KNcECJQAAAAJ&amp;hl=en">Mingze Xu</a> &amp; <a href="https://scholar.google.com/citations?user=ojKsx6AAAAAJ&amp;hl=en">Yuanjun Xiong</a></li>
 </ul>
 
-<h2 id="toc_3">Honors</h2>
-
-<ul>
-<li><strong>2016</strong> <strong>First prize</strong> of the Ninth National Information Security Competition</li>
-<li><strong>2016</strong> <strong>Second Prize</strong> of the 13th Huawei Cup National Graduate Mathematical Modeling Contest</li>
-<li><strong>2017</strong> Wenyuan Pan scholarship (<strong>7000 RMB</strong>)</li>
-<li><strong>2018</strong> National Cyberspace safety scholarship(<strong>50000 RMB</strong>)</li>
-</ul>
+<!--## Honors
+- **2016** **First prize** of the Ninth National Information Security Competition
+- **2016** **Second Prize** of the 13th Huawei Cup National Graduate Mathematical Modeling Contest
+- **2017** Wenyuan Pan scholarship (**7000 RMB**)
+- **2018** National Cyberspace safety scholarship(**50000 RMB**)-->
 
 ]]></content>
   </entry>
