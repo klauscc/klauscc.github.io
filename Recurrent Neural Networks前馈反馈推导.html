@@ -1,0 +1,439 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  Recurrent Neural Networks前馈反馈推导 - Feng Cheng
+  
+  </title>
+  
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3SP0SC55LM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-3SP0SC55LM');
+  </script>
+  <link href="atom.xml" rel="alternate" title="Feng Cheng" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:klauscc.github.io ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="Feng_Cheng.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; Feng Cheng</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="_self" href="Feng_Cheng.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="linux.html">linux</a></li>
+        
+            <li><a href="paper%20reading.html">paper reading</a></li>
+        
+            <li><a href="deep%20learning.html">deep learning</a></li>
+        
+            <li><a href="Digital%20Image%20Forensics.html">Digital Image Forensics</a></li>
+        
+            <li><a href="engineering.html">engineering</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>Recurrent Neural Networks前馈反馈推导</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2017/5/16</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='theory.html'>theory</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <p>本文推导了RNN的前馈和反馈过程公式。</p>
+
+<ul>
+<li>
+<a href="#toc_0">1. Introduction</a>
+</li>
+<li>
+<a href="#toc_1">2. Forward Pass</a>
+</li>
+<li>
+<a href="#toc_2">3. Backward Pass</a>
+</li>
+</ul>
+
+
+<span id="more"></span><!-- more -->
+
+<h2 id="toc_0">1. Introduction</h2>
+
+<p><img src="media/14949291764036/14949296062380.jpg" alt=""/></p>
+
+<p><img src="media/14949291764036/14949295667284.jpg" alt=""/></p>
+
+<p>输入一个时间序列X(I,T),输出一个时间序列Y(K,T), 时间t+1时刻的神经元会利用到t时刻的输出值。</p>
+
+<h2 id="toc_1">2. Forward Pass</h2>
+
+<p>前馈从输入层到输出层<br/>
+考虑一个RNN:<br/>
+    1. 输入层为I个神经元，序列长度为T。则输入x维度为(I,T),维度不考虑batch_size<br/>
+    2. 隐层(hidden layer)有H个神经元<br/>
+    3. 输出层有K个神经元.输出维度为(K,T)</p>
+
+<p>输入为\(x:\{x^1,x^2,...,x^T\}\),其中\(x^t = \{x_1^t,x_2^t,...,x_I^t\}\)。则\(x_i^t\)为时间t第i个神经元的输入。<br/>
+对于第L层，\(a_i^t\)为这一层的输入，\(b_i^t\)为这一层的输出。这一层的权重\(W = \{w_{ij}\}_{h\times k}\),h为L-1层的神经元个数，k为L层的神经元个数。\(w_{ij}\)为第L-1层第i个神经元与第L层第j个神经元的连接权重。</p>
+
+<p>每一层的输入输出如下。\(\theta(x)为激活函数，rnn中一般为sigmoid。\theta&#39;(x) = \theta(x)(1-\theta(x))\)<br/>
+Hidden Layer:<br/>
+    1. Input(x): \(x: \{x_i^t\}\)<br/>
+    2. Output(\(b_h^t\)):<br/>
+    <center>\(a_h^t = \sum_{i=1}^{I}w_{ih}x_i^t + \sum_{h&#39;=1}^{H}w_{h&#39;h}b_{h&#39;}^{t-1}\)<br/>
+    \(b_h^t = \theta(a_h^t)\)</center><br/>
+Output Layer:<br/>
+    1. Input(\(b_h^t\))<br/>
+    2. Output:<br/>
+<center><br/>
+    \(a_k^t = \sum_{h=1}^Hw_{hk}b_h^t\)<br/>
+    \(b_k^t = \theta(a_k^t)\)</center></p>
+
+<p>写成矩阵形式为<br/>
+    \(A_H^t = W_1^TX^t+ W_2^TA_H^{t-1}\), shape: (H,1)<br/><br/>
+    \(B_H^t = \theta(A_H^t)\), shape:(H,1)， \(\theta(V)\)表示对矩阵\(V\)的每个元素\(v_{ij}\)用\(\theta(v_{ij})\)进行计算<br/>
+    \(A_K^t = W_3^TB_H^t\), shape: (K,1)<br/>
+    \(B_K^t = \theta(A_K^t)\), shape:(K,1)</p>
+
+<p>注意到求\(A_H^t\)需要依赖于\(A_H^{t-1}\)，所以隐层在时间维度T是无法用矩阵并行运算而需要从t=0到t=T-1依次计算。但是反向求梯度的时候可以将时间维度T并行起来。</p>
+
+<h2 id="toc_2">3. Backward Pass</h2>
+
+<p>反向传播从输出层反向传梯度到输入层</p>
+
+<p><strong>输出层</strong>: with respect to Layer Output(\(b_k^t\)), Parameter(\(w_{hk}\)), Input(\(b_h^t \))<br/>
+\(\delta(b_k^t) = \frac{\partial L}{\partial b_k^t}\)<br/>
+\(\delta(a_k^t) = \theta&#39;(a_k^t)\delta(b_k^t)\)<br/>
+\(\delta(w_{hk}) = \frac{\partial L}{\partial w_{hk}} = \sum_{t=1}^{T}\frac{\partial L}{\partial a_k^t}* \frac{\partial a_k^t}{w_{hk}} = \sum_{t=1}^{T} \delta(a_k^t)b_h^t \)<br/>
+<strong>隐层</strong>: with respect to Layer Output(\(b_h^t\)),parameter(\(w_{ih}, w_(h&#39;h)\)), input(\(x_i^t\))<br/>
+\(\delta(b_h^t) = \frac{\partial L}{\partial b_h^t} = \sum_{k=1}^{K}\frac{\partial L}{\partial a_k^t}*\frac{\partial a_k^t}{b_h^t} + \sum_{h&#39;=1}^{H}\frac{\partial L}{\partial b_{h&#39;}^{t+1 }}*\frac{\partial b_{h&#39;}^{t+1}}{\partial b_h^{t}} \)<br/>
+ \( = \sum_{k=1}^{K}\delta(a_k^t)w_{hk} + \sum_{h&#39;=1}^{H}\delta(b_{h&#39;}^{t+1})w_{hh&#39;}\)<br/>
+ \(\delta(a_h^t) = \frac{\partial L}{a_h^t} = \frac{\partial L}{b_h^t} * \frac{\partial b_h^t}{a_h^t} = \delta(b_h^t) \theta&#39;(a_h^t)\)</p>
+
+<p>\(\delta(w_{ih}) = \frac{\partial L}{\partial w_{ih}} = \frac{\partial L}{\partial a_h^t} * \frac{\partial a_h^t}{\partial w_{ih}} = \delta(a_h^t) * x_i^t\)</p>
+
+<p>\(\delta(w_{h&#39;h}) = \frac{\partial L}{\partial w_{h&#39;h}} = \frac{\partial L}{\partial a_h^t}* \frac{\partial a_h^t}{\partial w_{h&#39;h}} = \sum_{t=1}^{T}\delta(a_h^t)b_{h&#39;}^{t-1}\)</p>
+
+<p>写成矩阵的形式:<br/>
+计Loss函数关于某个变量V(input, output, parameter)的梯度\(Grad(V) = \Delta(V)\)</p>
+
+<p>输出层:输入\(B_H:(H,T)\) 输出\(B_K:(K,T)\) 参数\(W_3:(H,K)\) <br/>
+\(\Delta(B_K) = \frac{\partial L}{\partial B_K} \) shape(K,T)<br/>
+\(\Delta(A_K) = \Delta(B_K) \odot \theta&#39;(A_K)\) shape(K,T)， \(\odot\)表示element-wise 乘法，即两个size相同的矩阵的每个对应元素相互乘起来。<br/>
+\(\Delta(W_3) = B_H*\Delta^T(A_K)\) shape(H,K)<br/>
+隐层: 输入\(X:(I,T)\) 输出\(B_H:(H,T)\) 参数\(W_1:(I,H),W_2:(H,H) \)<br/>
+\(\Delta(B_H) = W_3*\Delta(A_K) + W_2*(\Delta(B_H) &lt;&lt; 1, axis=2)\) shape(H,T). \(\Delta(B_H) &lt;&lt; 1, axis=2\) 表示矩阵\(\Delta(B_H)\)在时间T的维度向左移位1次<br/>
+\(\Delta(A_H) = \Delta(B_H) \odot \theta&#39;(B_H)\) ,shape(H,T)<br/>
+\(\Delta(W_1) = X * \Delta(A_H) \)<br/>
+\(\Delta(W_2) = (B_H &gt;&gt; 1, axis=2)*\Delta^T(A_H)\), shape(H,H)</p>
+
+<p>对于第L层，求出其输出梯度，从而求出其输入梯度。利用输出输入梯度，可以求得第L层参数梯度，从而更新第L层参数。<br/>
+而第L-1层的输出梯度为第L层的输入梯度。<br/>
+依次反向传播更新每层参数。</p>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="config-static-ipv6-address-on-ubuntu.html" 
+          title="Previous Post: Ubuntu 配置静态ipv6地址">&laquo; Ubuntu 配置静态ipv6地址</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="shadowsocks-proxychains-genpac-on-centos.html" 
+          title="Next Post: centos 安装shadowsocks,proxychains,genpac科学上网">centos 安装shadowsocks,proxychains,genpac科学上网 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          <div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = klauscc.github.io;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = klauscc; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://klauscc.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="media/15401786151592/logo.jpg" /></div>
+            
+                <h1>Feng Cheng</h1>
+                <div class="site-des">Ph.D student <br> University of North Carolina at Chapel Hill</div>
+                <div class="social">
+
+<a target="_blank" class="google" href="https://scholar.google.com/citations?hl=en&user=L5WbA3EAAAAJ&view_op=list_works&sortby=pubdate" rel="author" title="Google+">Google+</a>
+
+
+
+
+
+
+
+<a target="_blank" class="github" target="_blank" href="https://github.com/klauscc" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:fengchan@cs.unc.edu" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="linux.html"><strong>linux</strong></a>
+        
+            <a href="paper%20reading.html"><strong>paper reading</strong></a>
+        
+            <a href="deep%20learning.html"><strong>deep learning</strong></a>
+        
+            <a href="Digital%20Image%20Forensics.html"><strong>Digital Image Forensics</strong></a>
+        
+            <a href="engineering.html"><strong>engineering</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="Feng_Cheng.html">Feng Cheng</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="convs.html">Techniques in convolution</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15260272539482.html">Stream摄像头内容到浏览器</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="linux-starter-about-lib-and-conda.html">linux入门与服务器使用指南</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="lvm-cache%20config:%20improve%20hdd%20performance%20via%20a%20ssd.html">lvm cache配置 -- 用固态硬盘提升大的存储盘的性能</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+
+  </body>
+</html>

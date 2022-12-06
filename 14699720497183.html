@@ -1,0 +1,497 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  Digital image forensics: a booklet for beginners - Feng Cheng
+  
+  </title>
+  <meta name="keywords" content="deep learning, cnn, linux, 深度学习" />
+  <meta name="description" content="klauscc's blog for deep learning and linux and c progamming" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3SP0SC55LM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-3SP0SC55LM');
+  </script>
+  <link href="atom.xml" rel="alternate" title="Feng Cheng" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:klauscc.github.io ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="Feng_Cheng.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; Feng Cheng</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="_self" href="Feng_Cheng.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="linux.html">linux</a></li>
+        
+            <li><a href="paper%20reading.html">paper reading</a></li>
+        
+            <li><a href="deep%20learning.html">deep learning</a></li>
+        
+            <li><a href="Digital%20Image%20Forensics.html">Digital Image Forensics</a></li>
+        
+            <li><a href="engineering.html">engineering</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>Digital image forensics: a booklet for beginners</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2016/7/31</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='Digital%20Image%20Forensics.html'>Digital Image Forensics</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <h3 id="toc_0">1. Introduction</h3>
+
+<ul>
+<li><strong>Digital image forensics(DIF)</strong>
+
+<ul>
+<li>two principal research paths:
+
+<ol>
+<li>attempt at answering question a)(device captured the image as declared), by <strong>performing some kind of ballistic analysis</strong> to identify the device that captured the image, or at least to determine which devices did not capture it. </li>
+<li><strong>exposing traces of semantic manipulation</strong> (i.e. forgeries) by studying inconsistencies in natural image statistics. </li>
+</ol></li>
+</ul></li>
+</ul>
+
+<h3 id="toc_1">2. the role of digital image forensics in multimedia security</h3>
+
+<ul>
+<li><p>acquisition process and the tampering techniques leave subtle traces</p>
+
+<ul>
+<li><strong>active protection</strong>: watermarking</li>
+</ul>
+
+<h2 id="toc_2">- <strong>passive protection</strong>: tools in digital image forensics</h2>
+
+<span id="more"></span><!-- more --></li>
+</ul>
+
+<h3 id="toc_3">3. image source device identification</h3>
+
+<h4 id="toc_4">3.1 image acquisition and storage</h4>
+
+<h5 id="toc_5">stage might introduce imperfections:</h5>
+
+<ul>
+<li>lens distortion, chromatic aberration, pixel defects or CCD sensor imperfections, statistical dependencies related to proprietary CFA interpolation algorithms and other intrinsic image regularities</li>
+</ul>
+
+<h4 id="toc_6">3.2  forensics methods for image source identification</h4>
+
+<h5 id="toc_7">3.2.1 artifacts produced in the acquisition phase</h5>
+
+<p><strong>lens aberration. lateral chromatic aberration analysis<br/>
+demosaicing</strong>, introduces a specific type of correlation between the color value of one pixel and its neighboring samples in the same color channel.   so detect traces of CFA interpolation in color bands by using the <strong>expectation/maximization (EM) algorithm</strong>. </p>
+
+<h5 id="toc_8">3.2.2 sensor imperfecitons</h5>
+
+<p>sensor noise result from: pixel defects, fixed pattern noise(FPN), Photo Response Non Uniform(PRNU)</p>
+
+<h5 id="toc_9">3.3.3 source identification using properties of imaging device</h5>
+
+<h6 id="toc_10">post-processing performed in the storage phase</h6>
+
+<ul>
+<li>image features: color-related measurements,image quality features</li>
+<li>identification of the quantization table(JPEG compress)
+
+<ul>
+<li><strong>image thumbnails</strong>( it involves filtering operation, contrast adjustment,jpeg compression, depends on imaging device manufacturer and device model)</li>
+</ul></li>
+</ul>
+
+<h3 id="toc_11">4. tampering detection</h3>
+
+<h4 id="toc_12">4.1 forgeries:</h4>
+
+<ol>
+<li>remove information   in-painting methods, seam carving method</li>
+<li>add information   Blending and matting techniques;  Rotation, scaling and translation </li>
+</ol>
+
+<h4 id="toc_13">4.2 methods for forgery detection</h4>
+
+<h5 id="toc_14">4.2.1 detecting tampering performed ion a single image</h5>
+
+<ul>
+<li><p>copy-move of an image region，the tampered area still shares most of its intrinsic properties (e.g. pattern noise or color palette) </p>
+
+<ol>
+<li>[34] proposed to look for matches among DCT representations of image segments. </li>
+<li>[78] perform a principal component analysis(PCA) for the description of image segments
+exploits SIFT features, represent image segments in a Fourier-Mellin Transform domain.  to obtain robust to scaling and rotation operations</li>
+</ol></li>
+<li><p>to detect forgeries by in-painting and content-aware resizing techniques</p>
+
+<ol>
+<li>[83]observe that seam carving introduces inconsistencies in the image high frequency DCT components </li>
+<li>[33] extracting energy-bias-based features and wavelet absolute moments. </li>
+</ol></li>
+</ul>
+
+<h5 id="toc_15">4.2.2 detecting image composition</h5>
+
+<ul>
+<li>Bicoherence features [27]</li>
+<li>incident light direction[46][48]<br/></li>
+</ul>
+
+<h5 id="toc_16">4.2.3 tampering detection independent on the type of forgery</h5>
+
+<ul>
+<li><p>three different types of artifacts: traces of re-sampling, compression artifacts and inconsistencies in acquisition device fingerprints. </p></li>
+<li><p>to detect re-sampling process, which produces correlation among the image pixel, [80] use the Expectation/ Maximization algorithm to estimate the probability of each pixel to be correlated with its neighbors </p>
+
+<ul>
+<li>[31]another method is to check if diferrent zones of the image have diferrent “compression histories”</li>
+</ul></li>
+<li><p>a more general scenario: <strong>double compression</strong></p>
+
+<ul>
+<li>it introduces specific artifacts in the DCT coefficient histograms </li>
+<li>that represent important cues in tampering detection. </li>
+<li>[77] proposed the first theoretical analysis ,mainly due to the effects of double quantization: \(s_{ab}[t] = q_{ab}(u) = \lfloor\lfloor \frac{u}{b}\rfloor \frac{b}{a}\rfloor\)</li>
+</ul></li>
+</ul>
+
+<h3 id="toc_17">5. A new phase: counter-forensics</h3>
+
+<h4 id="toc_18">5.1 tamper hiding</h4>
+
+<ul>
+<li>[54]hiding traces of region re-sampling targeted on [80] which exposes forgeries by detecting the linear dependencies that re-sampling typically induces among pixels. <strong>post-processing the image with a median(non linear) filter, geometric distortions</strong></li>
+</ul>
+
+<h4 id="toc_19">5.2 image source counterfeiting</h4>
+
+<ul>
+<li>[39] attempt to fool source device identification method[65],which is based on the extraction and the analysis of the camera pattern noise </li>
+<li>[39] use flat-fielding to estimate both the FPN and the PRNU for the device of interest. 
+
+<ul>
+<li>pattern noise can be eventually suppressed from image x by:       \(J = \frac{I- d}{K}\)</li>
+<li>another device in terms of \((d_e, K_e)\) : \(J_{cont} = J* K_e +d_e\)</li>
+<li>forged in the polished image to counterfeit the camera signature</li>
+</ul></li>
+</ul>
+
+<h4 id="toc_20">5.3 countering counter-forensics</h4>
+
+<h3 id="toc_21">6. conclusions</h3>
+
+<h4 id="toc_22">concern:</h4>
+
+<ol>
+<li>the robustness of the existing tools</li>
+<li>confirming or strengthening the robustness of DIF techniques is a present priority for DIF experts </li>
+<li>the development of counter-forensics is to be encouraged</li>
+<li>future efforts in DIF should be also addressed towards video authentication. </li>
+<li>the major challenge in the future of image forensics consists in integrating it with visual perception. </li>
+</ol>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="14699724013434.html" 
+          title="Previous Post: Double Jpeg detection with the same quantization matrix (Notes)">&laquo; Double Jpeg detection with the same quantization matrix (Notes)</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          <div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = klauscc.github.io;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = klauscc; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://klauscc.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="media/15401786151592/logo.jpg" /></div>
+            
+                <h1>Feng Cheng</h1>
+                <div class="site-des">Ph.D student <br> University of North Carolina at Chapel Hill</div>
+                <div class="social">
+
+<a target="_blank" class="google" href="https://scholar.google.com/citations?hl=en&user=L5WbA3EAAAAJ&view_op=list_works&sortby=pubdate" rel="author" title="Google+">Google+</a>
+
+
+
+
+
+
+
+<a target="_blank" class="github" target="_blank" href="https://github.com/klauscc" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:fengchan@cs.unc.edu" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="linux.html"><strong>linux</strong></a>
+        
+            <a href="paper%20reading.html"><strong>paper reading</strong></a>
+        
+            <a href="deep%20learning.html"><strong>deep learning</strong></a>
+        
+            <a href="Digital%20Image%20Forensics.html"><strong>Digital Image Forensics</strong></a>
+        
+            <a href="engineering.html"><strong>engineering</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="Feng_Cheng.html">Feng Cheng</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="convs.html">Techniques in convolution</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15260272539482.html">Stream摄像头内容到浏览器</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="linux-starter-about-lib-and-conda.html">linux入门与服务器使用指南</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="lvm-cache%20config:%20improve%20hdd%20performance%20via%20a%20ssd.html">lvm cache配置 -- 用固态硬盘提升大的存储盘的性能</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+
+  </body>
+</html>

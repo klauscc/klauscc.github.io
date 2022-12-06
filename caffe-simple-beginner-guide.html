@@ -1,0 +1,720 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  深度学习、caffe简要入门指南 - Feng Cheng
+  
+  </title>
+  
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3SP0SC55LM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-3SP0SC55LM');
+  </script>
+  <link href="atom.xml" rel="alternate" title="Feng Cheng" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:klauscc.github.io ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="Feng_Cheng.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; Feng Cheng</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="_self" href="Feng_Cheng.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="linux.html">linux</a></li>
+        
+            <li><a href="paper%20reading.html">paper reading</a></li>
+        
+            <li><a href="deep%20learning.html">deep learning</a></li>
+        
+            <li><a href="Digital%20Image%20Forensics.html">Digital Image Forensics</a></li>
+        
+            <li><a href="engineering.html">engineering</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>深度学习、caffe简要入门指南</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2017/1/15</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='deep%20learning.html'>deep learning</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <p>近年来，深度学习是机器学习的一大潮流。它在计算机视觉CV，自然语言处理NLP等领域取得了极大的成就。本文以深度学习框架Caffe作为工具简要讲解深度学习入门。</p>
+
+<p><strong>对深度学习和CNN比较了解的可以直接跳至第四节，对caffe比较了解的可以直接跳过本教程。</strong></p>
+
+<span id="more"></span><!-- more -->
+
+<ul>
+<li>
+<a href="#toc_0">1. 深度学习概要</a>
+</li>
+<li>
+<a href="#toc_1">2. 神经网络</a>
+</li>
+<li>
+<a href="#toc_2">3. 卷积神经网络(Convolutional Neural Networks, CNNS or ConvNets)</a>
+</li>
+<li>
+<a href="#toc_3">4. Caffe 实战</a>
+<ul>
+<li>
+<a href="#toc_4">4.1 数据准备</a>
+</li>
+<li>
+<a href="#toc_5">4.2 定义模型</a>
+</li>
+<li>
+<a href="#toc_6">4.3 定义solver</a>
+</li>
+<li>
+<a href="#toc_7">4.4 训练模型</a>
+<ul>
+<li>
+<a href="#toc_8">4.4.1 训练</a>
+</li>
+<li>
+<a href="#toc_9">4.4.2 可视化</a>
+</li>
+<li>
+<a href="#toc_10">4.4.3 测试</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_11">4.5 迁移学习</a>
+<ul>
+<li>
+<a href="#toc_12">4.5.1 使用迁移学习解决猫狗分类</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_13">结论</a>
+</li>
+</ul>
+
+
+<h3 id="toc_0">1. 深度学习概要</h3>
+
+<p>深度学习模型是从<a href="http://ufldl.stanford.edu/wiki/index.php/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C">神经网络</a>演变而来，主流的两个模型是CNN(Convolutional Neural Network,卷积神经网络)和RNN(Recurrent Neural Network,循环神经网络)，分别对应CV领域和NLP领域。CNN的经典实例有Alexnet, Googlenet, VGG, Resnet等模型，RNN最经典的是LSTM。经过这些年的发展，在这两个领域新推出的模型几乎都是CNN和RNN的变种和组合。</p>
+
+<p>深度学习与传统机器学习最大的区别是特征由网络自动学习，而不需要手工设计特征。<br/>
+<center ><img src="media/14844628181225/14850557732034.jpg" alt=""/></center ></p>
+
+<p>作为入门，本文以caffe为工具，以<a href="https://www.kaggle.com/c/dogs-vs-cats">猫狗图片分类问题</a>， 使用Alexnet模型来简要介绍深度学习。</p>
+
+<h3 id="toc_1">2. 神经网络</h3>
+
+<p>神经元是大脑的基本组成成分，神经网络正是由生物的神经元激发的灵感，它由一个个神经元连接而成，每个神经元有一个激活函数(Sigmoid, ReLu,等)。下图是一个2隐层的前馈神经网络。<br/>
+<center ><img src="media/14844628181225/14850561002582.jpg" alt=""/> </center></p>
+
+<p>每两个神经元之间的连接有一个权值系数，而深度学习学习的目标就是找到一组这样的参数使得网络输出值与实际输出值之间的差别最小，这个差别使用Loss Function(损失函数，or 代价函数cost function)来衡量。一个最简单的损失函数是<strong>均方差损失函数</strong>(Squared-error cost function):<br/>
+<center> \(J(W,b;x,y) = \frac{1}{2}||h_{W,b}(x) - y||^2\) </center><br/>
+式中W,b是网络的权值，也是我们需要求的系数，\(h_{W,b}(x)\)是网络在参数W,b下的x的输出。</p>
+
+<p>学习的目标是<strong>最小化Loss函数</strong>，即是首先条件下求极值的问题。对于两三个参数的极值问题可以使用拉格朗日乘数法求极值，这就是<strong>符号微分</strong>。但是对于我们的网络，可能需要优化的参数有几百万个，符号微分方法不可行或者代价昂贵，在所有机器学习算法中使用的是<strong>自动化微分</strong>方法来求解。</p>
+
+<p>自动化微分的方法基本思想如下:<br/>
+    1. 训练开始时随机初始化参数。<br/>
+    2. 计算输入x在当前参数下的输出\(h_{W,b}(x)\)(Forward)<br/>
+    3. 计算Loss函数J的梯度，并使用梯度更新参数W，b(Backward)，参数更新方式有SGD,AdaGrad等方法。<br/>
+    4. 2和3是一个iteration(迭代)，如此进行多个迭代直至满足某一条件为止。</p>
+
+<p><strong>每个iteration选取训练集的一个batch的数据进行训练，一个epoch是指将训练集遍历完所需要的iteration的个数。</strong></p>
+
+<p><strong>具体学习过程参考UFLDL教程</strong>:<a href="http://ufldl.stanford.edu/tutorial/supervised/MultiLayerNeuralNetworks/">Multi-Layer Neural Network<br/>
+</a></p>
+
+<p>这种方法非常适合计算机矢量化实现，而且目前有很多优化的很好的张量运算库如mkl, cudnn等。</p>
+
+<h3 id="toc_2">3. 卷积神经网络(Convolutional Neural Networks, CNNS or ConvNets)</h3>
+
+<p>CNN是多层网络，由卷积层(Convolution),池化层(Pooling), Batch Normalization(BN,标准化，将输出变为方差0，均值1的高斯分布，防止“梯度弥散”。关于梯度弥散，一个简单的例子：0.9<sup>{30}\approx</sup> 0.04，BN将经过多层变得很小的梯度的scale变大)，全连接层(Full Connection, fc),Dropout(随机失活某些神经元，避免过拟合)等组成，每层是其中的一种。第2节中讲到的前馈神经网络是一个由3层全连接层构成的网络。CNN的训练过程和第2节训练方法一致。</p>
+
+<p><strong>具体讲解参考UFLDL教程<a href="http://ufldl.stanford.edu/tutorial/supervised/FeatureExtractionUsingConvolution/">Multi-Layer Neural Network<br/>
+</a></strong></p>
+
+<p>卷积层效果图。相当于将一个固定大小的kernel(卷积核)以stride的步长对图片进行遍历。需要注意的有kernel_size, stride, pad几个参数。kernel_size表示卷积核的大小;stride表示步长，即遍历的时候每次前进的大小;pad表示对原始图片两边(水平方向和竖直方向，pad_h和pad_w)进行补零以获得期望的输出尺寸。下图是以3x3的kernel, 1的stride, 0的pad对5x5(h_i x w_i)的图片进行convolution,输出大小为3x3(h_o x w_o)。<strong>计算公式 h_o = (h_i + 2 * pad_h - kernel_h) / stride_h + 1, w_o 类似</strong><br/>
+<img src="media/14844628181225/14855025028447.gif" alt=""/></p>
+
+<p><center><img src="media/14844628181225/14850653780486.jpg" alt=""/></center></p>
+
+<p>本文中即将使用的Alexnet结构如下:<br/>
+<center><br/>
+<img src="media/14844628181225/alxenet.jpg" alt="alxenet" style="width:5024px;"/><br/>
+</center></p>
+
+<h3 id="toc_3">4. Caffe 实战</h3>
+
+<p>caffe提供c++, python, matlab和shell接口。python 和matlab接口提供类似功能，一般在predict,feature extraction的时候才会用到，用于与其他模块结合。但是一般的训练测试过程只需要用到shell接口。</p>
+
+<p>在Caffe中训练模型有下面4步:</p>
+
+<pre><code>1. 数据准备。将数据处理为Caffe需要的形式。
+2. 定义Model。在Caffe中定义模型架构和参数使用`.prototxt`后缀名的文件
+3. 定义Solver。Solver是Caffe训练模型的入口，里面定义一些超参数如:学习率，最大Iteration数，模型参数文件保存路径等。
+4. 训练模型。在命令行执行caffe的命令即可训练模型。
+</code></pre>
+
+<p>示例代码路径: <a href="https://github.com/klauscc/dogOrCat">https://github.com/klauscc/dogOrCat</a></p>
+
+<p>上面四步只会用到shell接口。</p>
+
+<h4 id="toc_4">4.1 数据准备</h4>
+
+<p>从 <a href="https://www.kaggle.com/c/dogs-vs-cats/data">Dogs vs. Cats</a>下载数据后解压</p>
+
+<pre><code>unzip ~/train.zip
+unzip ~/test1.zip
+rm ~/deeplearning-cats-dogs-tutorial/input/*.zip
+</code></pre>
+
+<p>Caffe的输入可以使用lmdb格式的数据，也可以使用原始图片的label文件(每一行是一张图片的路径和类别)。</p>
+
+<p>创建lmdb数据库方式可以参考caffe源码中<code>./examples/imagenet/create_imagenet.sh</code>。如果你的训练数据不是原始图片(比如进行过预处理)，就必须使用lmdb的方式载入数据了,而创建方式就需要使用python或者c++接口了，需要的时候google <code>caffe python lmdb</code>就有大把的教程了。</p>
+
+<p>本文使用的是原始图片进行训练，caffe需要的文件内容如下:</p>
+
+<pre><code>./data/train/cat.10607.jpg 0
+./data/train/cat.7659.jpg 0
+./data/train/dog.3057.jpg 1
+./data/train/dog.5977.jpg 1
+./data/train/cat.9318.jpg 0
+./data/train/dog.625.jpg 1
+./data/train/cat.12339.jpg 0
+./data/train/cat.4378.jpg 0
+./data/train/cat.9347.jpg 0
+./data/train/dog.2431.jpg 1
+./data/train/cat.12228.jpg 0
+./data/train/dog.10660.jpg 1
+</code></pre>
+
+<p>生成这个文件<a href="https://github.com/klauscc/dogOrCat/blob/master/splitDataset.py">代码</a>:</p>
+
+<pre><code>import numpy as np
+import glob
+import os
+
+
+#get all the images
+database_dir=&quot;./data&quot;
+image_data = [img for img in glob.glob(database_dir+&quot;/train/*&quot;)]
+
+f_tv = open(&#39;train_val.txt&#39;,&#39;w&#39;)
+f_test = open(&#39;test.txt&#39;,&#39;w&#39;)
+
+#division the dataset into train and test set
+for in_idx, img_path in enumerate(image_data):
+    if &#39;dog&#39; in img_path:
+        label=1
+    else:
+        label=0
+
+    if in_idx % 5 ==0:
+        f_test.write(&quot;%s %d\n&quot; %(img_path, label))
+    else:
+        f_tv.write(&quot;%s %d\n&quot; %(img_path, label))
+
+f_tv.close()
+f_test.close()
+</code></pre>
+
+<h4 id="toc_5">4.2 定义模型</h4>
+
+<p>caffe 中网络模型文件使用<code>prototxt</code>后缀保存。<a href="https://github.com/klauscc/dogOrCat/blob/master/alexnet/train_val.prototxt">模型文件</a></p>
+
+<p>其基本结构如下</p>
+
+<pre><code>name: &#39;alexnet&#39;
+
+layer{
+ name: &quot;data&quot;
+  type: &quot;ImageData&quot;
+  top: &quot;data&quot;
+  top: &quot;label&quot;
+  include {
+    phase: TRAIN
+  }
+  transform_param {
+  }
+}
+
+layer {
+    bottom: &quot;data&quot;
+    top: &quot;conv1&quot;
+    ...
+}
+
+layer {
+
+}
+...
+</code></pre>
+
+<p>层间关系通过 <code>top</code>和<code>bottom</code>指定，这样一个网络结构就唯一确定下来了(回顾第三节alexnet结构图)。 这里挑选其中几层讲解,参数意义看注释</p>
+
+<pre><code>layer { #输入层
+  name: &quot;data&quot;  
+  type: &quot;ImageData&quot; #类型，这种类型使用4.1生成的label文件
+  top: &quot;data&quot;  #输出1
+  top: &quot;label&quot; #输出2
+  include {
+    phase: TRAIN #阶段，训练阶段的输入层;测试阶段的输入层:TEST。在solver中可以指定多少个iteration TEST一次
+  }
+  transform_param {
+    mirror: true  # data augmentation,将图片的水平翻转也加入数据集增加训练数据
+    crop_size: 227 #将图片crop到多大227x227
+    mean_value: 104 #归一化，rgb的mean value
+    mean_value: 117
+    mean_value: 123
+  }
+  image_data_param {
+    source: &quot;train_val.txt&quot; #数据来源
+    batch_size: 256 #batch 大小，一个iteration训练多少数据
+    new_height: 256
+    new_width: 256
+    shuffle: true  # 是否打乱训练数据
+  }
+}
+</code></pre>
+
+<p>这个输入层输出的数据尺寸为256x3x227x227(nchw. n:batchsize;c:channel;h:height;w:width. tensorflow中默认格式是nhwc)</p>
+
+<p>卷积层</p>
+
+<pre><code>layer {
+  name: &quot;conv1&quot;
+  type: &quot;Convolution&quot; 
+  bottom: &quot;data&quot;
+  top: &quot;conv1&quot;
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 96
+    kernel_size: 11
+    stride: 4
+    pad: 0
+    weight_filler {
+      type: &quot;gaussian&quot;
+      std: 0.01
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+      value: 0
+    }
+  }
+}
+</code></pre>
+
+<p>这个卷积层输入256x3x227x227(bottom: &quot;data&quot;), kernel_size, stride, pad,输出计算方法请看第三节,输出尺寸为 256x96x55x55. weight_filter 和 bias_filter是convolution参数的<strong>初始化</strong>方法。</p>
+
+<p><strong>其他各层以及每层参数意义可以参考<a href="http://caffe.berkeleyvision.org/tutorial/layers.html">caffe官方文档</a></strong></p>
+
+<h4 id="toc_6">4.3 定义solver</h4>
+
+<p>solver文件是caffe训练的入口文件，里面定义各种超参数。示例:</p>
+
+<pre><code>net: &quot;alexnet/train_val.prototxt&quot;  #网络模型路径
+test_iter: 200     #第一次测试的iteration
+test_interval: 200 #每隔多少个iteration 对模型测试一次
+test_initialization: false #是否开始训练时测试一次
+base_lr: 0.001 #基础学习率(learning rate, lr)
+lr_policy: &quot;step&quot; #lr 下降策略,step. 每隔stepsize个iteration降低lr, lr&#39; = lr * gamma
+gamma: 0.1
+stepsize: 2000 # 每隔2000个iteration调整一次学习率lr
+display: 20  # 每隔20个iteration 打印一次输出(loss, accuracy等)
+max_iter: 450000 # 到达max_iter则停止训练
+momentum: 0.9
+weight_decay: 0.0005 #防止过拟合, 给loss函数加的正则项(regulation, L1,L2)前的系数
+snapshot: 5000 #每隔多少个iteration保存一次模型
+snapshot_prefix: &quot;/data/tmp/klaus/dogVsCat/alexnet/dogvscat_alexnet_train&quot; #模型参数文件保存路径
+solver_mode: GPU #使用GPU进行训练
+</code></pre>
+
+<p><strong>更多详细参数参考 <a href="http://caffe.berkeleyvision.org/tutorial/solver.html">caffe官方文档</a></strong></p>
+
+<h4 id="toc_7">4.4 训练模型</h4>
+
+<h5 id="toc_8">4.4.1 训练</h5>
+
+<p>在定义了模型结构(train_val.prototxt)和训练超参数(solver.prototxt)以后，就可以进行训练了。</p>
+
+<pre><code>caffe train -solver ./alexnet/solver.prototxt 2&gt;&amp;1| tee dogVsCat.log
+</code></pre>
+
+<p>其中<code>2&gt;&amp;1| tee dogVsCat.log</code> 这一行是将控制台输出保存到文件中。<code>2&gt;&amp;1</code> 是将stderr重定向到stdout中</p>
+
+<h5 id="toc_9">4.4.2 可视化</h5>
+
+<p>在训练完以后，可以使用<code>dogVsCat.log</code>文件画出学习曲线</p>
+
+<pre><code>python plot_learning_curve.py ./dogVsCat.log ./dogcat_learning_curve.png
+</code></pre>
+
+<p><img src="media/14844628181225/14855045855566.jpg" alt=""/></p>
+
+<h5 id="toc_10">4.4.3 测试</h5>
+
+<p>测试模型</p>
+
+<pre><code>caffe test -model ./alexnet/train_val.prototxt -weights /data/tmp/klaus/dogVsCat/alexnet/dogvscat_alexnet_train_iter_10000.caffemodel  2&gt;&amp;1| tee dogVsCat_test.log
+</code></pre>
+
+<p>这里测试的数据是<code>train_val.prototxt</code>中<code>phase:TEST</code>对应的输入层的数据， -weights是网络权重，是训练过程保存的模型参数文件</p>
+
+<h4 id="toc_11">4.5 迁移学习</h4>
+
+<p>深度学习需要大量数据和大量资源进行训练。而迁移学习是将一个在其他数据库上训练过的模型迁移到我们的数据库上，<strong>参数初始化为其他数据库上训练完的参数</strong>，这样可以在很短时间内达到很好的效果。</p>
+
+<p>迁移学习在深度学习上一般有两种使用方式:</p>
+
+<pre><code>1. 用已训练的模型作为feature extractor: 就是固定网络的前面的若干层，只调整最后的几个全连接层
+2. fine-tune 已训练的模型: 在原有参数基础上继续训练所有层，这时候往往需要调低学习率(lr)
+</code></pre>
+
+<h5 id="toc_12">4.5.1 使用迁移学习解决猫狗分类</h5>
+
+<p>imagenet是一个具有1280000张图片，1000种分类的巨大数据库。而Alexnet在在2012年Imagenet大赛上获得了冠军，也是让深度学习再次火起来的原因之一。caffe提供了在Imagenet数据库上训练的Alexnet的模型参数。</p>
+
+<p>我们首先从 caffe 的 <a href="http://caffe.berkeleyvision.org/model_zoo.html">model zoo</a>下载alexnet模型. caffe 源码提供了相应脚本:</p>
+
+<pre><code>cd $CAFFE_ROOT #change $CAFFE_ROOT with your caffe source code dir path or set the environment variable.
+python scripts/download_model_binary.py models/bvlc_alexnet
+</code></pre>
+
+<p>这时候模型文件<code>bvlc_alexnet.caffemodel</code>下载到了<code>$CAFFE_ROOT/models/bvlc_alexnet/</code>目录下了，复制到我们的路径下，然后进行训练:</p>
+
+<pre><code>caffe train -solver ./alexnet/solver.prototxt -weights ./alexnet/bvlc_alexnet.caffemodel  2&gt;&amp;1| tee dogVsCat.log
+</code></pre>
+
+<p><code>-weights ./alexnet/bvlc_alexnet.caffemodel</code>表示参数初始化为<code>./alexnet/bvlc_alexnet.caffemodel</code>的参数。</p>
+
+<p>训练完后画出learning curve:<br/>
+<img src="media/14844628181225/14855056406821.jpg" alt=""/></p>
+
+<p>可以看到，相比于从头训练，模型的loss下降得更快而且最后效果更好。</p>
+
+<h3 id="toc_13">结论</h3>
+
+<p>关于使用python接口进行预测图片参考<a href="https://github.com/klauscc/dogOrCat/blob/master/make_predictions.py">make_predictions</a>,这里不做赘述。python接口往往是用来做application的，比如web_demo之类的。</p>
+
+<p>本文对caffe使用方法进行简单但是全面的介绍，对深度学习有些了解的童鞋应该可以使用caffe来写自己的模型了。</p>
+
+<p>对深度学习的进一步了解建议学习<a href="http://ufldl.stanford.edu/tutorial/supervised/ExerciseConvolutionalNeuralNetwork/">UFLDL教程</a> 和阅读<a href="https://github.com/songrotek/Deep-Learning-Papers-Reading-Roadmap">经典Paper</a></p>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="shadowsocks-proxychains-genpac-on-centos.html" 
+          title="Previous Post: centos 安装shadowsocks,proxychains,genpac科学上网">&laquo; centos 安装shadowsocks,proxychains,genpac科学上网</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="centos-setup-deeplearning-environment.html" 
+          title="Next Post: centos7.0安装配置，cuda,cudnn安装，anaconda安装，深度学习框架caffe,torch,theano,tensorflow安装">centos7.0安装配置，cuda,cudnn安装，anaconda安装，深度学习框架caffe,torch,theano,tensorflow安装 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          <div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = klauscc.github.io;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = klauscc; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://klauscc.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="media/15401786151592/logo.jpg" /></div>
+            
+                <h1>Feng Cheng</h1>
+                <div class="site-des">Ph.D student <br> University of North Carolina at Chapel Hill</div>
+                <div class="social">
+
+<a target="_blank" class="google" href="https://scholar.google.com/citations?hl=en&user=L5WbA3EAAAAJ&view_op=list_works&sortby=pubdate" rel="author" title="Google+">Google+</a>
+
+
+
+
+
+
+
+<a target="_blank" class="github" target="_blank" href="https://github.com/klauscc" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:fengchan@cs.unc.edu" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="linux.html"><strong>linux</strong></a>
+        
+            <a href="paper%20reading.html"><strong>paper reading</strong></a>
+        
+            <a href="deep%20learning.html"><strong>deep learning</strong></a>
+        
+            <a href="Digital%20Image%20Forensics.html"><strong>Digital Image Forensics</strong></a>
+        
+            <a href="engineering.html"><strong>engineering</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="Feng_Cheng.html">Feng Cheng</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="convs.html">Techniques in convolution</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15260272539482.html">Stream摄像头内容到浏览器</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="linux-starter-about-lib-and-conda.html">linux入门与服务器使用指南</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="lvm-cache%20config:%20improve%20hdd%20performance%20via%20a%20ssd.html">lvm cache配置 -- 用固态硬盘提升大的存储盘的性能</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+
+  </body>
+</html>
