@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-   - Feng Cheng
+  VindLU: A Recipe for Effective Video-and-Language Pretraining - Feng Cheng
   
   </title>
   
@@ -109,7 +109,7 @@
 
  <script type="text/javascript">
 	$(function(){
-		var currentURL = 'VindLU.html';
+		var currentURL = 'vindlu.html';
 		currentURL = currentURL.substr(0,currentURL.length-5);
 		$('#menu_item_'+currentURL).addClass('is_active');
 	});
@@ -117,14 +117,21 @@
 <div class="row">
 
     <div id="single-page-wrap">
-        <h1></h1>
+        <h1>VindLU: A Recipe for Effective Video-and-Language Pretraining</h1>
 
         <div class="markdown-body post-page">
-        <h1 id="toc_0">VindLU</h1>
+        <p><div style="text-align: center;"><br/>
+<a href="https://klauscc.github.io">Feng Cheng</a><sup>1</sup> , <a href="">Xizi Wang</a><sup>2</sup> , <a href="https://jayleicn.github.io/">Jie Lei</a><sup>1</sup> , <a href="https://luddy.indiana.edu/contact/profile/?David_Crandall">David Crandall</a><sup>2</sup> , <a href="http://www.cs.unc.edu/%7Embansal/">Mohit Bansal</a><sup>1</sup> , <a href="https://www.gedasbertasius.com/">Gedas Bertasius</a><sup>1</sup><br/>
+<sup>1</sup> University of North Carolina at Chapel Hill, <sup>2</sup> Indiana University</p>
 
-<p>VindLU: A Recipe for Effective Video-and-Language Pretraining [<a href="">arXiv</a>] [<a href="https://klauscc.github.io/VindLU.html">project page</a>]</p>
+<p><button name="button1" onclick="location.href='https://arxiv.org/abs/2212.05051';"> arxiv </button> <button name="button2" onclick="location.href='https://github.com/klauscc/VindLU';"> Code </button></p>
 
-<p><a href="https://klauscc.github.io">Feng Cheng</a>, <a href="">Xizi Wang</a>, <a href="https://jayleicn.github.io/">Jie Lei</a>, <a href="https://luddy.indiana.edu/contact/profile/?David_Crandall">David Crandall</a>, <a href="http://www.cs.unc.edu/%7Embansal/">Mohit Bansal</a>, <a href="https://www.gedasbertasius.com/">Gedas Bertasius</a></p>
+<p><img src="media/16700216415652/16807109507588.jpg" alt=""/></p>
+
+<h2 id="toc_0">Abstract</h2>
+
+<p><div style="text-align: justify;"><br/>
+The last several years have witnessed remarkable progress in video-and-language (VidL) understanding. However, most modern VidL approaches use complex and specialized model architectures and sophisticated pretraining protocols, making the reproducibility, analysis and comparisons of these frameworks difficult. Hence, instead of proposing yet another new VidL model, this paper conducts a thorough empirical study demystifying the most important factors in the VidL model design. Among the factors that we investigate are (i) the spatiotemporal architecture design, (ii) the multimodal fusion schemes, (iii) the pretraining objectives, (iv) the choice of pretraining data, (v) pretraining and finetuning protocols, and (vi) dataset and model scaling. Our empirical study reveals that the most important design factors include: temporal modeling, video-to-text multimodal fusion, masked modeling objectives, and joint training on images and videos. Using these empirical insights, we then develop a step-by-step recipe, dubbed VindLU, for effective VidL pretraining. Our final model trained using our recipe achieves comparable or better than state-of-the-art results on several VidL tasks without relying on external CLIP pretraining. In particular, on the text-to-video retrieval task, our approach obtains 61.2% on DiDeMo, and 55.0% on ActivityNet, outperforming current SOTA by 7.8% and 6.1% respectively. Furthermore, our model also obtains state-of-the-art video question-answering results on ActivityNet-QA, MSRVTT-QA, MSRVTT-MC and TVQA. Our code and pretrained models are publicly available at: <a href="https://github.com/klauscc/VindLU">https://github.com/klauscc/VindLU</a>.</p>
 
         </div>
     </div>
