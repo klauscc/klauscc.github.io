@@ -121,7 +121,8 @@
 
         <div class="markdown-body post-page">
         <p><div style="text-align: center;"> <a href="https://klauscc.github.io">Feng Cheng</a><sup>1</sup> , <a href="">Xizi Wang</a><sup>2</sup> , <a href="https://jayleicn.github.io/">Jie Lei</a><sup>1</sup> , <a href="https://luddy.indiana.edu/contact/profile/?David_Crandall">David Crandall</a><sup>2</sup> , <a href="http://www.cs.unc.edu/%7Embansal/">Mohit Bansal</a><sup>1</sup> , <a href="https://www.gedasbertasius.com/">Gedas Bertasius</a><sup>1</sup><br/>
-<sup>1</sup> University of North Carolina at Chapel Hill, <sup>2</sup> Indiana University</p>
+<sup>1</sup> University of North Carolina at Chapel Hill, <sup>2</sup> Indiana University<br/>
+CVPR 2023</p>
 
 <p><button name="button1" onclick="location.href='https://arxiv.org/abs/2212.05051';"> arxiv </button> <button name="button2" onclick="location.href='https://github.com/klauscc/VindLU';"> Code </button></p>
 
@@ -130,7 +131,36 @@
 <h2 id="toc_0">Abstract</h2>
 
 <p><div style="text-align: justify;"><br/>
-The last several years have witnessed remarkable progress in video-and-language (VidL) understanding. However, most modern VidL approaches use complex and specialized model architectures and sophisticated pretraining protocols, making the reproducibility, analysis and comparisons of these frameworks difficult. Hence, instead of proposing yet another new VidL model, this paper conducts a thorough empirical study demystifying the most important factors in the VidL model design. Among the factors that we investigate are (i) the spatiotemporal architecture design, (ii) the multimodal fusion schemes, (iii) the pretraining objectives, (iv) the choice of pretraining data, (v) pretraining and finetuning protocols, and (vi) dataset and model scaling. Our empirical study reveals that the most important design factors include: temporal modeling, video-to-text multimodal fusion, masked modeling objectives, and joint training on images and videos. Using these empirical insights, we then develop a step-by-step recipe, dubbed VindLU, for effective VidL pretraining. Our final model trained using our recipe achieves comparable or better than state-of-the-art results on several VidL tasks without relying on external CLIP pretraining. In particular, on the text-to-video retrieval task, our approach obtains 61.2% on DiDeMo, and 55.0% on ActivityNet, outperforming current SOTA by 7.8% and 6.1% respectively. Furthermore, our model also obtains state-of-the-art video question-answering results on ActivityNet-QA, MSRVTT-QA, MSRVTT-MC and TVQA. Our code and pretrained models are publicly available at: <a href="https://github.com/klauscc/VindLU">https://github.com/klauscc/VindLU</a>.</p>
+The last several years have witnessed remarkable progress in video-and-language (VidL) understanding. However, most modern VidL approaches use complex and specialized model architectures and sophisticated pretraining protocols, making the reproducibility, analysis and comparisons of these frameworks difficult. Hence, instead of proposing yet another new VidL model, this paper conducts a thorough empirical study demystifying the most important factors in the VidL model design. Among the factors that we investigate are (i) the spatiotemporal architecture design, (ii) the multimodal fusion schemes, (iii) the pretraining objectives, (iv) the choice of pretraining data, (v) pretraining and finetuning protocols, and (vi) dataset and model scaling. Our empirical study reveals that the most important design factors include: temporal modeling, video-to-text multimodal fusion, masked modeling objectives, and joint training on images and videos. Using these empirical insights, we then develop a step-by-step recipe, dubbed VindLU, for effective VidL pretraining. Our final model trained using our recipe achieves comparable or better than state-of-the-art results on several VidL tasks without relying on external CLIP pretraining. In particular, on the text-to-video retrieval task, our approach obtains 61.2% on DiDeMo, and 55.0% on ActivityNet, outperforming current SOTA by 7.8% and 6.1% respectively. Furthermore, our model also obtains state-of-the-art video question-answering results on ActivityNet-QA, MSRVTT-QA, MSRVTT-MC and TVQA.</p>
+
+<h2 id="toc_1">Key Findings</h2>
+
+<ul>
+<li><strong>Temporal Modeling</strong> leads to a significant improvement over the spatial-only baselines. Temporal Attention leads to <strong>+6%</strong> averaged video retrieval Top-1, 5, 10 accuracy on MSR-VTT, DiDeMo and ActivityNet datasets.</li>
+<li><strong>Multimodal fusion</strong> that incorporates video features into text is critical for good VidL performance (+3.6%). Conversely, we find that adding text features to the video representation is not useful.</li>
+<li><strong>Masked Language Modeling (MLM) objective</strong> significantly improves performance (<strong>+6.2%</strong>). However, to obtain such gains, a BERT-like language model pretrained on this objective is needed for initialization. Masked video modeling objective brings an additional <strong>+1%</strong> improvement.</li>
+<li><strong>Pretraining jointly</strong> on images and videos is beneficial (<strong>+2.7%</strong>). Also, contrary to prior methods, we find <strong>multi-stage training unnecessary</strong>.</li>
+<li><strong>Pretraining with a small number of frames (e.g., 4) is sufficient</strong> and it can significantly reduce the computational cost of large-scale pretraining. Pretraining with more frames does not lead to a substantial performance boost.</li>
+<li>Compared to many recent CLIP-based VidL approaches, our recipe achieves comparable or even better performance with <strong>20\(\times\)</strong> less pretraining data.</li>
+</ul>
+
+<h2 id="toc_2">Experiments</h2>
+
+<p>Based on our VindLU recipe, we achieve state-of-the-art results on 9 VidL benchmarks. See the recipe details in threads below. To highlight, on the text-to-video retrieval task, we outperform the state-of-the-arts by 7.8% and 6.1% on DiDeMo and ActivityNet.<br/>
+<img src="media/16700216415652/16808045617909.jpg" alt=""/><br/>
+<p float="top"><br/>
+  <img src="media/16700216415652/16808053018796.jpg" width="48%" /> <img src="media/16700216415652/16808053115089.jpg" width="48%" /><br/>
+</p></p>
+
+<h2 id="toc_3">BibTex</h2>
+
+<pre><code>@article{cheng2022vindlu,
+  title={VindLU: A Recipe for Effective Video-and-Language Pretraining},
+  author={Cheng, Feng and Wang, Xizi and Lei, Jie and Crandall, David and Bansal, Mohit and Bertasius, Gedas},
+  journal={arXiv preprint arXiv:2212.05051},
+  year={2022}
+}
+</code></pre>
 
         </div>
     </div>
