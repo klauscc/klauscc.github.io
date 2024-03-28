@@ -2,72 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
   <loc>https://klauscc.github.io/</loc>
-  <lastmod>2023-11-14T22:22:15-05:00</lastmod>
+  <lastmod>2024-03-28T16:28:08-04:00</lastmod>
 </url>
 
 <url>
   <loc>https://klauscc.github.io/Feng_Cheng.html</loc>
   <lastmod>2023-11-04T21:23:35-04:00</lastmod>
-</url>
-
-<url>
-  <loc>https://klauscc.github.io/convs.html</loc>
-  <lastmod>2019-05-08T05:48:34-04:00</lastmod>
-</url>
-
-<url>
-  <loc>https://klauscc.github.io/linux-starter-about-lib-and-conda.html</loc>
-  <lastmod>2018-10-15T01:26:35-04:00</lastmod>
-</url>
-
-<url>
-  <loc>https://klauscc.github.io/15260272539482.html</loc>
-  <lastmod>2018-05-11T04:27:33-04:00</lastmod>
-</url>
-
-<url>
-  <loc>https://klauscc.github.io/lvm-cache%20config:%20improve%20hdd%20performance%20via%20a%20ssd.html</loc>
-  <lastmod>2017-11-03T04:03:56-04:00</lastmod>
-</url>
-
-<url>
-  <loc>https://klauscc.github.io/reading-note_Recursive-Recurrent-Nets-with-Attention-Modeling-for-OCR-in-the-Wild.html</loc>
-  <lastmod>2017-09-24T01:33:56-04:00</lastmod>
-</url>
-
-<url>
-  <loc>https://klauscc.github.io/config-static-ipv6-address-on-ubuntu.html</loc>
-  <lastmod>2017-09-05T23:32:56-04:00</lastmod>
-</url>
-
-<url>
-  <loc>https://klauscc.github.io/Recurrent%20Neural%20Networks%E5%89%8D%E9%A6%88%E5%8F%8D%E9%A6%88%E6%8E%A8%E5%AF%BC.html</loc>
-  <lastmod>2017-05-16T06:06:16-04:00</lastmod>
-</url>
-
-<url>
-  <loc>https://klauscc.github.io/shadowsocks-proxychains-genpac-on-centos.html</loc>
-  <lastmod>2017-02-13T01:28:05-05:00</lastmod>
-</url>
-
-<url>
-  <loc>https://klauscc.github.io/caffe-simple-beginner-guide.html</loc>
-  <lastmod>2017-01-15T01:46:58-05:00</lastmod>
-</url>
-
-<url>
-  <loc>https://klauscc.github.io/centos-setup-deeplearning-environment.html</loc>
-  <lastmod>2016-12-06T23:57:59-05:00</lastmod>
-</url>
-
-<url>
-  <loc>https://klauscc.github.io/14699724013434.html</loc>
-  <lastmod>2016-07-31T09:40:01-04:00</lastmod>
-</url>
-
-<url>
-  <loc>https://klauscc.github.io/14699720497183.html</loc>
-  <lastmod>2016-07-31T09:34:09-04:00</lastmod>
 </url>
 
 
@@ -76,30 +16,6 @@
   <lastmod>2023-04-06T14:24:36-04:00</lastmod>
 </url>
 
-
-<url>
-  <loc>https://klauscc.github.io/linux.html</loc>
-</url>
-
-<url>
-  <loc>https://klauscc.github.io/paper%20reading.html</loc>
-</url>
-
-<url>
-  <loc>https://klauscc.github.io/deep%20learning.html</loc>
-</url>
-
-<url>
-  <loc>https://klauscc.github.io/theory.html</loc>
-</url>
-
-<url>
-  <loc>https://klauscc.github.io/Digital%20Image%20Forensics.html</loc>
-</url>
-
-<url>
-  <loc>https://klauscc.github.io/engineering.html</loc>
-</url>
 
 
 </urlset>
