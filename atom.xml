@@ -4,7 +4,7 @@
   <title><![CDATA[Feng Cheng]]></title>
   <link href="https://klauscc.github.io/atom.xml" rel="self"/>
   <link href="https://klauscc.github.io/"/>
-  <updated>2024-04-15T15:38:32-04:00</updated>
+  <updated>2024-07-16T20:52:08-04:00</updated>
   <id>https://klauscc.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -47,7 +47,7 @@ Mentor: <a href="https://scholar.google.com/citations?user=KNcECJQAAAAJ&amp;hl=e
 <ul>
 <li><p><a href="">4DIFF: 3D-Aware Diffusion Model for Third-to-First Viewpoint Translation</a><br/>
 <strong>Feng Cheng</strong>, Mi (Romy) Luo, Huiyu Wang, Alex Dimakis, Lorenzo Torresani, Gedas Bertasius, Kristen Grauman<br/>
-<strong>Available soon</strong></p></li>
+<strong>ECCV 2024</strong></p></li>
 <li><p><a href="https://arxiv.org/abs/2403.08755">DAM: Dynamic Adapter Merging for Continual Video QA Learning</a><br/>
 <strong>Feng Cheng</strong>, Ziyang Wang, Yi-Lin Sung, Yan-Bo Lin, Mohit Bansal, Gedas Bertasius<br/>
 <strong>Preprint</strong>  [<a href="https://github.com/klauscc/DAM">code</a>]</p></li>
